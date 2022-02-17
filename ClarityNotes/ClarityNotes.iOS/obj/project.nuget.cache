@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "QD5DuRifoO1cJwiinN9jGQP5kMDNsVTQypy2igSG1ZidlfstdAshz4phQfmmRYOKEe5fEOft13fi3qb31ZShPw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\DELL\\Desktop\\Répertoires Dev'\\ClarityNotes\\ClarityNotes\\ClarityNotes.iOS\\ClarityNotes.iOS.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\DELL\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\xamarin.essentials\\1.7.0\\xamarin.essentials.1.7.0.nupkg.sha512",
+    "C:\\Users\\DELL\\.nuget\\packages\\xamarin.forms\\5.0.0.2196\\xamarin.forms.5.0.0.2196.nupkg.sha512"
+  ],
+  "logs": []
+}
