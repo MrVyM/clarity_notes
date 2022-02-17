@@ -3,5 +3,4 @@ Le projet Clarity Notes a pour but de créer une application mobile de partage d
 Ce projet est développé par : 
 	- Romain
 	- Vianney
-	- Lucas
 	- Khôren
