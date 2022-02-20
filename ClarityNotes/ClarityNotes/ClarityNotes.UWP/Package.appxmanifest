@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="F4583AB3-7AEA-46D4-8BEA-C890EA33D39A"
-    Publisher="CN=BBADDAE4-A21F-41B7-A904-A1B75A0A4449"
+    Name="E313C9C8-0A48-49A1-AB25-AB668BD935EE"
+    Publisher="CN=3A56D9A2-2DFC-4968-89DA-A45F92E932E8"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>ClarityNotes.UWP</DisplayName>
-    <PublisherDisplayName>BBADDAE4-A21F-41B7-A904-A1B75A0A4449</PublisherDisplayName>
+    <PublisherDisplayName>3A56D9A2-2DFC-4968-89DA-A45F92E932E8</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 

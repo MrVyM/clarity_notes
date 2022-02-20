@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{641450E4-F222-48EF-AB2D-AFA53EEAD82C}</ProjectGuid>
+    <ProjectGuid>{B218E8F0-1881-4670-85C1-5802182EEAA4}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>ClarityNotes.UWP</RootNamespace>
@@ -150,7 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClarityNotes\ClarityNotes.csproj">
-      <Project>{C4093CA0-067C-4676-8038-FD3D23422B82}</Project>
+      <Project>{674AD5F4-F8CF-4B05-BF12-58D7FAA0C995}</Project>
       <Name>ClarityNotes</Name>
     </ProjectReference>
   </ItemGroup>
