@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9D064A00-0FD9-4F7A-8A6D-0B4E8CE6779A}</ProjectGuid>
+    <ProjectGuid>{D69D8BA9-FEF5-463D-BDB6-078ED781ADF1}</ProjectGuid>
     <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{6143fdea-f3c2-4a09-aafa-6e230626515e}</TemplateGuid>
     <OutputType>Exe</OutputType>
@@ -129,7 +129,7 @@
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
     <ProjectReference Include="..\ClarityNotes\ClarityNotes.csproj">
-      <Project>{674AD5F4-F8CF-4B05-BF12-58D7FAA0C995}</Project>
+      <Project>{78F31DD2-BB1A-47A7-84BB-DD938D8A50BF}</Project>
       <Name>ClarityNotes</Name>
     </ProjectReference>
   </ItemGroup>

@@ -1,0 +1,14 @@
+C:\Users\Marc & Elisabeth\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes\bin\Debug\netstandard2.0\ClarityNotes.deps.json
+C:\Users\Marc & Elisabeth\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes\bin\Debug\netstandard2.0\ClarityNotes.dll
+C:\Users\Marc & Elisabeth\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes\bin\Debug\netstandard2.0\ClarityNotes.pdb
+C:\Users\Marc & Elisabeth\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes\obj\Debug\netstandard2.0\ClarityNotes.csproj.AssemblyReference.cache
+C:\Users\Marc & Elisabeth\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes\obj\Debug\netstandard2.0\ClarityNotes.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Marc & Elisabeth\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes\obj\Debug\netstandard2.0\App.xaml.g.cs
+C:\Users\Marc & Elisabeth\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes\obj\Debug\netstandard2.0\ClarityNotes.AssemblyInfoInputs.cache
+C:\Users\Marc & Elisabeth\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes\obj\Debug\netstandard2.0\ClarityNotes.AssemblyInfo.cs
+C:\Users\Marc & Elisabeth\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes\obj\Debug\netstandard2.0\ClarityNotes.csproj.CoreCompileInputs.cache
+C:\Users\Marc & Elisabeth\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes\obj\Debug\netstandard2.0\XamlC.stamp
+C:\Users\Marc & Elisabeth\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes\obj\Debug\netstandard2.0\ClarityNotes.dll
+C:\Users\Marc & Elisabeth\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes\obj\Debug\netstandard2.0\refint\ClarityNotes.dll
+C:\Users\Marc & Elisabeth\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes\obj\Debug\netstandard2.0\ClarityNotes.pdb
+C:\Users\Marc & Elisabeth\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes\obj\Debug\netstandard2.0\ref\ClarityNotes.dll

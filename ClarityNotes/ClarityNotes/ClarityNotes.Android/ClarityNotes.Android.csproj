@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EC19F948-35FC-4B5E-AD63-50570BA3B358}</ProjectGuid>
+    <ProjectGuid>{7596FAD2-8316-4DA3-B03D-05F4E136334E}</ProjectGuid>
     <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TemplateGuid>{c9e5eea5-ca05-42a1-839b-61506e0a37df}</TemplateGuid>
     <OutputType>Library</OutputType>
@@ -88,7 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ClarityNotes\ClarityNotes.csproj">
-      <Project>{674AD5F4-F8CF-4B05-BF12-58D7FAA0C995}</Project>
+      <Project>{78F31DD2-BB1A-47A7-84BB-DD938D8A50BF}</Project>
       <Name>ClarityNotes</Name>
     </ProjectReference>
   </ItemGroup>
