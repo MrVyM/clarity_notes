@@ -9,8 +9,11 @@ namespace ClarityNotes
         public App()
         {
             InitializeComponent();
-
-            MainPage = new RootPage();
+            // MainPage = new NavigationPage(new LoginPage());
+            var page = new RootPage();
+            NavigationPage.SetHasNavigationBar(page, false);
+            MainPage = new NavigationPage(page);
+            
         }
 
         protected override void OnStart()

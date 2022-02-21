@@ -18,7 +18,7 @@ namespace ClarityNotes
 
             StackLayout mainContent = new StackLayout();
             mainContent.Orientation = StackOrientation.Horizontal;
-            mainContent.VerticalOptions = LayoutOptions.Start;
+            mainContent.VerticalOptions = LayoutOptions.CenterAndExpand;
             mainContent.HorizontalOptions = LayoutOptions.Start;
 
 
@@ -29,8 +29,7 @@ namespace ClarityNotes
 
             StackLayout verticalColumn = new StackLayout();
             verticalColumn.HorizontalOptions = LayoutOptions.Center;
-            verticalColumn.VerticalOptions = LayoutOptions.StartAndExpand;
-            verticalColumn.Margin = 10;
+            verticalColumn.VerticalOptions = LayoutOptions.CenterAndExpand;
 
 
             for (int i = 0; i < 10; i++)

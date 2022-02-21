@@ -11,23 +11,31 @@ namespace ClarityNotes
     {
         Entry idEntry;
         Entry mdpEntry;
+        Label error;
         public LoginPage()
-        {
+        { 
 
             StackLayout mainContent = new StackLayout();
             mainContent.HorizontalOptions = LayoutOptions.Center;
             mainContent.VerticalOptions = LayoutOptions.Center;
+            mainContent.WidthRequest = 500;
 
             Frame idFrame = new Frame();
-            idFrame.Margin = 15;
+            idFrame.Margin = 25;
             StackLayout idStack = new StackLayout();
+
+            error = new Label();
+            error.FontSize = 18;
+            error.TextColor = Color.Red;
+            error.HorizontalOptions = LayoutOptions.Center;
+            error.VerticalOptions = LayoutOptions.Center;   
+            mainContent.Children.Add(error);
 
             Label idLabel = new Label();
             idLabel.Text = "Votre identifiant : ";
             idStack.Children.Add(idLabel);
 
             idEntry = new Entry();
-            idEntry.WidthRequest = 100;
             idStack.Children.Add(idEntry);
 
             idFrame.Content = idStack;
@@ -35,6 +43,7 @@ namespace ClarityNotes
 
             Frame mdpFrame = new Frame();
             mdpFrame.Margin = 25;
+            mdpFrame.HorizontalOptions = LayoutOptions.FillAndExpand;
             StackLayout mdpStack = new StackLayout();
 
             Label mdpLabel = new Label();
@@ -43,13 +52,13 @@ namespace ClarityNotes
 
             mdpEntry = new Entry();
             mdpEntry.IsPassword = true;
-            mdpEntry.WidthRequest = 100;
             mdpStack.Children.Add(mdpEntry);
 
             mdpFrame.Content = mdpStack;
 
             Button connexion = new Button();
             connexion.Text = "Connexion";
+            connexion.HorizontalOptions = LayoutOptions.Center;
             connexion.Clicked += OnConnexionCliked;
 
             
@@ -64,9 +73,20 @@ namespace ClarityNotes
         {
             var mdpEntryText = mdpEntry.Text;
             mdpEntry.Text = "";
+            error.Text = "";
+            System.Threading.Thread.Sleep(2000);
             if (idEntry.Text == "root" && mdpEntryText == "toor")
-                Console.WriteLine("yep");
-        
+            {
+                Navigation.PopAsync();
+                var page = new RootPage();
+                NavigationPage.SetHasNavigationBar(page, false);
+                Navigation.PushAsync(page);
+                
+            }
+            else 
+            {
+                error.Text = "Identifiant ou mot de passe invalid.";
+            }
         }
     }
 }
