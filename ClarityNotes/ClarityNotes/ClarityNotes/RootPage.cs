@@ -2,19 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.IO;
 using Xamarin.Forms;
 
 namespace ClarityNotes
 {
     public class RootPage : ContentPage
     {
+        string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
         public RootPage()
         {
 
             Label testLabel = new Label();
 
-            testLabel.Text = "test";
+            string temp = "";
+            foreach (var dir in Directory.EnumerateDirectories(PATH+"/.."))
+            {
+                temp += dir + "         ";
+            }
+
+            testLabel.Text = PATH;
+
+  
 
             StackLayout mainContent = new StackLayout();
             mainContent.Orientation = StackOrientation.Horizontal;
