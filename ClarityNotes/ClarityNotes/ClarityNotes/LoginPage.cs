@@ -66,6 +66,7 @@ namespace ClarityNotes
             mainContent.Children.Add(mdpFrame);
             mainContent.Children.Add(connexion);
             this.Content = mainContent;
+            this.Title = "Clarity Notes";
                
         }
 

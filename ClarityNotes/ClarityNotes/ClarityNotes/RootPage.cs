@@ -13,18 +13,6 @@ namespace ClarityNotes
         public RootPage()
         {
 
-            Label testLabel = new Label();
-
-            string temp = "";
-            foreach (var dir in Directory.EnumerateDirectories(PATH+"/.."))
-            {
-                temp += dir + "         ";
-            }
-
-            testLabel.Text = PATH;
-
-  
-
             StackLayout mainContent = new StackLayout();
             mainContent.Orientation = StackOrientation.Horizontal;
             mainContent.VerticalOptions = LayoutOptions.CenterAndExpand;
@@ -49,11 +37,22 @@ namespace ClarityNotes
                 but.Clicked += OnButtonCliked;
                 verticalColumn.Children.Add(but);
             }
-
             frameColumn.Content = verticalColumn;
 
+            StackLayout listNotes = new StackLayout();
+            listNotes.Margin = 15;
+
+            foreach (var dir in Directory.EnumerateDirectories(PATH))
+            {
+                Label temp = new Label();
+                temp.Text = Path.GetFileName(dir); 
+                listNotes.Children.Add(temp);
+            }
+
+
+
             mainContent.Children.Add(frameColumn);
-            mainContent.Children.Add(testLabel);
+            mainContent.Children.Add(listNotes);
             this.Content = mainContent;
         }
 

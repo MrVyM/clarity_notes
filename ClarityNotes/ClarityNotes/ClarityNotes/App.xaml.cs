@@ -9,10 +9,14 @@ namespace ClarityNotes
         public App()
         {
             InitializeComponent();
-            // MainPage = new NavigationPage(new LoginPage());
-            var page = new RootPage();
-            NavigationPage.SetHasNavigationBar(page, false);
-            MainPage = new NavigationPage(page);
+            if (false)
+                MainPage = new NavigationPage(new LoginPage());
+            else
+            {
+                var page = new RootPage();
+                NavigationPage.SetHasNavigationBar(page, false);
+                MainPage = new NavigationPage(page);
+            }
             
         }
 
