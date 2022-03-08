@@ -9,19 +9,28 @@ namespace ClarityNotes
 {
     public class RootPage : ContentPage
     {
-        string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+        string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/data";
+
         public RootPage()
         {
+            if (!Directory.Exists(PATH))
+            {
+                Directory.CreateDirectory(PATH);
+                
+            }
+            Directory.CreateDirectory(PATH + "/tet");
+            Console.WriteLine(PATH);
 
             StackLayout mainContent = new StackLayout();
             mainContent.Orientation = StackOrientation.Horizontal;
             mainContent.VerticalOptions = LayoutOptions.CenterAndExpand;
             mainContent.HorizontalOptions = LayoutOptions.Start;
 
+            StackLayout verticalLayout = new StackLayout();
 
             Frame frameColumn = new Frame();
             frameColumn.VerticalOptions = LayoutOptions.StartAndExpand;
-            frameColumn.HorizontalOptions = LayoutOptions.StartAndExpand;   
+            frameColumn.HorizontalOptions = LayoutOptions.StartAndExpand;
 
 
             StackLayout verticalColumn = new StackLayout();
@@ -29,30 +38,46 @@ namespace ClarityNotes
             verticalColumn.VerticalOptions = LayoutOptions.CenterAndExpand;
 
 
-            for (int i = 0; i < 10; i++)
+            foreach (string dir in Directory.EnumerateDirectories(PATH))
             {
-                Button but = new Button();
-                but.Text = i.ToString();
-                but.WidthRequest = 50;
-                but.Clicked += OnButtonCliked;
-                verticalColumn.Children.Add(but);
+                Button button = new Button();
+                button.Clicked += OnButtonCliked;
+                button.Text = Path.GetFileName(dir);
+                verticalColumn.Children.Add(button);
             }
+
             frameColumn.Content = verticalColumn;
+
+            Frame AddFrame = new Frame();
+            StackLayout AddLayout = new StackLayout();
+
+            Button add = new Button();
+            add.Text = "+";
+            add.Clicked += OnAddCliked;
+            AddLayout.Children.Add(add);
+
+            Button settings = new Button();
+            settings.Text = "SET";
+            AddLayout.Children.Add(settings);
 
             StackLayout listNotes = new StackLayout();
             listNotes.Margin = 15;
 
-            foreach (var dir in Directory.EnumerateDirectories(PATH))
+            foreach (var dir in Directory.EnumerateFiles(PATH))
             {
+                Console.WriteLine(dir);
                 Label temp = new Label();
-                temp.Text = Path.GetFileName(dir); 
+                temp.Text = Path.GetFileName(dir);
                 listNotes.Children.Add(temp);
             }
 
 
 
-            mainContent.Children.Add(frameColumn);
+            verticalLayout.Children.Add(verticalColumn);
+            verticalLayout.Children.Add(AddLayout);
+            mainContent.Children.Add(verticalLayout);
             mainContent.Children.Add(listNotes);
+            this.Content = mainContent;
             this.Content = mainContent;
         }
 
@@ -60,5 +85,12 @@ namespace ClarityNotes
         {
             Console.WriteLine(((Button)sender).Text);
         }
+        private void OnAddCliked(object sender, EventArgs e)
+        {
+            var page = new AddChapterPage();
+            NavigationPage.SetHasNavigationBar(page, false);
+            Navigation.PushAsync(page);
+        }
+
     }
 }

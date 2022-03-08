@@ -1,5 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
+using System.IO;
 using Xamarin.Forms.Xaml;
 
 namespace ClarityNotes
@@ -17,11 +18,19 @@ namespace ClarityNotes
                 NavigationPage.SetHasNavigationBar(page, false);
                 MainPage = new NavigationPage(page);
             }
-            
+
+            string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+
+            if (!Directory.Exists(PATH))
+            {
+                Directory.CreateDirectory(PATH + "/data");
+            }
+
         }
 
         protected override void OnStart()
-        {
+        { 
+
         }
 
         protected override void OnSleep()
