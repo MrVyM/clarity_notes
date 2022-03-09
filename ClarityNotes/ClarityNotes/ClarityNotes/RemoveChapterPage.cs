@@ -1,21 +1,36 @@
 ﻿using System;
+using System.IO;
 using Xamarin.Forms;
 
 namespace ClarityNotes
 {
     public class RemoveChapterPage : ContentPage
     {
-        Entry Name;
+        string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/data";
+        Picker picker;
+
         public RemoveChapterPage()
         {
             StackLayout mainContent = new StackLayout() { VerticalOptions = LayoutOptions.Center};
 
-            Label questionLabel = new Label() { FontSize = 16, TextColor = Color.Black, HorizontalTextAlignment = TextAlignment.Center };
+            Label questionLabel = new Label() { 
+                FontSize = 16, 
+                TextColor = Color.Black, 
+                HorizontalTextAlignment = TextAlignment.Center };
+
             questionLabel.Text = "Quel chapitre souhaitez-vous supprimer ?";
             mainContent.Children.Add(questionLabel);
 
-            Name = new Entry();
-            mainContent.Children.Add(Name);
+            picker = new Picker
+            {
+                Title = "Liste des chapitres",
+                HorizontalTextAlignment = TextAlignment.Center,
+                VerticalOptions = LayoutOptions.CenterAndExpand };
+
+            foreach (string dir in Directory.EnumerateDirectories(PATH))
+                picker.Items.Add(Path.GetFileName(dir));
+
+            mainContent.Children.Add(picker);
 
             Button submit = new Button() { Text = "Confirmation" };
             submit.Clicked += OnSubmitClicked;
@@ -31,7 +46,10 @@ namespace ClarityNotes
 
         private void OnSubmitClicked(object sender, EventArgs e)
         {
-            // TODO : TO IMPLEMENT SOON   
+            if (picker.SelectedItem == null) return;
+            String fullPath = PATH + "/" + picker.SelectedItem.ToString();
+            if (!File.Exists(fullPath)) return;
+            Directory.Delete(fullPath, true);
         }
     }
 }

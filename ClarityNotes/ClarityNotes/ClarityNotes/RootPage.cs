@@ -18,7 +18,7 @@ namespace ClarityNotes
                 Directory.CreateDirectory(PATH);
                 
             }
-            Directory.CreateDirectory(PATH + "/tet");
+            //Directory.CreateDirectory(PATH + "/tet");
             Console.WriteLine(PATH);
 
             StackLayout mainContent = new StackLayout();
