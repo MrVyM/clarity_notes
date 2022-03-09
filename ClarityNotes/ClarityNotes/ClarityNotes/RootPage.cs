@@ -16,7 +16,7 @@ namespace ClarityNotes
             if (!Directory.Exists(PATH))
             {
                 Directory.CreateDirectory(PATH);
-                
+
             }
             //Directory.CreateDirectory(PATH + "/tet");
             Console.WriteLine(PATH);

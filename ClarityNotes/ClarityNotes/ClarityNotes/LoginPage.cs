@@ -13,7 +13,7 @@ namespace ClarityNotes
         Entry mdpEntry;
         Label error;
         public LoginPage()
-        { 
+        {
 
             StackLayout mainContent = new StackLayout();
             mainContent.HorizontalOptions = LayoutOptions.Center;
@@ -28,7 +28,7 @@ namespace ClarityNotes
             error.FontSize = 18;
             error.TextColor = Color.Red;
             error.HorizontalOptions = LayoutOptions.Center;
-            error.VerticalOptions = LayoutOptions.Center;   
+            error.VerticalOptions = LayoutOptions.Center;
             mainContent.Children.Add(error);
 
             Label idLabel = new Label();
@@ -61,13 +61,13 @@ namespace ClarityNotes
             connexion.HorizontalOptions = LayoutOptions.Center;
             connexion.Clicked += OnConnexionCliked;
 
-            
+
             mainContent.Children.Add(idFrame);
             mainContent.Children.Add(mdpFrame);
             mainContent.Children.Add(connexion);
             this.Content = mainContent;
             this.Title = "Clarity Notes";
-               
+
         }
 
         private void OnConnexionCliked(object sender, EventArgs e)
@@ -82,11 +82,11 @@ namespace ClarityNotes
                 var page = new RootPage();
                 NavigationPage.SetHasNavigationBar(page, false);
                 Navigation.PushAsync(page);
-                
+
             }
-            else 
+            else
             {
-                error.Text = "Identifiant ou mot de passe invalid.";
+                error.Text = "Compte inexistant.";
             }
         }
     }
