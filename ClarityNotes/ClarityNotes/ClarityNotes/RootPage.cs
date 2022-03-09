@@ -41,7 +41,7 @@ namespace ClarityNotes
             foreach (string dir in Directory.EnumerateDirectories(PATH))
             {
                 Button button = new Button();
-                button.Clicked += OnButtonCliked;
+                button.Clicked += OnButtonClicked;
                 button.Text = Path.GetFileName(dir);
                 verticalColumn.Children.Add(button);
             }
@@ -51,13 +51,15 @@ namespace ClarityNotes
             Frame AddFrame = new Frame();
             StackLayout AddLayout = new StackLayout();
 
-            Button add = new Button();
-            add.Text = "+";
-            add.Clicked += OnAddCliked;
+            Button add = new Button() { Text = "+" };
+            add.Clicked += OnAddClicked;
             AddLayout.Children.Add(add);
 
-            Button settings = new Button();
-            settings.Text = "SET";
+            Button remove = new Button() { Text = "-" };
+            remove.Clicked += OnRemoveClicked;
+            AddLayout.Children.Add(remove);
+
+            Button settings = new Button() { Text = "SET" };
             AddLayout.Children.Add(settings);
 
             StackLayout listNotes = new StackLayout();
@@ -71,8 +73,6 @@ namespace ClarityNotes
                 listNotes.Children.Add(temp);
             }
 
-
-
             verticalLayout.Children.Add(verticalColumn);
             verticalLayout.Children.Add(AddLayout);
             mainContent.Children.Add(verticalLayout);
@@ -81,16 +81,22 @@ namespace ClarityNotes
             this.Content = mainContent;
         }
 
-        private void OnButtonCliked(object sender, EventArgs e)
+        private void OnButtonClicked(object sender, EventArgs e)
         {
             Console.WriteLine(((Button)sender).Text);
         }
-        private void OnAddCliked(object sender, EventArgs e)
+        private void OnAddClicked(object sender, EventArgs e)
         {
             var page = new AddChapterPage();
             NavigationPage.SetHasNavigationBar(page, false);
             Navigation.PushAsync(page);
         }
 
+        private void OnRemoveClicked(object sender, EventArgs e)
+        {
+            var page = new RemoveChapterPage();
+            NavigationPage.SetHasNavigationBar(page, false);
+            Navigation.PushAsync(page);
+        }
     }
 }

@@ -525,23 +525,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\VyM\\.nuget\\packages\\": {},
+    "C:\\Users\\DELL\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\VyM\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes\\ClarityNotes.csproj",
+      "projectUniqueName": "C:\\Users\\DELL\\Desktop\\Répertoires Dev'\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes\\ClarityNotes.csproj",
       "projectName": "ClarityNotes",
-      "projectPath": "C:\\Users\\VyM\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes\\ClarityNotes.csproj",
-      "packagesPath": "C:\\Users\\VyM\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\VyM\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes\\obj\\",
+      "projectPath": "C:\\Users\\DELL\\Desktop\\Répertoires Dev'\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes\\ClarityNotes.csproj",
+      "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\DELL\\Desktop\\Répertoires Dev'\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\VyM\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
