@@ -1219,7 +1219,6 @@ C:\Users\VyM\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes.Androi
 C:\Users\VyM\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes.Android\obj\Debug\120\android\src\mono\MonoPackageManager_Resources.java
 C:\Users\VyM\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes.Android\obj\Debug\120\android\src\xamarin\essentials\fileProvider.java
 C:\Users\VyM\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes.Android\obj\Debug\120\android\bin\packaged_resources
-C:\Users\VyM\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes.Android\obj\Debug\120\android\src\com\companyname\claritynotes\R.java
 C:\Users\VyM\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes.Android\obj\Debug\120\android\compressed_assemblies.arm64-v8a.s
 C:\Users\VyM\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes.Android\obj\Debug\120\android\compressed_assemblies.armeabi-v7a.s
 C:\Users\VyM\Desktop\clarity_notes\ClarityNotes\ClarityNotes\ClarityNotes.Android\obj\Debug\120\android\compressed_assemblies.x86.s

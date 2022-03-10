@@ -10,16 +10,18 @@ namespace ClarityNotes
     public class RootPage : ContentPage
     {
         string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/data";
-
+        StackLayout listNotes;
         public RootPage()
         {
             if (!Directory.Exists(PATH))
             {
                 Directory.CreateDirectory(PATH);
+                Directory.CreateDirectory(PATH + "/Test");
+                StreamWriter sw = new StreamWriter(PATH + "/Test/note.txt");
+                sw.WriteLine("Voila ma note");
+                sw.Close();
                 
             }
-            //Directory.CreateDirectory(PATH + "/tet");
-            Console.WriteLine(PATH);
 
             StackLayout mainContent = new StackLayout();
             mainContent.Orientation = StackOrientation.Horizontal;
@@ -37,13 +39,14 @@ namespace ClarityNotes
             verticalColumn.HorizontalOptions = LayoutOptions.Center;
             verticalColumn.VerticalOptions = LayoutOptions.CenterAndExpand;
 
-
+            Button buttonChapter;
             foreach (string dir in Directory.EnumerateDirectories(PATH))
             {
-                Button button = new Button();
-                button.Clicked += OnButtonClicked;
-                button.Text = Path.GetFileName(dir);
-                verticalColumn.Children.Add(button);
+                Console.WriteLine(dir);
+                buttonChapter = new Button();
+                buttonChapter.Clicked += OnButtonClicked;
+                buttonChapter.Text = Path.GetFileName(dir);
+                verticalColumn.Children.Add(buttonChapter);
             }
 
             frameColumn.Content = verticalColumn;
@@ -62,28 +65,45 @@ namespace ClarityNotes
             Button settings = new Button() { Text = "SET" };
             AddLayout.Children.Add(settings);
 
-            StackLayout listNotes = new StackLayout();
+            listNotes = new StackLayout();
             listNotes.Margin = 15;
 
-            foreach (var dir in Directory.EnumerateFiles(PATH))
+            var direc = Directory.EnumerateDirectories(PATH);
+            if (direc.Count() != 0) // si il existe un chapter
             {
-                Console.WriteLine(dir);
-                Label temp = new Label();
-                temp.Text = Path.GetFileName(dir);
-                listNotes.Children.Add(temp);
+                foreach (var dir in Directory.EnumerateFiles(direc.First()))
+                {
+                    Console.WriteLine(dir);
+                    Label temp = new Label();
+                    temp.Text = Path.GetFileName(dir);
+                    listNotes.Children.Add(temp);
+                }
+            }
+            else 
+            {
+                Label pleaseAddChapter = new Label();
+                pleaseAddChapter.Text = "Vous n'avez pas encore de chapitre. Vous pouvez en creer un en utilisant le bouton +";
+                listNotes.Children.Add(pleaseAddChapter);
             }
 
             verticalLayout.Children.Add(verticalColumn);
             verticalLayout.Children.Add(AddLayout);
             mainContent.Children.Add(verticalLayout);
             mainContent.Children.Add(listNotes);
-            this.Content = mainContent;
+
             this.Content = mainContent;
         }
 
         private void OnButtonClicked(object sender, EventArgs e)
         {
-            Console.WriteLine(((Button)sender).Text);
+            listNotes.Children.Clear();
+            foreach (var dir in Directory.EnumerateFiles(PATH + "/" + ((Button)sender).Text))
+            {
+                Console.WriteLine(dir);
+                Label temp = new Label();
+                temp.Text = Path.GetFileName(dir);
+                listNotes.Children.Add(temp);
+            }
         }
         private void OnAddClicked(object sender, EventArgs e)
         {
