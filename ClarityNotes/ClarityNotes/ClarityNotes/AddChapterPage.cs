@@ -43,7 +43,7 @@ namespace ClarityNotes
             }
             else 
             {
-                // faire un retour user
+                var ans = DisplayAlert("Alerte", "Un chapitre existe déjà sous ce nom.", "D'accord");
                 Console.WriteLine("Le directory existe deja");
             }
             

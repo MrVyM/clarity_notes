@@ -47,9 +47,13 @@ namespace ClarityNotes
         private void OnSubmitClicked(object sender, EventArgs e)
         {
             if (picker.SelectedItem == null) return;
-            String fullPath = PATH + "/" + picker.SelectedItem.ToString();
-            if (!File.Exists(fullPath)) return;
+            string fullPath = PATH + "/" + picker.SelectedItem.ToString();
+            if (!Directory.Exists(fullPath)) return;
             Directory.Delete(fullPath, true);
+            var page = new RootPage();
+            NavigationPage.SetHasNavigationBar(page, false);
+            Navigation.PushAsync(page);
+            Navigation.RemovePage(this);
         }
     }
 }

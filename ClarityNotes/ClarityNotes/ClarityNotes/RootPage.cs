@@ -22,6 +22,7 @@ namespace ClarityNotes
                 sw.Close();
                 
             }
+           
 
             StackLayout mainContent = new StackLayout();
             mainContent.Orientation = StackOrientation.Horizontal;
@@ -44,7 +45,7 @@ namespace ClarityNotes
             {
                 Console.WriteLine(dir);
                 buttonChapter = new Button();
-                buttonChapter.Clicked += OnButtonClicked;
+                buttonChapter.Clicked += OnNoteClicked;
                 buttonChapter.Text = Path.GetFileName(dir);
                 verticalColumn.Children.Add(buttonChapter);
             }
@@ -55,7 +56,7 @@ namespace ClarityNotes
             StackLayout AddLayout = new StackLayout();
 
             Button add = new Button() { Text = "+" };
-            add.Clicked += OnAddClicked;
+            add.Clicked += OnAddChapterClicked;
             AddLayout.Children.Add(add);
 
             Button remove = new Button() { Text = "-" };
@@ -67,17 +68,24 @@ namespace ClarityNotes
 
             listNotes = new StackLayout();
             listNotes.Margin = 15;
+            listNotes.VerticalOptions = LayoutOptions.Center; 
 
             var direc = Directory.EnumerateDirectories(PATH);
             if (direc.Count() != 0) // si il existe un chapter
             {
+                listNotes.Children.Clear();
                 foreach (var dir in Directory.EnumerateFiles(direc.First()))
                 {
                     Console.WriteLine(dir);
                     Label temp = new Label();
-                    temp.Text = Path.GetFileName(dir);
+                    temp.FontSize = 16;
+                    temp.Text = Path.GetFileName(dir).Split('.').First();
                     listNotes.Children.Add(temp);
                 }
+                Button AddNote = new Button();
+                AddNote.Text = "Ajouter une note a " + Path.GetFileName(direc.First());
+                AddNote.Clicked += OnAddNotePageClicked;
+                listNotes.Children.Add(AddNote);
             }
             else 
             {
@@ -94,18 +102,33 @@ namespace ClarityNotes
             this.Content = mainContent;
         }
 
-        private void OnButtonClicked(object sender, EventArgs e)
+        private void OnNoteClicked(object sender, EventArgs e)
         {
             listNotes.Children.Clear();
             foreach (var dir in Directory.EnumerateFiles(PATH + "/" + ((Button)sender).Text))
             {
                 Console.WriteLine(dir);
                 Label temp = new Label();
-                temp.Text = Path.GetFileName(dir);
+                temp.FontSize = 16;
+                temp.Text = Path.GetFileName(dir).Split('.').First();
                 listNotes.Children.Add(temp);
             }
+            Button AddNote = new Button();
+            AddNote.Text = "Ajouter une note a " + ((Button)sender).Text;
+            AddNote.Clicked += OnAddNotePageClicked;
+            listNotes.Children.Add(AddNote);
+
         }
-        private void OnAddClicked(object sender, EventArgs e)
+        private void OnAddNotePageClicked(object sender, EventArgs e)
+        {
+            string text = ((Button)sender).Text;
+            string[] splited = text.Split(' ');
+            var page = new AddNotePage(splited[splited.Length -1]);
+            NavigationPage.SetHasNavigationBar(page, false);
+            Navigation.PushAsync(page);
+        }
+
+        private void OnAddChapterClicked(object sender, EventArgs e)
         {
             var page = new AddChapterPage();
             NavigationPage.SetHasNavigationBar(page, false);
