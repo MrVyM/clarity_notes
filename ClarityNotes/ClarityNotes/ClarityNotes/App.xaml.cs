@@ -29,7 +29,7 @@ namespace ClarityNotes
         }
 
         protected override void OnStart()
-        {
+        { 
 
         }
 

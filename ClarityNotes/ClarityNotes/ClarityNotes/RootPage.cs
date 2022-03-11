@@ -16,15 +16,11 @@ namespace ClarityNotes
             if (!Directory.Exists(PATH))
             {
                 Directory.CreateDirectory(PATH);
-<<<<<<< HEAD
                 Directory.CreateDirectory(PATH + "/Test");
                 StreamWriter sw = new StreamWriter(PATH + "/Test/note.txt");
                 sw.WriteLine("Voila ma note");
                 sw.Close();
                 
-=======
-
->>>>>>> 15f2468185a283160a3ce5ae080dbc2f037b6bee
             }
 
             StackLayout mainContent = new StackLayout();

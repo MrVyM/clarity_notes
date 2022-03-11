@@ -11,24 +11,21 @@ namespace ClarityNotes
 
         public RemoveChapterPage()
         {
-            StackLayout mainContent = new StackLayout() { VerticalOptions = LayoutOptions.Center };
+            StackLayout mainContent = new StackLayout() { VerticalOptions = LayoutOptions.Center};
 
-            Label questionLabel = new Label()
-            {
-                FontSize = 16,
-                Text = "Quel chapitre souhaitez-vous supprimer ?",
-                TextColor = Color.Black,
-                HorizontalTextAlignment = TextAlignment.Center
-            };
+            Label questionLabel = new Label() { 
+                FontSize = 16, 
+                TextColor = Color.Black, 
+                HorizontalTextAlignment = TextAlignment.Center };
 
+            questionLabel.Text = "Quel chapitre souhaitez-vous supprimer ?";
             mainContent.Children.Add(questionLabel);
 
             picker = new Picker
             {
                 Title = "Liste des chapitres",
                 HorizontalTextAlignment = TextAlignment.Center,
-                VerticalOptions = LayoutOptions.CenterAndExpand
-            };
+                VerticalOptions = LayoutOptions.CenterAndExpand };
 
             foreach (string dir in Directory.EnumerateDirectories(PATH))
                 picker.Items.Add(Path.GetFileName(dir));
@@ -39,15 +36,9 @@ namespace ClarityNotes
             submit.Clicked += OnSubmitClicked;
             mainContent.Children.Add(submit);
 
-            Label warningLabel = new Label()
-            {
-                FontSize = 16,
-                Text = "Attention, la suppression d'un chapitre est irréversible et " +
-                "supprime définitivement toutes les notes incluses dans ce dernier.",
-                TextColor = Color.Red,
-                HorizontalTextAlignment = TextAlignment.Center
-            };
-
+            Label warningLabel = new Label() { FontSize = 16, TextColor = Color.Red, HorizontalTextAlignment = TextAlignment.Center };
+            warningLabel.Text = "Attention, la suppression d'un chapitre est irréversible et " +
+                "supprime définitivement toutes les notes incluses dans ce dernier.";
             mainContent.Children.Add(warningLabel);
 
             this.Content = mainContent;
@@ -57,12 +48,8 @@ namespace ClarityNotes
         {
             if (picker.SelectedItem == null) return;
             String fullPath = PATH + "/" + picker.SelectedItem.ToString();
-            if (!Directory.Exists(fullPath)) return;
+            if (!File.Exists(fullPath)) return;
             Directory.Delete(fullPath, true);
-            var page = new RootPage();
-            NavigationPage.SetHasNavigationBar(page, false);
-            Navigation.PushAsync(page);
-            Navigation.RemovePage(this);
         }
     }
 }
