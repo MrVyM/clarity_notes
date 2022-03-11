@@ -11,6 +11,7 @@ namespace ClarityNotes
     {
         string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/data";
         StackLayout listNotes;
+        string PATHlistNotes;
         public RootPage()
         {
             if (!Directory.Exists(PATH))
@@ -77,12 +78,15 @@ namespace ClarityNotes
                 foreach (var dir in Directory.EnumerateFiles(direc.First()))
                 {
                     Console.WriteLine(dir);
-                    Label temp = new Label();
+                    Button temp = new Button();
                     temp.FontSize = 16;
                     temp.Text = Path.GetFileName(dir).Split('.').First();
+                    temp.Clicked += OnEditorCliked;
                     listNotes.Children.Add(temp);
                 }
+                PATHlistNotes = Path.GetFileName(direc.First());
                 Button AddNote = new Button();
+                AddNote.VerticalOptions = LayoutOptions.End;
                 AddNote.Text = "Ajouter une note a " + Path.GetFileName(direc.First());
                 AddNote.Clicked += OnAddNotePageClicked;
                 listNotes.Children.Add(AddNote);
@@ -101,18 +105,24 @@ namespace ClarityNotes
 
             this.Content = mainContent;
         }
-
+        private void OnEditorCliked(object sender, EventArgs e)
+        {
+            var page = new EditeurPage(PATHlistNotes + "/" + ((Button)sender).Text);
+            Navigation.PushAsync(page);
+        }
         private void OnNoteClicked(object sender, EventArgs e)
         {
             listNotes.Children.Clear();
             foreach (var dir in Directory.EnumerateFiles(PATH + "/" + ((Button)sender).Text))
             {
                 Console.WriteLine(dir);
-                Label temp = new Label();
+                Button temp = new Button();
                 temp.FontSize = 16;
+                temp.Clicked += OnEditorCliked;
                 temp.Text = Path.GetFileName(dir).Split('.').First();
                 listNotes.Children.Add(temp);
             }
+            PATHlistNotes = Path.GetFileName(((Button)sender).Text);
             Button AddNote = new Button();
             AddNote.Text = "Ajouter une note a " + ((Button)sender).Text;
             AddNote.Clicked += OnAddNotePageClicked;
