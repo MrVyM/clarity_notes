@@ -24,16 +24,17 @@ namespace ClarityNotes
             editor.HeightRequest = 200;
             editor.Text = sr.ReadToEnd();
             sr.Close();
+            editor.TextChanged += OnSaveClicked;
 
-            Button save = new Button();
-            save.Clicked += OnSaveClicked;
             mainContent.Children.Add(editor);
             this.Title = path;
             this.Content = mainContent;
         }
         private void OnSaveClicked(Object sender, EventArgs e)
         {
-            Console.WriteLine("Faut encore Save");
+            StreamWriter sw = new StreamWriter(PATH);
+            sw.Write(editor.Text);
+            sw.Close();
         }
     }
 }
