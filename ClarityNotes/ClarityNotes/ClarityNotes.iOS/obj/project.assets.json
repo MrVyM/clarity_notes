@@ -982,20 +982,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Khôren\\.nuget\\packages\\": {}
+    "C:\\Users\\VyM\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Khôren\\Desktop\\projet s2\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes.iOS\\ClarityNotes.iOS.csproj",
+      "projectUniqueName": "C:\\Users\\VyM\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes.iOS\\ClarityNotes.iOS.csproj",
       "projectName": "ClarityNotes.iOS",
-      "projectPath": "C:\\Users\\Khôren\\Desktop\\projet s2\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes.iOS\\ClarityNotes.iOS.csproj",
-      "packagesPath": "C:\\Users\\Khôren\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Khôren\\Desktop\\projet s2\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes.iOS\\obj\\",
+      "projectPath": "C:\\Users\\VyM\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes.iOS\\ClarityNotes.iOS.csproj",
+      "packagesPath": "C:\\Users\\VyM\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\VyM\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes.iOS\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Khôren\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\VyM\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1008,8 +1013,8 @@
       "frameworks": {
         "xamarinios10": {
           "projectReferences": {
-            "C:\\Users\\Khôren\\Desktop\\projet s2\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes\\ClarityNotes.csproj": {
-              "projectPath": "C:\\Users\\Khôren\\Desktop\\projet s2\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes\\ClarityNotes.csproj"
+            "C:\\Users\\VyM\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes\\ClarityNotes.csproj": {
+              "projectPath": "C:\\Users\\VyM\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes\\ClarityNotes.csproj"
             }
           }
         }
