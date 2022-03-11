@@ -10,7 +10,7 @@ namespace ClarityNotes
         public App()
         {
             InitializeComponent();
-            if (true)
+            if (false)
                 MainPage = new NavigationPage(new LoginPage());
             else
             {

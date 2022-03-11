@@ -55,6 +55,7 @@ namespace ClarityNotes
 
             Frame AddFrame = new Frame();
             StackLayout AddLayout = new StackLayout();
+            AddLayout.HorizontalOptions = LayoutOptions.End;
 
             Button add = new Button() { Text = "+" };
             add.Clicked += OnAddChapterClicked;
@@ -80,6 +81,9 @@ namespace ClarityNotes
                     Console.WriteLine(dir);
                     Button temp = new Button();
                     temp.FontSize = 16;
+                    temp.BackgroundColor = Color.White;
+                    temp.BorderColor = Color.Gray;
+                    temp.BorderWidth = 1;
                     temp.Text = Path.GetFileName(dir).Split('.').First();
                     temp.Clicked += OnEditorCliked;
                     listNotes.Children.Add(temp);
@@ -118,6 +122,7 @@ namespace ClarityNotes
                 Console.WriteLine(dir);
                 Button temp = new Button();
                 temp.FontSize = 16;
+                temp.BackgroundColor = Color.White;
                 temp.Clicked += OnEditorCliked;
                 temp.Text = Path.GetFileName(dir).Split('.').First();
                 listNotes.Children.Add(temp);
