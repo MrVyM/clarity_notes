@@ -22,6 +22,7 @@ namespace ClarityNotes
             StackLayout mainContent = new StackLayout();
             editor = new Editor();
             editor.HeightRequest = 200;
+            editor.IsTextPredictionEnabled = false;
             editor.Text = sr.ReadToEnd();
             sr.Close();
             editor.TextChanged += OnSaveClicked;
