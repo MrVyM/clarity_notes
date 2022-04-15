@@ -31,7 +31,7 @@ namespace ClarityNotes
         }
         private void OnSubmitClicked(object sender, EventArgs e)
         {
-            string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/data";
+            string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "/data";
             if (!Directory.Exists(PATH +"/"+ Name.Text))
             {
                 Directory.CreateDirectory(PATH +"/"+ Name.Text);

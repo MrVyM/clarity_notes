@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "oH1M/+CnBu+S8t89UKaIskov5ik+9ExJXB58XR2fgnHGoFKoPT36JxYgGNjfqCpseoly7XRLQtK+2UFYmFwvfg==",
+  "dgSpecHash": "MO7U41/XyLeZs4u3W/u8kBJ/3dW/cTrT1K4dV5m7WVzRvjvVPlSQfzc6c6JsU7OJVJ0yCFY2i6JHrbatp3GQbA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\VyM\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes.iOS\\ClarityNotes.iOS.csproj",
+  "projectFilePath": "C:\\Users\\Vym\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes.iOS\\ClarityNotes.iOS.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\VyM\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
-    "C:\\Users\\VyM\\.nuget\\packages\\xamarin.essentials\\1.7.0\\xamarin.essentials.1.7.0.nupkg.sha512",
-    "C:\\Users\\VyM\\.nuget\\packages\\xamarin.forms\\5.0.0.2196\\xamarin.forms.5.0.0.2196.nupkg.sha512"
+    "C:\\Users\\Vym\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\Vym\\.nuget\\packages\\xamarin.essentials\\1.7.0\\xamarin.essentials.1.7.0.nupkg.sha512",
+    "C:\\Users\\Vym\\.nuget\\packages\\xamarin.forms\\5.0.0.2196\\xamarin.forms.5.0.0.2196.nupkg.sha512"
   ],
   "logs": []
 }

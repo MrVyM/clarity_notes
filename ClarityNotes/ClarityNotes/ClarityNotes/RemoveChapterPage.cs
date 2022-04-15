@@ -6,7 +6,7 @@ namespace ClarityNotes
 {
     public class RemoveChapterPage : ContentPage
     {
-        string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/data";
+        string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "/data";
         Picker picker;
 
         public RemoveChapterPage()

@@ -9,7 +9,7 @@ namespace ClarityNotes
 {
     public class RootPage : ContentPage
     {
-        string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/data";
+        string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "/data";
         StackLayout listNotes;
         string PATHlistNotes;
         public RootPage()

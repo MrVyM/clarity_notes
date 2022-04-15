@@ -17,7 +17,7 @@ namespace ClarityNotes
         public EditeurPage(string path)
         {
 
-            PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/data" + "/" + path + ".txt";
+            PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "/data" + "/" + path + ".txt";
             StreamReader sr = new StreamReader(PATH);
             StackLayout mainContent = new StackLayout();
             editor = new Editor();

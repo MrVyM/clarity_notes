@@ -19,11 +19,17 @@ namespace ClarityNotes
                 MainPage = new NavigationPage(page);
             }
 
-            string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
 
             if (!Directory.Exists(PATH))
             {
-                Directory.CreateDirectory(PATH + "/data");
+
+                for (int i = 0; i < 10; i++)
+                {
+                    Console.WriteLine("OKAY");
+                }
+                Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
+                //Directory.CreateDirectory(PATH + "/data");
             }
 
         }

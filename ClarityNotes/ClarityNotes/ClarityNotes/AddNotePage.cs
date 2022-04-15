@@ -14,7 +14,7 @@ namespace ClarityNotes
         public AddNotePage(string path)
         {
             Console.WriteLine(path);
-            PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal) + "/data" + "/" + path;
+            PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "/data" + "/" + path;
             StackLayout mainContent = new StackLayout();
 
             Label label = new Label();

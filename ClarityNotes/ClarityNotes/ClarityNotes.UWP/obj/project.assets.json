@@ -9044,18 +9044,18 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\VyM\\.nuget\\packages\\": {},
+    "C:\\Users\\Vym\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
     "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\VyM\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes.UWP\\ClarityNotes.UWP.csproj",
+      "projectUniqueName": "C:\\Users\\Vym\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes.UWP\\ClarityNotes.UWP.csproj",
       "projectName": "ClarityNotes.UWP",
-      "projectPath": "C:\\Users\\VyM\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes.UWP\\ClarityNotes.UWP.csproj",
-      "packagesPath": "C:\\Users\\VyM\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\VyM\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes.UWP\\obj\\",
+      "projectPath": "C:\\Users\\Vym\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes.UWP\\ClarityNotes.UWP.csproj",
+      "packagesPath": "C:\\Users\\Vym\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Vym\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes.UWP\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -9063,7 +9063,7 @@
         "C:\\Program Files (x86)\\Microsoft SDKs\\UWPNuGetPackages\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\VyM\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Vym\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -9077,8 +9077,8 @@
       "frameworks": {
         "uap10.0.16299": {
           "projectReferences": {
-            "C:\\Users\\VyM\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes\\ClarityNotes.csproj": {
-              "projectPath": "C:\\Users\\VyM\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes\\ClarityNotes.csproj"
+            "C:\\Users\\Vym\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes\\ClarityNotes.csproj": {
+              "projectPath": "C:\\Users\\Vym\\Desktop\\clarity_notes\\ClarityNotes\\ClarityNotes\\ClarityNotes\\ClarityNotes.csproj"
             }
           }
         }
