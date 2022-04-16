@@ -13,6 +13,7 @@ namespace ClarityNotes
         Entry pass2Entry;
         Entry emailEntry;
         Entry nameEntry;
+        Button create;
         public CreateAccountPage()
         {
             StackLayout content = new StackLayout();
@@ -20,7 +21,10 @@ namespace ClarityNotes
             content.Padding = 50;
 
 
+
             Frame email = new Frame();
+            email.BorderColor = Color.Gray;
+            email.BackgroundColor = Color.White;
             email.Margin = 20;
             email.CornerRadius = 10;
 
@@ -38,6 +42,8 @@ namespace ClarityNotes
             content.Children.Add(email);
 
             Frame username = new Frame();
+            username.BorderColor = Color.Gray;
+            username.BackgroundColor = Color.White;
             username.Margin = 20;
             username.CornerRadius = 10;
 
@@ -57,6 +63,8 @@ namespace ClarityNotes
 
             Frame password = new Frame();
             password.Margin = 20;
+            password.BorderColor = Color.Gray;
+            password.BackgroundColor = Color.White;
             password.CornerRadius = 10;
 
             StackLayout passStack = new StackLayout();
@@ -82,12 +90,16 @@ namespace ClarityNotes
             content.Children.Add(password);
 
 
-            Button create = new Button();
+            create = new Button();
+            create.IsEnabled = false;
             create.Text = "Créer";
+            create.HorizontalOptions = LayoutOptions.Center;
+            create.VerticalOptions = LayoutOptions.Center;
 
             create.Clicked += OnCreateCliked;
 
             content.Children.Add(create);
+            this.BackgroundColor = Color.Beige;
             this.Content = content; 
         }
 
@@ -97,11 +109,13 @@ namespace ClarityNotes
             bool condition = pass1Entry.Text == pass2Entry.Text && pass1Entry.Text.Length >= 6;
             if (!condition)
             {
+                create.IsEnabled = false;
                 pass1Entry.TextColor = Color.Red;
                 pass2Entry.TextColor = Color.Red;
             }
             else
             {
+                create.IsEnabled = true;
                 pass1Entry.TextColor= Color.Blue;
                 pass2Entry.TextColor= Color.Blue;
             }

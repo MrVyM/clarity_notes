@@ -10,15 +10,15 @@ namespace ClarityNotes
         public App()
         {
             InitializeComponent();
-            if (false)
+            if (true)
                 MainPage = new NavigationPage(new LoginPage());
             else
             {
-                var page = new CreateAccountPage();
+                var page = new RootPage();
                 NavigationPage.SetHasNavigationBar(page, false);
                 MainPage = new NavigationPage(page);
             }
-             ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.Blue;
+             ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.FromHex("#5865f2");
 
             string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
 

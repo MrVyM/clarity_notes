@@ -21,14 +21,14 @@ namespace ClarityNotes
             StreamReader sr = new StreamReader(PATH);
             StackLayout mainContent = new StackLayout();
             editor = new Editor();
-            editor.HeightRequest = 200;
+            editor.HeightRequest = App.Current.MainPage.Height;
             editor.IsTextPredictionEnabled = false;
             editor.Text = sr.ReadToEnd();
             sr.Close();
             editor.TextChanged += OnSaveClicked;
 
             mainContent.Children.Add(editor);
-            this.Title = path;
+            this.Title = "  --- "+path;
             this.Content = mainContent;
         }
         private void OnSaveClicked(Object sender, EventArgs e)

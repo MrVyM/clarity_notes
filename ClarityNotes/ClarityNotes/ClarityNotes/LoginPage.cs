@@ -63,19 +63,40 @@ namespace ClarityNotes
 
             mdpFrame.Content = mdpStack;
 
+            StackLayout buttonStack = new StackLayout();
+            buttonStack.Orientation = StackOrientation.Horizontal; 
+            buttonStack.HorizontalOptions = LayoutOptions.Center;
+            buttonStack.VerticalOptions = LayoutOptions.FillAndExpand;
+
             Button connexion = new Button();
             connexion.Text = "Connexion";
             connexion.HorizontalOptions = LayoutOptions.Center;
+            connexion.VerticalOptions = LayoutOptions.Center;
             connexion.Clicked += OnConnexionCliked;
+            buttonStack.Children.Add(connexion);
 
-            
+            Button create = new Button();
+            create.Text = "Créer";
+            create.Clicked += OnCreatePage;
+            create.HorizontalOptions = LayoutOptions.Center;
+            create.VerticalOptions = LayoutOptions.Center;
+            buttonStack.Children.Add(create);
+
             mainContent.Children.Add(idFrame);
             mainContent.Children.Add(mdpFrame);
-            mainContent.Children.Add(connexion);
+            mainContent.Children.Add(buttonStack);
             this.Content = mainContent;
             this.BackgroundColor = Color.Beige;
             this.Title = "Clarity Notes";
                
+        }
+
+        public void OnCreatePage(object sender, EventArgs e)
+        {
+            Navigation.PopAsync();
+            var page = new CreateAccountPage();
+            NavigationPage.SetHasNavigationBar(page, false);
+            Navigation.PushAsync(page);
         }
 
         private void OnConnexionCliked(object sender, EventArgs e)
