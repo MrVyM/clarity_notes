@@ -23,7 +23,6 @@ namespace ClarityNotes
 
 
             Frame email = new Frame();
-            email.BorderColor = Color.Gray;
             email.BackgroundColor = Color.White;
             email.Margin = 20;
             email.CornerRadius = 10;
@@ -42,7 +41,6 @@ namespace ClarityNotes
             content.Children.Add(email);
 
             Frame username = new Frame();
-            username.BorderColor = Color.Gray;
             username.BackgroundColor = Color.White;
             username.Margin = 20;
             username.CornerRadius = 10;
@@ -63,7 +61,6 @@ namespace ClarityNotes
 
             Frame password = new Frame();
             password.Margin = 20;
-            password.BorderColor = Color.Gray;
             password.BackgroundColor = Color.White;
             password.CornerRadius = 10;
 
@@ -123,7 +120,9 @@ namespace ClarityNotes
 
         private void OnCreateCliked(object sender, EventArgs e)
         {
-            
+            // mettre les infos dans la BDD
+
+            Navigation.PopAsync();
         }
     }
 }

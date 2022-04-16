@@ -93,9 +93,7 @@ namespace ClarityNotes
 
         public void OnCreatePage(object sender, EventArgs e)
         {
-            Navigation.PopAsync();
             var page = new CreateAccountPage();
-            NavigationPage.SetHasNavigationBar(page, false);
             Navigation.PushAsync(page);
         }
 
@@ -109,7 +107,7 @@ namespace ClarityNotes
             {
                 Navigation.PopAsync();
                 var page = new RootPage();
-                NavigationPage.SetHasNavigationBar(page, false);
+                NavigationPage.SetHasNavigationBar(page,false);
                 Navigation.PushAsync(page);
                 
             }

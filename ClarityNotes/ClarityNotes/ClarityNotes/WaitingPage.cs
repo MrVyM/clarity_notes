@@ -24,8 +24,8 @@ namespace ClarityNotes
             mainContent.Children.Add(webImage); 
             this.Content = mainContent;
             System.Threading.Thread.Sleep(2000);
-            //Navigation.PushAsync(new LoginPage());
-            //Navigation.RemovePage(this);
+            Navigation.PushAsync(new LoginPage());
+            Navigation.RemovePage(this);
 
         }
     }

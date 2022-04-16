@@ -12,14 +12,17 @@ namespace ClarityNotes
         string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "/data";
         StackLayout listNotes;
         string PATHlistNotes;
+        int fontSize;
+
         public RootPage()
         {
+            fontSize = (int)(App.Current.MainPage.Height/ 30);
             if (!Directory.Exists(PATH))
             {
                 Directory.CreateDirectory(PATH);
                 Directory.CreateDirectory(PATH + "/Test");
-                StreamWriter sw = new StreamWriter(PATH + "/Test/note.txt");
-                sw.WriteLine("Voila ma note");
+                StreamWriter sw = new StreamWriter(PATH + "/Test/Note.txt");
+                sw.WriteLine("Voila ma note\n\n\n\n\nJe peux mettre autant de texte que je veux");
                 sw.Close();
                 
             }
@@ -28,7 +31,7 @@ namespace ClarityNotes
             StackLayout mainContent = new StackLayout();
             mainContent.Orientation = StackOrientation.Horizontal;
             mainContent.VerticalOptions = LayoutOptions.CenterAndExpand;
-            mainContent.HorizontalOptions = LayoutOptions.Start;
+            mainContent.HorizontalOptions = LayoutOptions.FillAndExpand;
 
             StackLayout verticalLayout = new StackLayout();
 
@@ -46,6 +49,7 @@ namespace ClarityNotes
             {
                 Console.WriteLine(dir);
                 buttonChapter = new Button();
+                buttonChapter.BackgroundColor = Color.White;
                 buttonChapter.Clicked += OnNoteClicked;
                 buttonChapter.Text = Path.GetFileName(dir);
                 verticalColumn.Children.Add(buttonChapter);
@@ -59,18 +63,22 @@ namespace ClarityNotes
 
             Button add = new Button() { Text = "+" };
             add.Clicked += OnAddChapterClicked;
+            add.BackgroundColor = Color.White;
             AddLayout.Children.Add(add);
 
             Button remove = new Button() { Text = "-" };
             remove.Clicked += OnRemoveClicked;
+            remove.BackgroundColor = Color.White;  
             AddLayout.Children.Add(remove);
 
             Button settings = new Button() { Text = "SET" };
+            settings.BackgroundColor = Color.White;
             AddLayout.Children.Add(settings);
 
             listNotes = new StackLayout();
             listNotes.Margin = 15;
-            listNotes.VerticalOptions = LayoutOptions.Center; 
+            listNotes.HorizontalOptions = LayoutOptions.CenterAndExpand; 
+            listNotes.VerticalOptions = LayoutOptions.CenterAndExpand;
 
             var direc = Directory.EnumerateDirectories(PATH);
             if (direc.Count() != 0) // si il existe un chapter
@@ -80,9 +88,8 @@ namespace ClarityNotes
                 {
                     Console.WriteLine(dir);
                     Button temp = new Button();
-                    temp.FontSize = 16;
-                    temp.BackgroundColor = Color.White;
-                    temp.BorderColor = Color.Gray;
+                    temp.FontSize = fontSize;
+                    temp.BackgroundColor = Color.Beige;
                     temp.BorderWidth = 1;
                     temp.Text = Path.GetFileName(dir).Split('.').First();
                     temp.Clicked += OnEditorCliked;
@@ -90,8 +97,10 @@ namespace ClarityNotes
                 }
                 PATHlistNotes = Path.GetFileName(direc.First());
                 Button AddNote = new Button();
-                AddNote.VerticalOptions = LayoutOptions.End;
+                AddNote.VerticalOptions = LayoutOptions.EndAndExpand;
                 AddNote.Text = "Ajouter une note a " + Path.GetFileName(direc.First());
+                AddNote.FontSize = fontSize;
+                AddNote.BackgroundColor = Color.White;
                 AddNote.Clicked += OnAddNotePageClicked;
                 listNotes.Children.Add(AddNote);
             }
@@ -108,6 +117,7 @@ namespace ClarityNotes
             mainContent.Children.Add(listNotes);
 
             this.Content = mainContent;
+            this.BackgroundColor = Color.Beige;
         }
         private void OnEditorCliked(object sender, EventArgs e)
         {
@@ -121,8 +131,8 @@ namespace ClarityNotes
             {
                 Console.WriteLine(dir);
                 Button temp = new Button();
-                temp.FontSize = 16;
-                temp.BackgroundColor = Color.White;
+                temp.FontSize = fontSize;
+                temp.BackgroundColor = Color.Beige;
                 temp.Clicked += OnEditorCliked;
                 temp.Text = Path.GetFileName(dir).Split('.').First();
                 listNotes.Children.Add(temp);
@@ -130,6 +140,7 @@ namespace ClarityNotes
             PATHlistNotes = Path.GetFileName(((Button)sender).Text);
             Button AddNote = new Button();
             AddNote.Text = "Ajouter une note a " + ((Button)sender).Text;
+            AddNote.BackgroundColor = Color.White;
             AddNote.Clicked += OnAddNotePageClicked;
             listNotes.Children.Add(AddNote);
 

@@ -16,30 +16,60 @@ namespace ClarityNotes
             Console.WriteLine(path);
             PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "/data" + "/" + path;
             StackLayout mainContent = new StackLayout();
+            mainContent.Padding = 50;
+            mainContent.HorizontalOptions = LayoutOptions.Center;
+            mainContent.VerticalOptions = LayoutOptions.CenterAndExpand;
+
+            Frame frame = new Frame();
+            frame.HasShadow = true;
+            frame.BackgroundColor = Color.Beige;
+            frame.HorizontalOptions = LayoutOptions.Center;    
+            StackLayout framStack = new StackLayout();
 
             Label label = new Label();
             label.FontSize = 16;
             label.Text = "Veuillez entrer un nom de note.";
-            mainContent.Children.Add(label);
+            framStack.Children.Add(label);
 
             Name = new Entry();
-            mainContent.Children.Add(Name);
+            framStack.Children.Add(Name);
 
             Button submit = new Button();
+            submit.HorizontalOptions = LayoutOptions.Center;
+            submit.VerticalOptions = LayoutOptions.Center;
             submit.Clicked += OnSubmitClicked;
             submit.Text = "Valider";
-            mainContent.Children.Add(submit);
 
+            frame.Content = framStack;
+            mainContent.Children.Add(frame);
+
+
+            mainContent.Children.Add(submit);  
             this.Content = mainContent;
         }
+
+        private static bool CheckName(string input)
+        {
+            List<char> symbol = new List<char>{'<', '>', ':', '“', '/', '\'', '|', '?' };
+            foreach (char c in symbol)
+            {
+                if (input.Contains(c))
+                    return true;
+            }
+            return false;
+        }
+
+
         private void OnSubmitClicked(object sender, EventArgs e)
         {
-            if (Name.Text == "")
+            if (Name.Text == "" || CheckName(Name.Text))
             {
-                var ans = DisplayAlert("Alerte", "Une note ne peut pas avoir un nom vide.", "D'accord");
+                var ans = DisplayAlert("Alerte", "Ce nom n'est pas valide. Vuillez en choisir un autre.", "D'accord");
             }
             else if (!File.Exists(PATH + "/" + Name.Text + ".txt"))
             {
+                if(Name.Text.Contains(' '))
+                    Name.Text = Name.Text.Replace(' ', '_');
                 StreamWriter sw = new StreamWriter(PATH + "/" + Name.Text + ".txt");
                 sw.WriteLine("");
                 sw.Close();
