@@ -10,26 +10,21 @@ namespace ClarityNotes
         public App()
         {
             InitializeComponent();
-            if (true)
+            if (false)
                 MainPage = new NavigationPage(new LoginPage());
             else
             {
-                var page = new RootPage();
+                var page = new CreateAccountPage();
                 NavigationPage.SetHasNavigationBar(page, false);
                 MainPage = new NavigationPage(page);
             }
+             ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.Blue;
 
             string PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
 
             if (!Directory.Exists(PATH))
             {
-
-                for (int i = 0; i < 10; i++)
-                {
-                    Console.WriteLine("OKAY");
-                }
-                Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData));
-                //Directory.CreateDirectory(PATH + "/data");
+                Directory.CreateDirectory(PATH + "/data");
             }
 
         }

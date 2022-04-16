@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Text;
 
@@ -21,7 +22,9 @@ namespace ClarityNotes
             mainContent.WidthRequest = 500;
 
             Frame idFrame = new Frame();
+            idFrame.BackgroundColor = Color.White;
             idFrame.Margin = 25;
+            idFrame.CornerRadius = 20;
             StackLayout idStack = new StackLayout();
 
             error = new Label();
@@ -33,6 +36,7 @@ namespace ClarityNotes
 
             Label idLabel = new Label();
             idLabel.Text = "Votre identifiant : ";
+            idLabel.TextDecorations = TextDecorations.Underline;
             idStack.Children.Add(idLabel);
 
             idEntry = new Entry();
@@ -42,12 +46,15 @@ namespace ClarityNotes
 
 
             Frame mdpFrame = new Frame();
+            mdpFrame.BackgroundColor = Color.White;
             mdpFrame.Margin = 25;
+            mdpFrame.CornerRadius = 20;
             mdpFrame.HorizontalOptions = LayoutOptions.FillAndExpand;
             StackLayout mdpStack = new StackLayout();
 
             Label mdpLabel = new Label();
             mdpLabel.Text = "Votre mot de passe : ";
+            mdpLabel.TextDecorations = TextDecorations.Underline;
             mdpStack.Children.Add(mdpLabel);
 
             mdpEntry = new Entry();
@@ -66,6 +73,7 @@ namespace ClarityNotes
             mainContent.Children.Add(mdpFrame);
             mainContent.Children.Add(connexion);
             this.Content = mainContent;
+            this.BackgroundColor = Color.Beige;
             this.Title = "Clarity Notes";
                
         }
