@@ -16,7 +16,11 @@ namespace ClarityNotes
 
         public RootPage()
         {
-            fontSize = (int)(App.Current.MainPage.Height/ 30);
+            if (App.Current.MainPage.Height < 800)
+                fontSize = (int)(App.Current.MainPage.Height / 50);
+            else
+                fontSize = (int)(App.Current.MainPage.Height / 30);
+            
             if (!Directory.Exists(PATH))
             {
                 Directory.CreateDirectory(PATH);
@@ -49,6 +53,7 @@ namespace ClarityNotes
             {
                 Console.WriteLine(dir);
                 buttonChapter = new Button();
+                buttonChapter.FontSize = fontSize/1.5;
                 buttonChapter.BackgroundColor = Color.White;
                 buttonChapter.Clicked += OnNoteClicked;
                 buttonChapter.Text = Path.GetFileName(dir);
@@ -63,16 +68,19 @@ namespace ClarityNotes
 
             Button add = new Button() { Text = "+" };
             add.Clicked += OnAddChapterClicked;
+            add.FontSize = fontSize;
             add.BackgroundColor = Color.White;
             AddLayout.Children.Add(add);
 
             Button remove = new Button() { Text = "-" };
             remove.Clicked += OnRemoveClicked;
+            remove.FontSize = fontSize;
             remove.BackgroundColor = Color.White;  
             AddLayout.Children.Add(remove);
 
             Button settings = new Button() { Text = "SET" };
             settings.BackgroundColor = Color.White;
+            settings.FontSize = fontSize/1.5;
             AddLayout.Children.Add(settings);
 
             listNotes = new StackLayout();
@@ -91,18 +99,35 @@ namespace ClarityNotes
                     temp.FontSize = fontSize;
                     temp.BackgroundColor = Color.Beige;
                     temp.BorderWidth = 1;
-                    temp.Text = Path.GetFileName(dir).Split('.').First();
+                    temp.Text = Path.GetFileName(dir).Split('.').First().Replace('_',' ');
                     temp.Clicked += OnEditorCliked;
                     listNotes.Children.Add(temp);
                 }
+
                 PATHlistNotes = Path.GetFileName(direc.First());
+
+                StackLayout buttonListNotes = new StackLayout();
+                buttonListNotes.Orientation = StackOrientation.Horizontal;
+
                 Button AddNote = new Button();
                 AddNote.VerticalOptions = LayoutOptions.EndAndExpand;
                 AddNote.Text = "Ajouter une note a " + Path.GetFileName(direc.First());
                 AddNote.FontSize = fontSize;
                 AddNote.BackgroundColor = Color.White;
                 AddNote.Clicked += OnAddNotePageClicked;
-                listNotes.Children.Add(AddNote);
+
+                Button removeNote = new Button();
+                removeNote.VerticalOptions = LayoutOptions.EndAndExpand;
+                removeNote.Text = "Ajouter une note a " + Path.GetFileName(direc.First());
+                removeNote.FontSize = fontSize;
+                removeNote.BackgroundColor = Color.White;
+                removeNote.Clicked += OnAddNotePageClicked;
+
+
+                buttonListNotes.Children.Add(AddNote);
+                buttonListNotes.Children.Add(removeNote);
+
+                listNotes.Children.Add(buttonListNotes);
             }
             else 
             {

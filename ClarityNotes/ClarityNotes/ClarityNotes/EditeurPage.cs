@@ -16,7 +16,7 @@ namespace ClarityNotes
         Editor editor;
         public EditeurPage(string path)
         {
-
+            path=path.Replace(' ', '_');
             PATH = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "/data" + "/" + path + ".txt";
             StreamReader sr = new StreamReader(PATH);
             StackLayout mainContent = new StackLayout();
@@ -28,7 +28,7 @@ namespace ClarityNotes
             editor.TextChanged += OnSaveClicked;
 
             mainContent.Children.Add(editor);
-            this.Title = "  --- "+path;
+            this.Title = "  --- "+path.Replace('_',' ');
             this.Content = mainContent;
         }
         private void OnSaveClicked(Object sender, EventArgs e)
