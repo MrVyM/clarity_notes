@@ -1,6 +1,6 @@
-Le projet Clarity Notes a pour but de créer une application mobile de partage de notes et de prise de notes. 
+Le projet Clarity Notes a pour but de créer une application de prise et de partage de notes entre ses membres.
 
-Ce projet est développé par : 
+Ce projet est développé par :
 	- Romain
 	- Vianney
 	- Khôren
