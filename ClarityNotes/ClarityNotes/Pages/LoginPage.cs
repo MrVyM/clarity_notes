@@ -5,9 +5,9 @@ namespace ClarityNotes
 {
     public class LoginPage : ContentPage
     {
-        Entry usernameEntry;
-        Entry passwordEntry;
-        Label errorLabel;
+        private Entry usernameEntry;
+        private Entry passwordEntry;
+        private Label errorLabel;
 
         public LoginPage()
         { 
@@ -33,7 +33,7 @@ namespace ClarityNotes
             Label idLabel = new Label();
             idLabel.Text = "Nom d'utilisateur";
             idLabel.VerticalOptions = LayoutOptions.FillAndExpand;
-            idLabel.VerticalTextAlignment = TextAlignment.Center;
+            //idLabel.HorizontalTextAlignment = TextAlignment.Center;
             idStack.Children.Add(idLabel);
 
             usernameEntry = new Entry();
@@ -51,6 +51,7 @@ namespace ClarityNotes
 
             Label mdpLabel = new Label();
             mdpLabel.Text = "Mot de passe";
+            //mdpLabel.HorizontalTextAlignment = TextAlignment.Center;
             mdpStack.Children.Add(mdpLabel);
 
             passwordEntry = new Entry();
@@ -88,6 +89,8 @@ namespace ClarityNotes
             this.Title = "ClarityNotes";
             usernameEntry.Placeholder = "Username";
             passwordEntry.Placeholder = "Password";
+            //usernameEntry.HorizontalTextAlignment = TextAlignment.Center;
+            //passwordEntry.HorizontalTextAlignment = TextAlignment.Center;
         }
 
         public void OnCreatePage(object sender, EventArgs e)
