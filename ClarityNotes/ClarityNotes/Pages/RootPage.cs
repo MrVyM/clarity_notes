@@ -69,6 +69,7 @@ namespace ClarityNotes
 
             Button settings = new Button() { Text = "SET" };
             settings.BackgroundColor = Color.White;
+            settings.Clicked += OnSettingsPageCliked;
             settings.FontSize = fontSize/1.5;
             AddLayout.Children.Add(settings);
 
@@ -163,6 +164,12 @@ namespace ClarityNotes
             Navigation.PushAsync(page);
         }
 
+        private void OnSettingsPageCliked(object sender, EventArgs e)
+        {
+            var page = new SettingsPage();
+            NavigationPage.SetHasNavigationBar(page, false);
+            Navigation.PushAsync(page);
+        }
         private void OnAddChapterClicked(object sender, EventArgs e)
         {
             var page = new AddChapterPage(user);

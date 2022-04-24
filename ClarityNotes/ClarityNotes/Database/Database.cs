@@ -4,9 +4,9 @@ using System;
 public static class Database
 {
     private static string ip = "localhost"; // 83.150.217.50
-    private static string database = "clarity_notes";
+    private static string database = "clarity";
     private static string username = "root";
-    private static string password = ""; // tAP4kN4SLEpita
+    private static string password = "tAP4kN4SLEpita"; // tAP4kN4SLEpita
 
     public static MySqlConnection GetConnection()
     {
