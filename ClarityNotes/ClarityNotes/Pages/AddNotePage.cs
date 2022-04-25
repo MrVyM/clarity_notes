@@ -11,10 +11,12 @@ namespace ClarityNotes
     {
         private User user;
         private Entry nameEntry;
+        private Directory directory;
 
-        public AddNotePage(User user)
+        public AddNotePage(User user, Directory directory)
         {
             this.user = user;
+            this.directory = directory;
 
             StackLayout mainContent = new StackLayout();
             mainContent.Padding = 50;
@@ -55,7 +57,7 @@ namespace ClarityNotes
             {
                 var ans = DisplayAlert("Création impossible", "Ce nom n'est pas valide. Veuillez en choisir un autre.", "OK");
             }
-            else if (Note.CreateNote(nameEntry.Text, 1, user))
+            else if (Note.CreateNote(nameEntry.Text, directory.Id, user))
             {
                 var page = new RootPage(user);
                 NavigationPage.SetHasNavigationBar(page, false);

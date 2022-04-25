@@ -13,7 +13,7 @@ public static class Database
         string parameters = $"Data Source={ip};Initial Catalog={database};User id={username};Password={password};";
         MySqlConnection mySqlConnection = new MySqlConnection();
         mySqlConnection.ConnectionString = parameters;
-        mySqlConnection.Open(); ;
+        mySqlConnection.Open();
         return mySqlConnection;
     }
 
