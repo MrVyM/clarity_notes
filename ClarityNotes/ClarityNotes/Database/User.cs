@@ -56,11 +56,12 @@ public class User
     public static void Change(int id, string arg, string value)
     {
         MySqlConnection mySqlConnection = Database.GetConnection();
-        string query = "UPDATE `users` SET @arg = @value WHERE id = @id";
+        string query = "UPDATE `users` SET "+arg+" = @value WHERE id = @id";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
-        mySqlCommand.Parameters.AddWithValue("@arg", arg);
         mySqlCommand.Parameters.AddWithValue("@value", value);
         mySqlCommand.Parameters.AddWithValue("@id", id);
+        mySqlCommand.ExecuteNonQuery();
+        mySqlConnection.Close();
     }
 
     public static bool CreateUser(string email, string username, string password)

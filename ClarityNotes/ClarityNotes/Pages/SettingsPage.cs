@@ -10,32 +10,65 @@ namespace ClarityNotes
         public SettingsPage(User user)
         {
             this.user = user;
-            StackLayout mainContent = new StackLayout();
-            Button logOut = new Button();
-            logOut.Text = "Déconnexion";
-            logOut.Clicked += OnLogOut;
-            mainContent.Children.Add(logOut);
+            int fontSize = 0;
 
-            Button deleteAccount = new Button();
-            deleteAccount.Text = "Suprimer mon compte";
-            deleteAccount.Clicked += OnDelete;
-            mainContent.Children.Add(deleteAccount);
+            if (Device.RuntimePlatform == Device.Android)
+                fontSize = 20;
+            else if (Device.RuntimePlatform == Device.UWP)
+                fontSize = 25;
+            else
+                fontSize = 20;
+
+            StackLayout mainContent = new StackLayout();
+            mainContent.HorizontalOptions = LayoutOptions.Center;
+            mainContent.VerticalOptions = LayoutOptions.Center;
 
             Button passwordChange = new Button();
             passwordChange.Text = "Changer mon mot de passe";
-            passwordChange.Clicked += OnPasswordChange;
+            passwordChange.FontSize = fontSize;
+            passwordChange.Clicked += OnPasswordChange;             
+            passwordChange.BackgroundColor = Color.FromHex("249eed");
+            passwordChange.CornerRadius = 25;
+            passwordChange.Margin = 20;
             mainContent.Children.Add(passwordChange);
 
             Button nameChange = new Button();
             nameChange.Text = "Changer mon nom d'utilisateur";
             nameChange.Clicked += OnNameChange;
+            nameChange.FontSize = fontSize;
+            nameChange.BackgroundColor = Color.FromHex("249eed");
+            nameChange.CornerRadius = 25;
+            nameChange.Margin = 20;
             mainContent.Children.Add(nameChange);
 
             Button mailChange = new Button();
             mailChange.Text = "Changer mon mail";
+            mailChange.FontSize = fontSize;
+            mailChange.BackgroundColor = Color.FromHex("249eed");
+            mailChange.CornerRadius = 25;
+            mailChange.Margin = 20;
             mailChange.Clicked += OnMailChange;
             mainContent.Children.Add(mailChange);
-            
+
+            Button logOut = new Button();
+            logOut.Text = "Déconnexion";
+            logOut.BackgroundColor = Color.FromHex("249eed");
+            logOut.CornerRadius = 25;
+            logOut.Margin = 20;
+            logOut.FontSize = fontSize;
+            logOut.Clicked += OnLogOut;
+            mainContent.Children.Add(logOut);
+
+            Button deleteAccount = new Button();
+            deleteAccount.Text = "Supprimer mon compte";
+            deleteAccount.Clicked += OnDelete;
+            deleteAccount.FontSize = fontSize;
+            deleteAccount.BackgroundColor = Color.FromHex("249eed");
+            deleteAccount.CornerRadius = 25;
+            deleteAccount.Margin = 20;
+            mainContent.Children.Add(deleteAccount);
+
+            this.BackgroundColor = Color.FromHex("57b1eb");
             this.Content = mainContent;
         }
 

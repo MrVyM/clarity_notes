@@ -74,7 +74,7 @@ namespace ClarityNotes
             string temp = passwordEntry.Text;
             passwordEntry.Text = "";
             if (user.Password != temp)
-                OnLogOut(new Object(), new EventArgs());
+                Navigation.PopToRootAsync();
             else
             {
                 var page = new NewMailPage(user);
@@ -87,7 +87,7 @@ namespace ClarityNotes
             string temp = passwordEntry.Text;
             passwordEntry.Text = "";
             if (user.Password != temp)
-                OnLogOut(new Object(), new EventArgs());
+                Navigation.PopToRootAsync();
             else
             {
                 var page = new NewPasswordPage(user);
@@ -101,7 +101,7 @@ namespace ClarityNotes
             string temp = passwordEntry.Text;
             passwordEntry.Text = "";
             if (user.Password != temp)
-                OnLogOut(new Object(), new EventArgs());
+                Navigation.PopToRootAsync();
             else
             {
                 var page = new NewNamePage(user);
@@ -110,22 +110,10 @@ namespace ClarityNotes
             }
         }
 
-        private void OnLogOut(Object sender, EventArgs e)
-        {
-            foreach (var page in Navigation.ModalStack)
-            {
-                if (page != this)
-                    Navigation.RemovePage(page);
-            }
-            Navigation.PushAsync(new LoginPage());
-            Navigation.RemovePage(this);
-        }
-
-
         private void OnDelete(object sender, EventArgs e)
         {
             User.DeleteUser(user.Id);
-            OnLogOut(new Object(), new EventArgs());
+            Navigation.PopToRootAsync();
         }
 
     }

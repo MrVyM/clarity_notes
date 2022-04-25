@@ -52,18 +52,7 @@ namespace ClarityNotes
         private void OnSubmitClicked(object sender, EventArgs e)
         {
             User.Change(user.Id, "password", passwordEntry.Text);
-            OnLogOut(new object(), new EventArgs());
-        }
-
-        private void OnLogOut(Object sender, EventArgs e)
-        {
-            foreach (var page in Navigation.ModalStack)
-            {
-                if (page != this)
-                    Navigation.RemovePage(page);
-            }
-            Navigation.PushAsync(new LoginPage());
-            Navigation.RemovePage(this);
+            Navigation.PopToRootAsync();
         }
     }
 }

@@ -29,11 +29,13 @@ namespace ClarityNotes
             mainContent.HorizontalOptions = LayoutOptions.FillAndExpand;
 
             StackLayout verticalLayout = new StackLayout();
-
+            verticalLayout.VerticalOptions = LayoutOptions.Start;
+            verticalLayout.HorizontalOptions = LayoutOptions.Start;
+            verticalLayout.Margin = 20;
 
             StackLayout verticalColumn = new StackLayout();
             verticalColumn.HorizontalOptions = LayoutOptions.Start;
-            verticalColumn.VerticalOptions = LayoutOptions.CenterAndExpand;
+            verticalColumn.VerticalOptions = LayoutOptions.Start;
 
             Button buttonChapter;
             foreach (Directory directory in directories)
@@ -42,6 +44,7 @@ namespace ClarityNotes
                 buttonChapter.FontSize = fontSize / 1.5;
                 buttonChapter.BackgroundColor = Color.White;
                 buttonChapter.Clicked += OnNoteClicked;
+                buttonChapter.CornerRadius = 5;
                 buttonChapter.Text = directory.Title;
                 verticalColumn.Children.Add(buttonChapter);
             }
@@ -52,19 +55,25 @@ namespace ClarityNotes
             Button add = new Button() { Text = "+" };
             add.Clicked += OnAddChapterClicked;
             add.FontSize = fontSize;
+            add.CornerRadius = 10;
+            add.Margin = 10;
             add.BackgroundColor = Color.White;
             AddLayout.Children.Add(add);
 
             Button remove = new Button() { Text = "-" };
             remove.Clicked += OnRemoveClicked;
             remove.FontSize = fontSize;
+            remove.CornerRadius = 10;
+            remove.Margin = 10;
             remove.BackgroundColor = Color.White;
             AddLayout.Children.Add(remove);
 
             Button settings = new Button() { Text = "SET" };
             settings.BackgroundColor = Color.White;
+            settings.CornerRadius = 10;
+            settings.Margin = 10;
             settings.Clicked += OnSettingsPageCliked;
-            settings.FontSize = fontSize / 1.5;
+            settings.FontSize = fontSize;
             AddLayout.Children.Add(settings);
 
             stackListNotes = new StackLayout();
@@ -81,9 +90,9 @@ namespace ClarityNotes
                     Button temp = new Button();
                     temp.FontSize = fontSize;
                     temp.BackgroundColor = Color.FromHex("249eed");
+                    temp.CornerRadius = 25;
                     temp.BorderWidth = 1;
                     temp.Text = note.Title;
-                    temp.CornerRadius = 25;
                     temp.FontAttributes = FontAttributes.Italic;
                     temp.Clicked += OnEditorClicked;
                     stackListNotes.Children.Add(temp);
@@ -91,6 +100,7 @@ namespace ClarityNotes
 
                 StackLayout buttonListNotes = new StackLayout();
                 buttonListNotes.Orientation = StackOrientation.Horizontal;
+                buttonListNotes.Margin = 20;
 
                 Button AddNote = new Button();
                 AddNote.VerticalOptions = LayoutOptions.EndAndExpand;
