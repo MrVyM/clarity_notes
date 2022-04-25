@@ -33,12 +33,12 @@ namespace ClarityNotes
             framStack.Children.Add(label);
 
             passwordEntry = new Entry();
+            passwordEntry.IsPassword = true;
             framStack.Children.Add(passwordEntry);
 
             Button submit = new Button();
             submit.HorizontalOptions = LayoutOptions.Center;
             submit.VerticalOptions = LayoutOptions.Center;
-
 
             switch (change) 
             {
@@ -62,13 +62,11 @@ namespace ClarityNotes
 
             frame.Content = framStack;
             mainContent.Children.Add(frame);
-
-
             mainContent.Children.Add(submit);
+
+            if (title != "") this.Title = title;
             this.Content = mainContent;
             this.BackgroundColor = Color.FromHex("57b1eb");
-
-
         }
 
         private void OnMailClicked(object sender, EventArgs e)

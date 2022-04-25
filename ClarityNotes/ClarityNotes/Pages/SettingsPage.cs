@@ -45,16 +45,16 @@ namespace ClarityNotes
         }
         private void OnMailChange(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new GetPasswordPage(user, "mail"));
+            Navigation.PushAsync(new GetPasswordPage(user, "mail", "Changement de l'adresse mail"));
         }
 
         private void OnNameChange(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new GetPasswordPage(user, "name"));
+            Navigation.PushAsync(new GetPasswordPage(user, "name", "Changement du nom d'utilisateur"));
         }
         private void OnPasswordChange(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new GetPasswordPage(user, "password"));
+            Navigation.PushAsync(new GetPasswordPage(user, "password", "Changement du mot de passe"));
         }
 
         private void OnLogOut(Object sender, EventArgs e)

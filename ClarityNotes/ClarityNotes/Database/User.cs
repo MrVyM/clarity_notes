@@ -53,6 +53,16 @@ public class User
         return users.ToArray();
     }
 
+    public static void Change(int id, string arg, string value)
+    {
+        MySqlConnection mySqlConnection = Database.GetConnection();
+        string query = "UPDATE `users` SET @arg = @value WHERE id = @id";
+        MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
+        mySqlCommand.Parameters.AddWithValue("@arg", arg);
+        mySqlCommand.Parameters.AddWithValue("@value", value);
+        mySqlCommand.Parameters.AddWithValue("@id", id);
+    }
+
     public static bool CreateUser(string email, string username, string password)
     {
         foreach (User user in GetAllUsers()) 
