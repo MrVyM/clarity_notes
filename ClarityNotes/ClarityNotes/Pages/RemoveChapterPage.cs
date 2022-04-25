@@ -51,8 +51,9 @@ namespace ClarityNotes
 
             mainContent.Children.Add(new Frame() { Margin = 25, Content = stackLayout });
             mainContent.Children.Add(submit);
-
             this.Content = mainContent;
+            this.BackgroundColor = Color.FromHex("57b1eb");
+
         }
 
         private void OnSubmitClicked(object sender, EventArgs e)
