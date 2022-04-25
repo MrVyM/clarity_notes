@@ -8,8 +8,9 @@ namespace ClarityNotes
     {
         private User user;
         private StackLayout stackListNotes;
-        private string PATHlistNotes;
+        private StackLayout stackButtonListNotes;
         private int fontSize;
+        private Directory selectedDirectory;
 
         public RootPage(User user)
         {
@@ -40,7 +41,7 @@ namespace ClarityNotes
                 buttonChapter = new Button();
                 buttonChapter.FontSize = fontSize/1.5;
                 buttonChapter.BackgroundColor = Color.White;
-                buttonChapter.Clicked += OnNoteClicked;
+                buttonChapter.Clicked += OnDirectoryButtonClicked;
                 buttonChapter.Text = directory.Title;
                 verticalColumn.Children.Add(buttonChapter);
             }
@@ -55,7 +56,7 @@ namespace ClarityNotes
             AddLayout.Children.Add(add);
 
             Button remove = new Button() { Text = "-" };
-            remove.Clicked += OnRemoveClicked;
+            remove.Clicked += OnRemoveChapterClicked;
             remove.FontSize = fontSize;
             remove.BackgroundColor = Color.White;  
             AddLayout.Children.Add(remove);
@@ -70,10 +71,10 @@ namespace ClarityNotes
             stackListNotes.Margin = 15;
             stackListNotes.HorizontalOptions = LayoutOptions.CenterAndExpand; 
             stackListNotes.VerticalOptions = LayoutOptions.CenterAndExpand;
-
             if (directories.Any())
             {
                 stackListNotes.Children.Clear();
+                selectedDirectory = directories[0];
                 foreach (Note note in Note.GetNotesByIdDirectory(directories[0].Id))
                 {
                     Button temp = new Button();
@@ -85,28 +86,28 @@ namespace ClarityNotes
                     stackListNotes.Children.Add(temp);
                 }
 
-                StackLayout buttonListNotes = new StackLayout();
-                buttonListNotes.Orientation = StackOrientation.Horizontal;
+                this.stackButtonListNotes = new StackLayout();
+                stackButtonListNotes.Orientation = StackOrientation.Horizontal;
 
                 Button AddNote = new Button();
                 AddNote.VerticalOptions = LayoutOptions.EndAndExpand;
                 AddNote.Text = "Ajouter une note à " + directories[0].Title;
                 AddNote.FontSize = fontSize;
                 AddNote.BackgroundColor = Color.White;
-                AddNote.Clicked += OnAddNotePageClicked;
+                AddNote.Clicked += OnAddNoteClicked;
 
                 Button removeNote = new Button();
                 removeNote.VerticalOptions = LayoutOptions.EndAndExpand;
                 removeNote.Text = "Retirer une note à " + directories[0].Title;
                 removeNote.FontSize = fontSize;
                 removeNote.BackgroundColor = Color.White;
-                removeNote.Clicked += OnRemoveNotePageCliked;
+                removeNote.Clicked += OnAddNoteClicked;
 
 
-                buttonListNotes.Children.Add(AddNote);
-                buttonListNotes.Children.Add(removeNote);
+                stackButtonListNotes.Children.Add(AddNote);
+                stackButtonListNotes.Children.Add(removeNote);
 
-                stackListNotes.Children.Add(buttonListNotes);
+                stackListNotes.Children.Add(stackButtonListNotes);
             }
             else 
             {
@@ -128,10 +129,11 @@ namespace ClarityNotes
             var page = new EditorPage(Note.GetNoteByTitle(((Button)sender).Text), user);
             Navigation.PushAsync(page);
         }
-        private void OnNoteClicked(object sender, EventArgs e)
+        private void OnDirectoryButtonClicked(object sender, EventArgs e)
         {
             stackListNotes.Children.Clear();
-            foreach (Note note in Note.GetNotesByIdDirectory(Directory.GetDirectoryByTitle(((Button)sender).Text).Id))
+            selectedDirectory = Directory.GetDirectoryByTitle(((Button)sender).Text);
+            foreach (Note note in Note.GetNotesByIdDirectory(selectedDirectory.Id))
             {
                 Button temp = new Button();
                 temp.FontSize = fontSize;
@@ -140,19 +142,31 @@ namespace ClarityNotes
                 temp.Text = note.Title;
                 stackListNotes.Children.Add(temp);
             }
-            //PATHlistNotes = Path.GetFileName(((Button)sender).Text);
-            Button AddNote = new Button();
-            AddNote.Text = "Ajouter une note à " + ((Button)sender).Text;
-            AddNote.BackgroundColor = Color.White;
-            AddNote.Clicked += OnAddNotePageClicked;
-            stackListNotes.Children.Add(AddNote);
+
+            Button addNote = new Button();
+            addNote.VerticalOptions = LayoutOptions.EndAndExpand;
+            addNote.Text = "Ajouter une note à " + selectedDirectory.Title;
+            addNote.FontSize = fontSize;
+            addNote.BackgroundColor = Color.White;
+            addNote.Clicked += OnAddNoteClicked;
+
+            Button removeNote = new Button();
+            removeNote.VerticalOptions = LayoutOptions.EndAndExpand;
+            removeNote.Text = "Retirer une note à " + selectedDirectory.Title;
+            removeNote.FontSize = fontSize;
+            removeNote.BackgroundColor = Color.White;
+            removeNote.Clicked += OnAddNoteClicked;
+
+            stackButtonListNotes.Children.Clear();
+            stackButtonListNotes.Children.Add(addNote);
+            stackButtonListNotes.Children.Add(removeNote);
+            stackListNotes.Children.Remove(stackButtonListNotes);
+            stackListNotes.Children.Add(stackButtonListNotes);
 
         }
-        private void OnAddNotePageClicked(object sender, EventArgs e)
+        private void OnAddNoteClicked(object sender, EventArgs e)
         {
-            string text = ((Button)sender).Text;
-            string[] splited = text.Split(' ');
-            var page = new AddNotePage(user);
+            var page = new AddNotePage(user, selectedDirectory);
             NavigationPage.SetHasNavigationBar(page, false);
             Navigation.PushAsync(page);
         }
@@ -177,7 +191,7 @@ namespace ClarityNotes
             Navigation.PushAsync(page);
         }
 
-        private void OnRemoveClicked(object sender, EventArgs e)
+        private void OnRemoveChapterClicked(object sender, EventArgs e)
         {
             var page = new RemoveChapterPage(user);
             NavigationPage.SetHasNavigationBar(page, false);
