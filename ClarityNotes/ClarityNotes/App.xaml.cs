@@ -10,7 +10,7 @@ namespace ClarityNotes
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new SettingsPage());
+            MainPage = new NavigationPage(new LoginPage());
         }
 
         protected override void OnStart()

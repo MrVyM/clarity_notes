@@ -104,8 +104,11 @@ namespace ClarityNotes
             var mdpEntryText = passwordEntry.Text;
             passwordEntry.Text = "";
             User user = User.Connexion(usernameEntry.Text, mdpEntryText);
-            if(user == null)
+            if (user == null)
+            {
                 errorLabel.Text = "Nom d'utilisateur ou mot de passe invalide";
+                errorLabel.FontAttributes = FontAttributes.Bold;
+            }
             else
             {
                 Navigation.PopAsync();

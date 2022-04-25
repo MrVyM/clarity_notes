@@ -29,13 +29,9 @@ namespace ClarityNotes
 
             StackLayout verticalLayout = new StackLayout();
 
-            Frame frameColumn = new Frame();
-            frameColumn.VerticalOptions = LayoutOptions.StartAndExpand;
-            frameColumn.HorizontalOptions = LayoutOptions.StartAndExpand;
-
 
             StackLayout verticalColumn = new StackLayout();
-            verticalColumn.HorizontalOptions = LayoutOptions.Center;
+            verticalColumn.HorizontalOptions = LayoutOptions.Start;
             verticalColumn.VerticalOptions = LayoutOptions.CenterAndExpand;
 
             Button buttonChapter;
@@ -48,12 +44,9 @@ namespace ClarityNotes
                 buttonChapter.Text = directory.Title;
                 verticalColumn.Children.Add(buttonChapter);
             }
-
-            frameColumn.Content = verticalColumn;
-
-            Frame AddFrame = new Frame();
             StackLayout AddLayout = new StackLayout();
-            AddLayout.HorizontalOptions = LayoutOptions.End;
+            AddLayout.HorizontalOptions = LayoutOptions.Center;
+            AddLayout.VerticalOptions = LayoutOptions.End;
 
             Button add = new Button() { Text = "+" };
             add.Clicked += OnAddChapterClicked;
@@ -85,7 +78,7 @@ namespace ClarityNotes
                 {
                     Button temp = new Button();
                     temp.FontSize = fontSize;
-                    temp.BackgroundColor = Color.Beige;
+                    temp.BackgroundColor = Color.FromHex("57b1eb");
                     temp.BorderWidth = 1;
                     temp.Text = note.Title;
                     temp.Clicked += OnEditorClicked;
@@ -107,7 +100,7 @@ namespace ClarityNotes
                 removeNote.Text = "Retirer une note à " + directories[0].Title;
                 removeNote.FontSize = fontSize;
                 removeNote.BackgroundColor = Color.White;
-                removeNote.Clicked += OnAddNotePageClicked;
+                removeNote.Clicked += OnRemoveNotePageCliked;
 
 
                 buttonListNotes.Children.Add(AddNote);
@@ -128,7 +121,7 @@ namespace ClarityNotes
             mainContent.Children.Add(stackListNotes);
 
             this.Content = mainContent;
-            this.BackgroundColor = Color.Beige;
+            this.BackgroundColor = Color.FromHex("57b1eb");
         }
         private void OnEditorClicked(object sender, EventArgs e)
         {
@@ -142,7 +135,7 @@ namespace ClarityNotes
             {
                 Button temp = new Button();
                 temp.FontSize = fontSize;
-                temp.BackgroundColor = Color.Beige;
+                temp.BackgroundColor = Color.FromHex("57b1eb");
                 temp.Clicked += OnEditorClicked;
                 temp.Text = note.Title;
                 stackListNotes.Children.Add(temp);
@@ -166,13 +159,20 @@ namespace ClarityNotes
 
         private void OnSettingsPageCliked(object sender, EventArgs e)
         {
-            var page = new SettingsPage();
+            var page = new SettingsPage(user);
             NavigationPage.SetHasNavigationBar(page, false);
             Navigation.PushAsync(page);
         }
         private void OnAddChapterClicked(object sender, EventArgs e)
         {
             var page = new AddChapterPage(user);
+            NavigationPage.SetHasNavigationBar(page, false);
+            Navigation.PushAsync(page);
+        }
+
+        private void OnRemoveNotePageCliked(object sender, EventArgs e)
+        {
+            var page = new RemoveNotePage(user);
             NavigationPage.SetHasNavigationBar(page, false);
             Navigation.PushAsync(page);
         }
