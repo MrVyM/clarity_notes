@@ -21,12 +21,40 @@ namespace ClarityNotes
             deleteAccount.Clicked += OnDelete;
             mainContent.Children.Add(deleteAccount);
 
+            Button passwordChange = new Button();
+            passwordChange.Text = "Changer mon mot de passe";
+            passwordChange.Clicked += OnPasswordChange;
+            mainContent.Children.Add(passwordChange);
+
+            Button nameChange = new Button();
+            nameChange.Text = "Changer mon nom d'utilisateur";
+            nameChange.Clicked += OnNameChange;
+            mainContent.Children.Add(nameChange);
+
+            Button mailChange = new Button();
+            mailChange.Text = "Changer mon mail";
+            mailChange.Clicked += OnMailChange;
+            mainContent.Children.Add(mailChange);
+            
             this.Content = mainContent;
         }
 
         private void OnDelete(object sender, EventArgs e)
         {
             Navigation.PushAsync(new DeleteAccount(user));
+        }
+        private void OnMailChange(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new GetPasswordPage(user, "mail"));
+        }
+
+        private void OnNameChange(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new GetPasswordPage(user, "name"));
+        }
+        private void OnPasswordChange(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new GetPasswordPage(user, "password"));
         }
 
         private void OnLogOut(Object sender, EventArgs e)

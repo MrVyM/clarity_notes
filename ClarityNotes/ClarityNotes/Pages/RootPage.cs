@@ -8,17 +8,18 @@ namespace ClarityNotes
     {
         private User user;
         private StackLayout stackListNotes;
-        private string PATHlistNotes;
         private int fontSize;
 
         public RootPage(User user)
         {
             this.user = user;
 
-            if (App.Current.MainPage.Height < 800)
-                fontSize = (int)(App.Current.MainPage.Height / 50);
+            if (Device.RuntimePlatform == Device.Android)
+                fontSize = 20;
+            else if (Device.RuntimePlatform == Device.UWP)
+                fontSize = 25;
             else
-                fontSize = (int)(App.Current.MainPage.Height / 30);
+                fontSize = 20;
 
             Directory[] directories = Directory.GetAllDirectories();
 
@@ -69,7 +70,7 @@ namespace ClarityNotes
             stackListNotes = new StackLayout();
             stackListNotes.Margin = 15;
             stackListNotes.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            stackListNotes.VerticalOptions = LayoutOptions.CenterAndExpand;
+            stackListNotes.VerticalOptions = LayoutOptions.End;
 
             if (directories != new Directory[] { })
             {
@@ -77,12 +78,13 @@ namespace ClarityNotes
                 Note[] notes = Note.GetNotesByIdDirectory(directories[0].Id);
                 foreach (Note note in notes)
                 {
-                    Console.WriteLine(note.Title);
                     Button temp = new Button();
                     temp.FontSize = fontSize;
-                    temp.BackgroundColor = Color.FromHex("57b1eb");
+                    temp.BackgroundColor = Color.FromHex("249eed");
                     temp.BorderWidth = 1;
                     temp.Text = note.Title;
+                    temp.CornerRadius = 25;
+                    temp.FontAttributes = FontAttributes.Italic;
                     temp.Clicked += OnEditorClicked;
                     stackListNotes.Children.Add(temp);
                 }
@@ -104,7 +106,6 @@ namespace ClarityNotes
                 removeNote.FontSize = fontSize;
                 removeNote.BackgroundColor = Color.White;
                 removeNote.Clicked += OnRemoveNotePageCliked;
-                
 
                 if (notes.Length == 0) {
                     removeNote.IsEnabled = false;
@@ -142,9 +143,12 @@ namespace ClarityNotes
             {
                 Button temp = new Button();
                 temp.FontSize = fontSize;
-                temp.BackgroundColor = Color.FromHex("57b1eb");
-                temp.Clicked += OnEditorClicked;
+                temp.BackgroundColor = Color.FromHex("249eed");
+                temp.BorderWidth = 1;
                 temp.Text = note.Title;
+                temp.CornerRadius = 25;
+                temp.FontAttributes = FontAttributes.Italic;
+                temp.Clicked += OnEditorClicked;
                 stackListNotes.Children.Add(temp);
             }
 
@@ -172,11 +176,7 @@ namespace ClarityNotes
             }
              
             buttonListNotes.Children.Add(removeNote);
-           
-
             stackListNotes.Children.Add(buttonListNotes);
-
-
         }
         private void OnAddNotePageClicked(object sender, EventArgs e)
         {

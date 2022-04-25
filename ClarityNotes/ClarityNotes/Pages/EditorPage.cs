@@ -14,7 +14,7 @@ namespace ClarityNotes
         {
             this.note = note;
             this.user = user;
-            /*
+           
             editor = new Editor
             {
                 HeightRequest = App.Current.MainPage.Height,
@@ -23,7 +23,7 @@ namespace ClarityNotes
             };
 
             editor.TextChanged += OnSaveClicked;
-            */
+            
 
             StackLayout mainContent = new StackLayout();
             this.Title = note.Title;
