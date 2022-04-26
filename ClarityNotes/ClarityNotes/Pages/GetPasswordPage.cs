@@ -29,7 +29,7 @@ namespace ClarityNotes
 
             Label label = new Label();
             label.FontSize = 16;
-            label.Text = "Veuillez entrer votre mot de passe";
+            label.Text = "Veuillez entrer votre mot de passe actuel";
             framStack.Children.Add(label);
 
             passwordEntry = new Entry();
@@ -87,7 +87,10 @@ namespace ClarityNotes
             string temp = passwordEntry.Text;
             passwordEntry.Text = "";
             if (user.Password != temp)
+            {
+                DisplayAlert("Erreur de mot de passe", "Nous vous avons déconnecté par mesure de précaution", "OK");
                 Navigation.PopToRootAsync();
+            }
             else
             {
                 var page = new NewPasswordPage(user);

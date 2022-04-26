@@ -92,13 +92,7 @@ namespace ClarityNotes
 
         private void OnLogOut(Object sender, EventArgs e)
         {
-            foreach (var page in Navigation.ModalStack)
-            {
-                if (page != this)
-                    Navigation.RemovePage(page);
-            }
-            Navigation.PushAsync(new LoginPage());
-            Navigation.RemovePage(this);
+            Navigation.PopToRootAsync();
         }
     }
 }

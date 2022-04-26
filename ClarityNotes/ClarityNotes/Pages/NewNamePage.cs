@@ -32,7 +32,6 @@ namespace ClarityNotes
             framStack.Children.Add(label);
 
             nameEntry = new Entry();
-            nameEntry.IsPassword = true;
             framStack.Children.Add(nameEntry);
 
             Button submit = new Button();
@@ -51,7 +50,7 @@ namespace ClarityNotes
 
         private void OnSubmitClicked(object sender, EventArgs e)
         {
-            User.Change(user.Id, "name", nameEntry.Text);
+            User.Change(user.Id, "username", nameEntry.Text);
             Navigation.PopToRootAsync();
         }
     }

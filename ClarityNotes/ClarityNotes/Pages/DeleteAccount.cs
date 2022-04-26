@@ -33,7 +33,7 @@ namespace ClarityNotes
             mainContent.Children.Add(frame);
 
             Button delete = new Button();
-            delete.Text = "Suprimer";
+            delete.Text = "Supprimer";
             delete.Clicked += OnDelete;
             mainContent.Children.Add(delete);
 

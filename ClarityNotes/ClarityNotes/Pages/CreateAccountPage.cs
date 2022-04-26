@@ -83,8 +83,8 @@ namespace ClarityNotes
 
             confirmButton = new Button();
             confirmButton.IsEnabled = false;
-            confirmButton.Text = "S'inscrire";
             confirmButton.BackgroundColor = Color.FromHex("298dcc");
+            confirmButton.Text = "S'inscrire";
             confirmButton.CornerRadius = 10;
             confirmButton.HorizontalOptions = LayoutOptions.Center;
             confirmButton.VerticalOptions = LayoutOptions.Center;
@@ -121,7 +121,11 @@ namespace ClarityNotes
         private void OnCreateClicked(object sender, EventArgs e)
         {
             bool result = User.CreateUser(emailEntry.Text, usernameEntry.Text, passwordEntry.Text);
-            if (result) Navigation.PopAsync();
+            if (result)
+            {
+                DisplayAlert("Inscription effectuée", "Votre compte a été crée avec succès.", "OK");
+                Navigation.PopAsync();
+            }
             else
             {
                 usernameEntry.Text = "";
