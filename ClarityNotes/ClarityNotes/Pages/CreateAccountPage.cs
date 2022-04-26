@@ -84,13 +84,14 @@ namespace ClarityNotes
             confirmButton = new Button();
             confirmButton.IsEnabled = false;
             confirmButton.Text = "S'inscrire";
+            confirmButton.BackgroundColor = Color.FromHex("298dcc");
+            confirmButton.CornerRadius = 10;
             confirmButton.HorizontalOptions = LayoutOptions.Center;
             confirmButton.VerticalOptions = LayoutOptions.Center;
 
             confirmButton.Clicked += OnCreateClicked;
 
             content.Children.Add(confirmButton);
-            BackgroundColor = Color.Beige;
             Content = content;
 
             usernameEntry.Placeholder = "Username";

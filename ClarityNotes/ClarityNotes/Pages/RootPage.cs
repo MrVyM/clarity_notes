@@ -164,6 +164,7 @@ namespace ClarityNotes
 
             StackLayout buttonListNotes = new StackLayout();
             buttonListNotes.Orientation = StackOrientation.Horizontal;
+            buttonListNotes.Margin = 20;
 
             Button AddNote = new Button();
             AddNote.VerticalOptions = LayoutOptions.EndAndExpand;
