@@ -22,7 +22,7 @@ namespace ClarityNotes
 
             Frame frame = new Frame();
             frame.HasShadow = true;
-            frame.BackgroundColor = Color.Beige;
+            frame.BackgroundColor = Color.FromHex("94c6ff");
             frame.HorizontalOptions = LayoutOptions.Center;
             StackLayout framStack = new StackLayout();
 
@@ -38,11 +38,13 @@ namespace ClarityNotes
             Button submit = new Button();
             submit.HorizontalOptions = LayoutOptions.Center;
             submit.VerticalOptions = LayoutOptions.Center;
+            submit.Margin = 20;
+            submit.BackgroundColor = Color.FromHex("94c6ff");
             submit.Clicked += OnSubmitClicked;
             submit.Text = "Valider";
 
             frame.Content = framStack;
-            mainContent.Children.Add(frame);
+            mainContent.Children.Add(frame);    
             mainContent.Children.Add(submit);
 
             this.Content = mainContent;

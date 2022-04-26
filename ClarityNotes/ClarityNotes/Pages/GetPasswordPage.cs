@@ -23,8 +23,9 @@ namespace ClarityNotes
 
             Frame frame = new Frame();
             frame.HasShadow = true;
-            frame.BackgroundColor = Color.Beige;
+            frame.BackgroundColor = Color.FromHex("94c6ff");
             frame.HorizontalOptions = LayoutOptions.Center;
+
             StackLayout framStack = new StackLayout();
 
             Label label = new Label();
@@ -38,6 +39,8 @@ namespace ClarityNotes
 
             Button submit = new Button();
             submit.HorizontalOptions = LayoutOptions.Center;
+            submit.BackgroundColor = Color.FromHex("94c6ff");
+            submit.Margin = 20;
             submit.VerticalOptions = LayoutOptions.Center;
 
             switch (change) 
