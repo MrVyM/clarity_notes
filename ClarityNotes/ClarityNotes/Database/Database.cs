@@ -5,12 +5,10 @@ using System;
 public static class Database
 {
 
-    private static string ip = "localhost"; 
-    //private static string ip = "83.150.217.50";
-    //private static string database = "clarity_notes";
-    private static string database = "clarity";
+    private static string ip = "83.150.217.50";
+    private static string database = "clarity_notes";
     private static string username = "root";
-    private static string password = "tAP4kN4SLEpita";
+    private static string password = "tAP4kN4SLEpit@";
     private static string port = "3306";
 
     public static MySqlConnection GetConnection()
