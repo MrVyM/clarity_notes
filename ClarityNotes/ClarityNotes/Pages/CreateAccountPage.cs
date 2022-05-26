@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using Xamarin.Forms;
 
 namespace ClarityNotes
@@ -120,7 +121,15 @@ namespace ClarityNotes
 
         private void OnCreateClicked(object sender, EventArgs e)
         {
-            bool result = User.CreateUser(emailEntry.Text, usernameEntry.Text, passwordEntry.Text);
+            Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            Match match = regex.Match(emailEntry.Text.ToLower());
+            if (!match.Success)
+            {
+                DisplayAlert("Inscription échouée", "L'adresse mail n'est pas correcte (format invalide).", "OK");
+                emailEntry.Text = "";
+                return;
+            }
+            bool result = User.CreateUser(emailEntry.Text.ToLower(), usernameEntry.Text, passwordEntry.Text);
             if (result)
             {
                 DisplayAlert("Inscription effectuée", "Votre compte a été crée avec succès.", "OK");
