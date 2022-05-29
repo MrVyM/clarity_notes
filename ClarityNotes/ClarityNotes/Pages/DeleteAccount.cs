@@ -37,7 +37,7 @@ namespace ClarityNotes
             Button delete = new Button();
             delete.Text = "Supprimer";
             delete.BackgroundColor = Color.FromHex("94c6ff");
-            delete.Margin = 20;
+            //delete.Margin = 20;
             delete.Clicked += OnDelete;
             mainContent.Children.Add(delete);
 

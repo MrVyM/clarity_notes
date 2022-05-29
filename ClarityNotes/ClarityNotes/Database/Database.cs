@@ -4,7 +4,6 @@ using System;
 
 public static class Database
 {
-
     private static string ip = "83.150.217.50";
     private static string database = "clarity_notes";
     private static string username = "root";
