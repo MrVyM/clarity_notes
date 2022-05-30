@@ -50,6 +50,15 @@ namespace ClarityNotes
             mailChange.Clicked += OnMailChange;
             mainContent.Children.Add(mailChange);
 
+            Button themeChange = new Button();
+            themeChange.Text = "Changer de thème";
+            themeChange.FontSize = fontSize;
+            themeChange.BackgroundColor = Color.FromHex("249eed");
+            themeChange.CornerRadius = 25;
+            themeChange.Margin = 20;
+            themeChange.Clicked += OnThemeChange;
+            mainContent.Children.Add(themeChange);
+
             Button logOut = new Button();
             logOut.Text = "Déconnexion";
             logOut.BackgroundColor = Color.FromHex("249eed");
@@ -80,7 +89,10 @@ namespace ClarityNotes
         {
             Navigation.PushAsync(new GetPasswordPage(user, "mail", "Changement de l'adresse mail"));
         }
-
+        private void OnThemeChange(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ThemeChangePage(user));
+        }
         private void OnNameChange(object sender, EventArgs e)
         {
             Navigation.PushAsync(new GetPasswordPage(user, "name", "Changement du nom d'utilisateur"));

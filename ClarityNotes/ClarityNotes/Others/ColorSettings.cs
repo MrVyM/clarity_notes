@@ -16,11 +16,12 @@ namespace ClarityNotes
     {
         public static Color[] GetColors(ColorSettings colorSettings)
         {
-            // BackGround - Button - 
-            Color[] colors = new Color[3];
+            // BackgroundPage - BackgroundFrame - BackgroundButton
+            Color[] colors = null;
             switch (colorSettings)
             {
                 case ColorSettings.Blue:
+                    colors = new Color[]{ Color.FromHex("33B0FF"), Color.White, Color.FromHex("298dcc") };
                     break;
                 case ColorSettings.Green:
                     break;
@@ -34,6 +35,11 @@ namespace ClarityNotes
                     break;
             }
             return colors;
+        }
+
+        public static string[] GetColorsName()
+        {
+            return new string[] { "Blue", "Green", "Red", "Yellow", "Pink", "Orange" };
         }
     }
 }
