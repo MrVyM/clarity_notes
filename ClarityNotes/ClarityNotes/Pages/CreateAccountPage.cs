@@ -104,8 +104,7 @@ namespace ClarityNotes
 
         public void OnCompare(object sender, EventArgs e)
         {
-            //Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
-
+            // Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character
             Regex passwordType = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
             Match match = passwordType.Match(passwordConfirmEntry.Text);
             if (!(match.Success && passwordConfirmEntry.Text == passwordEntry.Text))
