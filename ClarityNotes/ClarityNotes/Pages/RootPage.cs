@@ -8,18 +8,21 @@ namespace ClarityNotes
     {
         private User user;
         private StackLayout stackListNotes;
-        private int fontSize;
+        private double divisor;
+        private int currentDirectory;
+        private int fontsize = 30;
 
         public RootPage(User user)
         {
             this.user = user;
 
-            if (Device.RuntimePlatform == Device.Android)
-                fontSize = 20;
-            else if (Device.RuntimePlatform == Device.UWP)
-                fontSize = 25;
+            if (Device.RuntimePlatform == Device.UWP)
+                divisor = 0.8;
             else
-                fontSize = 20;
+            {
+                fontsize = 13;
+                divisor = 2;
+            }   
 
             Directory[] directories = Directory.GetAllDirectories();
 
@@ -31,7 +34,7 @@ namespace ClarityNotes
             StackLayout verticalLayout = new StackLayout();
             verticalLayout.VerticalOptions = LayoutOptions.Start;
             verticalLayout.HorizontalOptions = LayoutOptions.Start;
-            verticalLayout.Margin = 20;
+            verticalLayout.Margin = 20/divisor;
 
             StackLayout verticalColumn = new StackLayout();
             verticalColumn.HorizontalOptions = LayoutOptions.Start;
@@ -41,7 +44,7 @@ namespace ClarityNotes
             foreach (Directory directory in directories)
             {
                 buttonChapter = new Button();
-                buttonChapter.FontSize = fontSize / 1.5;
+                buttonChapter.FontSize = fontsize / 1.2;
                 buttonChapter.BackgroundColor = Color.White;
                 buttonChapter.Clicked += OnNoteClicked;
                 buttonChapter.CornerRadius = 5;
@@ -54,26 +57,26 @@ namespace ClarityNotes
 
             Button add = new Button() { Text = "+" };
             add.Clicked += OnAddChapterClicked;
-            add.FontSize = fontSize;
+            add.FontSize = fontsize;
             add.CornerRadius = 10;
-            add.Margin = 10;
+            add.Margin = 10/divisor;
             add.BackgroundColor = Color.White;
             AddLayout.Children.Add(add);
 
             Button remove = new Button() { Text = "-" };
             remove.Clicked += OnRemoveClicked;
-            remove.FontSize = fontSize;
+            remove.FontSize = fontsize;
             remove.CornerRadius = 10;
-            remove.Margin = 10;
+            remove.Margin = 10/divisor;
             remove.BackgroundColor = Color.White;
             AddLayout.Children.Add(remove);
 
             Button settings = new Button() { Text = "SET" };
             settings.BackgroundColor = Color.White;
             settings.CornerRadius = 10;
-            settings.Margin = 10;
+            settings.Margin = 10/divisor;
             settings.Clicked += OnSettingsPageCliked;
-            settings.FontSize = fontSize;
+            settings.FontSize = fontsize;
             AddLayout.Children.Add(settings);
 
             Button Website = new Button() { Text = "Site Internet" };
@@ -86,18 +89,19 @@ namespace ClarityNotes
 
 
             stackListNotes = new StackLayout();
-            stackListNotes.Margin = 15;
+            stackListNotes.Margin = 15/divisor;
             stackListNotes.HorizontalOptions = LayoutOptions.CenterAndExpand;
             stackListNotes.VerticalOptions = LayoutOptions.End;
 
             if (directories != new Directory[] { })
             {
                 stackListNotes.Children.Clear();
+                currentDirectory = directories[0].Id;
                 Note[] notes = Note.GetNotesByIdDirectory(directories[0].Id);
                 foreach (Note note in notes)
                 {
                     Button temp = new Button();
-                    temp.FontSize = fontSize;
+                    temp.FontSize = fontsize;
                     temp.BackgroundColor = Color.FromHex("249eed");
                     temp.CornerRadius = 25;
                     temp.BorderWidth = 1;
@@ -109,22 +113,32 @@ namespace ClarityNotes
 
                 StackLayout buttonListNotes = new StackLayout();
                 buttonListNotes.Orientation = StackOrientation.Horizontal;
-                buttonListNotes.Margin = 20;
+                buttonListNotes.Margin = 20/divisor;
 
                 Button AddNote = new Button();
                 AddNote.VerticalOptions = LayoutOptions.EndAndExpand;
-                AddNote.Text = "Ajouter une note à " + directories[0].Title;
-                AddNote.FontSize = fontSize;
+                if (Device.RuntimePlatform == Device.UWP)
+                    AddNote.Text = "Ajouter une note";
+                else
+                    AddNote.Text = "Ajouter";
+                AddNote.FontSize = fontsize;
                 AddNote.BackgroundColor = Color.White;
                 AddNote.Clicked += OnAddNotePageClicked;
                 buttonListNotes.Children.Add(AddNote);
 
                 Button removeNote = new Button();
                 removeNote.VerticalOptions = LayoutOptions.EndAndExpand;
-                removeNote.Text = "Retirer une note à " + directories[0].Title;
-                removeNote.FontSize = fontSize;
+                removeNote.Text = "Retirer";
+                removeNote.FontSize = fontsize;
                 removeNote.BackgroundColor = Color.White;
                 removeNote.Clicked += OnRemoveNotePageCliked;
+
+                if (Device.RuntimePlatform == Device.UWP)
+                {
+                    AddNote.Text = "Ajouter une note";
+                    removeNote.Text = "Retirer une note";
+                }
+               
 
                 if (notes.Length == 0) {
                     removeNote.IsEnabled = false;
@@ -149,6 +163,13 @@ namespace ClarityNotes
             this.Content = mainContent;
             this.BackgroundColor = Color.FromHex("57b1eb");
         }
+
+        private void test(object sender, EventArgs e)
+        {
+            var page = new SettingsPage(user);
+            Navigation.PushAsync(page);
+        }
+
         private void OnEditorClicked(object sender, EventArgs e)
         {
             var page = new EditorPage(Note.GetNoteByTitle(((Button)sender).Text), user);
@@ -157,11 +178,12 @@ namespace ClarityNotes
         private void OnNoteClicked(object sender, EventArgs e)
         {
             stackListNotes.Children.Clear();
-            Note[] notes = Note.GetNotesByIdDirectory(Directory.GetDirectoryByTitle(((Button)sender).Text).Id);
+            currentDirectory = Directory.GetDirectoryByTitle(((Button)sender).Text).Id;
+            Note[] notes = Note.GetNotesByIdDirectory(currentDirectory);
             foreach (Note note in notes)
             {
                 Button temp = new Button();
-                temp.FontSize = fontSize;
+                temp.FontSize = fontsize;
                 temp.BackgroundColor = Color.FromHex("249eed");
                 temp.BorderWidth = 1;
                 temp.Text = note.Title;
@@ -173,22 +195,28 @@ namespace ClarityNotes
 
             StackLayout buttonListNotes = new StackLayout();
             buttonListNotes.Orientation = StackOrientation.Horizontal;
-            buttonListNotes.Margin = 20;
+            buttonListNotes.Margin = 20/ divisor;
 
             Button AddNote = new Button();
             AddNote.VerticalOptions = LayoutOptions.EndAndExpand;
-            AddNote.Text = "Ajouter une note à " + ((Button)sender).Text;
-            AddNote.FontSize = fontSize;
+            AddNote.Text = "Ajouter";
+            AddNote.FontSize = fontsize;
             AddNote.BackgroundColor = Color.White;
             AddNote.Clicked += OnAddNotePageClicked;
             buttonListNotes.Children.Add(AddNote);
 
             Button removeNote = new Button();
             removeNote.VerticalOptions = LayoutOptions.EndAndExpand;
-            removeNote.Text = "Retirer une note à " + ((Button)sender).Text;
-            removeNote.FontSize = fontSize;
+            removeNote.Text = "Retirer";
+            removeNote.FontSize = fontsize;
             removeNote.BackgroundColor = Color.White;
             removeNote.Clicked += OnRemoveNotePageCliked;
+
+            if (Device.RuntimePlatform == Device.UWP)
+            {
+                AddNote.Text = "Ajouter une note";
+                removeNote.Text = "Retirer une note";
+            }
 
             if (notes.Length == 0)
             {
@@ -202,7 +230,7 @@ namespace ClarityNotes
         {
             string text = ((Button)sender).Text;
             string[] splited = text.Split(' ');
-            var page = new AddNotePage(user, Directory.GetDirectoryByTitle(splited.Last()));
+            var page = new AddNotePage(user, Directory.GetDirectoryById(currentDirectory));
             NavigationPage.SetHasNavigationBar(page, false);
             Navigation.PushAsync(page);
         }
@@ -229,7 +257,7 @@ namespace ClarityNotes
 
         private void OnRemoveNotePageCliked(object sender, EventArgs e)
         {
-            var page = new RemoveNotePage(user);
+            var page = new RemoveNotePage(user,currentDirectory);
             NavigationPage.SetHasNavigationBar(page, false);
             Navigation.PushAsync(page);
         }

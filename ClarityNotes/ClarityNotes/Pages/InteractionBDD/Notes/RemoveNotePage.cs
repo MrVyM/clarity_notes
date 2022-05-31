@@ -12,7 +12,7 @@ namespace ClarityNotes
         private Picker picker;
         private User user;
 
-        public RemoveNotePage(User user)
+        public RemoveNotePage(User user,int IdDirectory)
         {
             this.user = user;
             StackLayout mainContent = new StackLayout()
@@ -39,7 +39,7 @@ namespace ClarityNotes
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
 
-            foreach (Note n in Note.GetAllNotes())
+            foreach (Note n in Note.GetNotesByIdDirectory(IdDirectory))
                 picker.Items.Add(n.Title);
 
             Button submit = new Button()
