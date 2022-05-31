@@ -12,6 +12,8 @@ namespace ClarityNotes
         private int currentDirectory;
         private int fontsize = 30;
 
+        public double FontSize { get; }
+
         public RootPage(User user)
         {
             this.user = user;
@@ -85,7 +87,7 @@ namespace ClarityNotes
             Website.Margin = 10;
             Website.Clicked += OnWebSiteCliked;
             Website.FontSize = fontsize;
-            AddLayout.Children.Add(Website);
+
 
 
             stackListNotes = new StackLayout();
