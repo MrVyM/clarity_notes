@@ -22,7 +22,7 @@ namespace ClarityNotes
             {
                 fontsize = 13;
                 divisor = 2;
-            }
+            }   
 
             Directory[] directories = Directory.GetAllDirectories();
 
@@ -241,7 +241,7 @@ namespace ClarityNotes
 
         private void OnRemoveNotePageCliked(object sender, EventArgs e)
         {
-            var page = new RemoveNotePage(user);
+            var page = new RemoveNotePage(user,currentDirectory);
             NavigationPage.SetHasNavigationBar(page, false);
             Navigation.PushAsync(page);
         }
