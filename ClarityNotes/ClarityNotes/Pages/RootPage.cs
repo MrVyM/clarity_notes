@@ -14,12 +14,10 @@ namespace ClarityNotes
         {
             this.user = user;
 
-            if (Device.RuntimePlatform == Device.Android)
-                fontSize = 20;
-            else if (Device.RuntimePlatform == Device.UWP)
+            if (Device.RuntimePlatform == Device.UWP)
                 fontSize = 25;
             else
-                fontSize = 20;
+                fontSize = 12;
 
             Directory[] directories = Directory.GetAllDirectories();
 
@@ -94,7 +92,8 @@ namespace ClarityNotes
                     temp.BorderWidth = 1;
                     temp.Text = note.Title;
                     temp.FontAttributes = FontAttributes.Italic;
-                    temp.Clicked += OnEditorClicked;
+                    temp.Released += OnEditorClicked;
+                    temp.Pressed += test;
                     stackListNotes.Children.Add(temp);
                 }
 
@@ -140,6 +139,13 @@ namespace ClarityNotes
             this.Content = mainContent;
             this.BackgroundColor = Color.FromHex("57b1eb");
         }
+
+        private void test(object sender, EventArgs e)
+        {
+            var page = new SettingsPage(user);
+            Navigation.PushAsync(page);
+        }
+
         private void OnEditorClicked(object sender, EventArgs e)
         {
             var page = new EditorPage(Note.GetNoteByTitle(((Button)sender).Text), user);
