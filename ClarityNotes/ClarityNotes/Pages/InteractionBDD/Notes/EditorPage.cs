@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using TEditor;
-using TEditor.Abstractions;
+using Syncfusion.XForms.RichTextEditor;
+
 
 namespace ClarityNotes
 {
@@ -10,14 +10,19 @@ namespace ClarityNotes
     {
         Note note;
         User user;
-
+        
         public EditorPage(Note note, User user)
         {
             this.note = note;
             this.user = user;
-            Content = new TEditorHtmlView(this.note.Title);
-            BackgroundColor = Color.FromHex("57b1eb");
+            StackLayout stack = new StackLayout();
+            SfRichTextEditor editor = new SfRichTextEditor
+            {
+                VerticalOptions = LayoutOptions.CenterAndExpand,
+                Text = ""
+            };
+            stack.Children.Add(editor);
+            this.Content = stack;
         }
-
     }
 }

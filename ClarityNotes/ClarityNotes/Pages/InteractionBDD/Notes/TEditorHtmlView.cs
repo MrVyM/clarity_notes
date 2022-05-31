@@ -17,7 +17,7 @@ namespace ClarityNotes
             this.Orientation = StackOrientation.Vertical;
             this.Children.Add(new Button
             {
-                Text = "Editer la note suivante :" + name,
+                Text = "Editer la note suivante : " + name,
                 HeightRequest = 100,
                 Command = new Command(async (obj) =>
                 {
