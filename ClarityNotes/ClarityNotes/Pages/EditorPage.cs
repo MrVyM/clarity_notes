@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using TEditor;
+using TEditor.Abstractions;
 
 namespace ClarityNotes
 {
@@ -8,32 +10,14 @@ namespace ClarityNotes
     {
         Note note;
         User user;
-        Editor editor;
 
         public EditorPage(Note note, User user)
         {
             this.note = note;
             this.user = user;
-            StackLayout mainContent = new StackLayout();
-
-            editor = new Editor
-            {
-                HeightRequest = App.Current.MainPage.Height,
-                IsTextPredictionEnabled = false,
-                Text = note.Content
-            };
-
-            editor.TextChanged += OnSaveClicked;
-
-            mainContent.Children.Add(editor);
-            this.Title = note.Title;
-            this.Content = mainContent;
+            Content = new TEditorHtmlView(this.note.Title);
+            BackgroundColor = Color.FromHex("57b1eb");
         }
 
-
-        private void OnSaveClicked(Object sender, EventArgs e)
-        {
-            note.Update(editor.Text, user);
-        }
     }
 }
