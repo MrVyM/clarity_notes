@@ -17,20 +17,20 @@ namespace ClarityNotes
             this.Orientation = StackOrientation.Vertical;
             this.Children.Add(new Button
             {
-                Text = "Editer la note suivante :" + name,
+                Text = "Editer la note suivante : " + name,
                 HeightRequest = 100,
                 Command = new Command(async (obj) =>
                 {
                     await ShowTEditor();
                 })
-            }) ; 
+            }); 
             displayWebView = new WebView() { HeightRequest = 500 };
             this.Children.Add(displayWebView);
         }
 
         async Task ShowTEditor()
         {
-            TEditorResponse response = await CrossTEditor.Current.ShowTEditor("<!-- This is an HTML comment --><p>This is a test of the <strong style=\"font-size:20px\">TEditor</strong> by <a title=\"XAM consulting\" href=\"http://www.xam-consulting.com\">XAM consulting</a></p>");
+            TEditorResponse response = await CrossTEditor.Current.ShowTEditor("<p>XAM consulting</p>");
             if (!string.IsNullOrEmpty(response.HTML))
                 displayWebView.Source = new HtmlWebViewSource() { Html = response.HTML };
         }
