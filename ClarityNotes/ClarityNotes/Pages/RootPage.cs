@@ -80,15 +80,6 @@ namespace ClarityNotes
             settings.FontSize = fontsize;
             AddLayout.Children.Add(settings);
 
-            Button Website = new Button() { Text = "Site Internet" };
-            Website.BackgroundColor = Color.White;
-            Website.CornerRadius = 10;
-            Website.Margin = 10;
-            Website.Clicked += OnWebSiteCliked;
-            Website.FontSize = fontsize;
-
-
-
             stackNotes = new StackLayout();
             stackNotes.Margin = 15/divisor;
             stackNotes.HorizontalOptions = LayoutOptions.CenterAndExpand;
@@ -270,12 +261,6 @@ namespace ClarityNotes
             Navigation.PushAsync(page);
         }
 
-        private void OnWebSiteCliked(object sender, EventArgs e)
-        {
-            var page = new WebPage("claritynotes.ml");
-            NavigationPage.SetHasNavigationBar(page, false);
-            Navigation.PushAsync(page);
-        }
         private void OnAddChapterClicked(object sender, EventArgs e)
         {
             var page = new AddChapterPage(user);
