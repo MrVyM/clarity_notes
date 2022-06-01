@@ -22,7 +22,8 @@ namespace ClarityNotes
             editor = new SfRichTextEditor();
             editor.AutoSize = AutoSizeOption.TextChanges;
             editor.HeightRequest = 1000;
-            editor.HtmlText = note.Content;
+            editor.CursorPosition = 0;
+            editor.InsertHTMLText(note.Content);
             editor.PlaceHolder = "Votre note";
             editor.TextChanged += OnTextChanged;
             stack.Children.Add(editor);
