@@ -7,7 +7,6 @@ using Android.OS;
 using Android.Views;
 using Android.App;
 using Android.Widget;
-using TEditor.Droid;
 
 namespace ClarityNotes.Droid
 {
