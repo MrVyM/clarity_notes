@@ -86,8 +86,8 @@ namespace ClarityNotes
             Website.CornerRadius = 10;
             Website.Margin = 10;
             Website.Clicked += OnWebSiteCliked;
-            Website.FontSize = FontSize;
-            AddLayout.Children.Add(Website);
+            Website.FontSize = fontsize;
+
 
 
             stackListNotes = new StackLayout();
