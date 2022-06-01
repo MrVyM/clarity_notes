@@ -38,6 +38,7 @@ namespace ClarityNotes
 
             StackLayout verticalColumn = new StackLayout();
             verticalColumn.VerticalOptions = LayoutOptions.StartAndExpand;
+            verticalColumn.Margin = 10/divisor;
 
             Button buttonChapter;
             foreach (Directory directory in directories)
@@ -47,12 +48,13 @@ namespace ClarityNotes
                 buttonChapter.BackgroundColor = Color.White;
                 buttonChapter.Clicked += OnNoteClicked;
                 buttonChapter.CornerRadius = 5;
+                buttonChapter.Padding = 5 / divisor;
                 buttonChapter.Text = directory.Title;
                 verticalColumn.Children.Add(buttonChapter);
             }
             StackLayout AddLayout = new StackLayout();
             AddLayout.HorizontalOptions = LayoutOptions.Center;
-            AddLayout.VerticalOptions = LayoutOptions.End;
+            AddLayout.VerticalOptions = LayoutOptions.EndAndExpand;
 
             Button add = new Button() { Text = "+" };
             add.Clicked += OnAddChapterClicked;
@@ -113,11 +115,13 @@ namespace ClarityNotes
                     stackListNotes.Children.Add(temp);
                 }
 
-                stackNotes.Children.Add(stackListNotes);
+                ScrollView scrollNotes = new ScrollView();
+                scrollNotes.Content = stackListNotes;
+                stackNotes.Children.Add(scrollNotes);
 
                 StackLayout buttonListNotes = new StackLayout();
                 buttonListNotes.Orientation = StackOrientation.Horizontal;
-                buttonListNotes.VerticalOptions = LayoutOptions.End;
+                buttonListNotes.VerticalOptions = LayoutOptions.EndAndExpand;
                 buttonListNotes.Margin = 20/divisor;
 
                 Button AddNote = new Button();
@@ -160,7 +164,10 @@ namespace ClarityNotes
                 stackNotes.Children.Add(pleaseAddChapter);
             }
 
-            verticalLayout.Children.Add(verticalColumn);
+            ScrollView scrollChapter = new ScrollView();
+            scrollChapter.Content = verticalColumn;
+
+            verticalLayout.Children.Add(scrollChapter);
             verticalLayout.Children.Add(AddLayout);
             mainContent.Children.Add(verticalLayout);
             mainContent.Children.Add(stackNotes);
@@ -203,11 +210,13 @@ namespace ClarityNotes
                 stackListNotes.Children.Add(temp);
             }
 
-            stackNotes.Children.Add(stackListNotes);
+            ScrollView scrollNotes = new ScrollView();
+            scrollNotes.Content = stackListNotes;
+            stackNotes.Children.Add(scrollNotes);
 
             StackLayout buttonListNotes = new StackLayout();
             buttonListNotes.Orientation = StackOrientation.Horizontal;
-            buttonListNotes.VerticalOptions = LayoutOptions.End;
+            buttonListNotes.VerticalOptions = LayoutOptions.EndAndExpand;
             buttonListNotes.Margin = 20/ divisor;
 
             Button AddNote = new Button();

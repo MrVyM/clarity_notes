@@ -54,7 +54,7 @@ namespace ClarityNotes
 
         private void OnSubmitClicked(object sender, EventArgs e)
         {
-            if (nameEntry.Text.Trim() == "")
+            if (nameEntry.Text.Trim() == null || nameEntry.Text.Trim() == "")
             {
                 var ans = DisplayAlert("Création impossible", "Ce nom n'est pas valide. Veuillez en choisir un autre.", "OK");
             }
