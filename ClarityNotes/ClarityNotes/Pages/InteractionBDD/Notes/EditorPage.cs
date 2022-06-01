@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -17,22 +18,38 @@ namespace ClarityNotes
         {
             this.note = note;
             this.user = user;
-            StackLayout stack = new StackLayout();
-            stack.VerticalOptions = LayoutOptions.Start;
+
+            Button traduce = new Button();
+            traduce.BackgroundColor = Color.Transparent;
+            traduce.HeightRequest = 50;
+            traduce.WidthRequest = 70;
+            traduce.Text = "Traduire";
+
             editor = new SfRichTextEditor();
             editor.AutoSize = AutoSizeOption.TextChanges;
+            editor.VerticalOptions = LayoutOptions.CenterAndExpand;
+            editor.HtmlText = note.Content;
             editor.HeightRequest = 1000;
-            editor.CursorPosition = 0;
-            editor.InsertHTMLText(note.Content);
             editor.PlaceHolder = "Votre note";
+            editor.ToolbarItems.Add(traduce);
             editor.TextChanged += OnTextChanged;
+
+            StackLayout stack = new StackLayout();
+            stack.VerticalOptions = LayoutOptions.Start;
             stack.Children.Add(editor);
             this.Content = stack;
+            
         }
 
-        public void OnTextChanged(object sender, EventArgs e)
+        public void OnTextChanged(object sender, Syncfusion.XForms.RichTextEditor.TextChangedEventArgs e)
         {
             note.Update(editor.HtmlText, user);
+            string text = e.Text;
+        }
+
+        public void OnTraduceCliked(object sender, EventArgs e)
+        {
+
         }
     }
 }
