@@ -36,7 +36,7 @@ namespace ClarityNotes
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
 
-            foreach (string colorName in ColorSettingsUsers.GetColorsName())
+            foreach (string colorName in new string[] { "Blue", "Green", "Red", "Yellow", "Pink", "Orange" })
                 picker.Items.Add(colorName);
 
             Button submit = new Button()
@@ -58,7 +58,27 @@ namespace ClarityNotes
         private void OnSubmitClicked(object sender, EventArgs e)
         {
             if (picker.SelectedItem == null) return;
-            // TODO : Update the user's theme
+            switch (picker.SelectedItem.ToString())
+            {
+                case "Blue":
+                    user.UpdateColorTheme(Color.Blue);
+                    break;
+                case "Green":
+                    user.UpdateColorTheme(Color.Green);
+                    break;
+                case "Red":
+                    user.UpdateColorTheme(Color.Red);
+                    break;
+                case "Yellow":
+                    user.UpdateColorTheme(Color.Yellow);
+                    break;
+                case "Pink":
+                    user.UpdateColorTheme(Color.Pink);
+                    break;
+                case "Orange":
+                    user.UpdateColorTheme(Color.Orange);
+                    break;
+            }
             var page = new RootPage(user);
             NavigationPage.SetHasNavigationBar(page, false);
             Navigation.PushAsync(page);

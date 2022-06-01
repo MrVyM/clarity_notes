@@ -130,4 +130,16 @@ public class User
             sBuilder.Append(data[i].ToString("x2"));
         return sBuilder.ToString();
     }
+
+    public void UpdateColorTheme(Color color)
+    {
+        this.colorTheme = color;
+        MySqlConnection mySqlConnection = Database.GetConnection();
+        string query = "UPDATE `usersettings` SET colorTheme = @colorTheme WHERE userId = @userId";
+        MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
+        mySqlCommand.Parameters.AddWithValue("@colorTheme", color.ToHex());
+        mySqlCommand.Parameters.AddWithValue("@userId", id);
+        mySqlCommand.ExecuteNonQuery();
+        mySqlConnection.Close();
+    }
 }
