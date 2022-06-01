@@ -85,7 +85,7 @@ namespace ClarityNotes
             mainContent.Children.Add(mdpFrame);
             mainContent.Children.Add(buttonStack);
             this.Content = mainContent;
-            this.BackgroundColor = Color.FromHex("57b1eb");
+            this.BackgroundColor = Database.DEFAULT_COLOR;
             this.Title = "ClarityNotes";
             usernameEntry.Placeholder = "Username";
             passwordEntry.Placeholder = "Password";
@@ -109,7 +109,7 @@ namespace ClarityNotes
                 user = User.Connexion(usernameEntry.Text, mdpEntryText);
             } catch
             {
-                DisplayAlert("Serveur Introuvable", "Veuillez vous assurer que votre appareil est connecté au réseau.", "Ok");
+                DisplayAlert("Serveur Introuvable", "Veuillez vous assurer que votre appareil est connecté au réseau.", "OK");
                 return;
             }
             if (user == null)

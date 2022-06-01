@@ -99,7 +99,7 @@ namespace ClarityNotes
             emailEntry.Placeholder = "Email";
             passwordEntry.Placeholder = "Password";
             passwordConfirmEntry.Placeholder = "Password";
-            this.BackgroundColor = Color.FromHex("33B0FF");
+            this.BackgroundColor = Database.DEFAULT_COLOR;
         }
 
         public void OnCompare(object sender, EventArgs e)
