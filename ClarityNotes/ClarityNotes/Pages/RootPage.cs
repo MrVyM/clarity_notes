@@ -7,7 +7,7 @@ namespace ClarityNotes
     public class RootPage : ContentPage
     {
         private User user;
-        private StackLayout stackListNotes;
+        private StackLayout stackNotes;
         private double divisor;
         private int currentDirectory;
         private int fontsize = 30;
@@ -30,17 +30,14 @@ namespace ClarityNotes
 
             StackLayout mainContent = new StackLayout();
             mainContent.Orientation = StackOrientation.Horizontal;
-            mainContent.VerticalOptions = LayoutOptions.CenterAndExpand;
             mainContent.HorizontalOptions = LayoutOptions.FillAndExpand;
 
             StackLayout verticalLayout = new StackLayout();
-            verticalLayout.VerticalOptions = LayoutOptions.Start;
-            verticalLayout.HorizontalOptions = LayoutOptions.Start;
+            verticalLayout.VerticalOptions = LayoutOptions.FillAndExpand;
             verticalLayout.Margin = 20/divisor;
 
             StackLayout verticalColumn = new StackLayout();
-            verticalColumn.HorizontalOptions = LayoutOptions.Start;
-            verticalColumn.VerticalOptions = LayoutOptions.Start;
+            verticalColumn.VerticalOptions = LayoutOptions.StartAndExpand;
 
             Button buttonChapter;
             foreach (Directory directory in directories)
@@ -90,13 +87,16 @@ namespace ClarityNotes
 
 
 
-            stackListNotes = new StackLayout();
-            stackListNotes.Margin = 15/divisor;
-            stackListNotes.HorizontalOptions = LayoutOptions.CenterAndExpand;
-            stackListNotes.VerticalOptions = LayoutOptions.End;
+            stackNotes = new StackLayout();
+            stackNotes.Margin = 15/divisor;
+            stackNotes.HorizontalOptions = LayoutOptions.CenterAndExpand;
 
             if (directories != new Directory[] { })
             {
+                StackLayout stackListNotes = new StackLayout();
+                stackListNotes.Margin = 15/divisor;
+                stackListNotes.VerticalOptions = LayoutOptions.CenterAndExpand;
+                stackListNotes.HorizontalOptions = LayoutOptions.FillAndExpand;
                 stackListNotes.Children.Clear();
                 currentDirectory = directories[0].Id;
                 Note[] notes = Note.GetNotesByIdDirectory(directories[0].Id);
@@ -113,8 +113,11 @@ namespace ClarityNotes
                     stackListNotes.Children.Add(temp);
                 }
 
+                stackNotes.Children.Add(stackListNotes);
+
                 StackLayout buttonListNotes = new StackLayout();
                 buttonListNotes.Orientation = StackOrientation.Horizontal;
+                buttonListNotes.VerticalOptions = LayoutOptions.End;
                 buttonListNotes.Margin = 20/divisor;
 
                 Button AddNote = new Button();
@@ -148,19 +151,19 @@ namespace ClarityNotes
 
                 buttonListNotes.Children.Add(removeNote);
 
-                stackListNotes.Children.Add(buttonListNotes);
+                stackNotes.Children.Add(buttonListNotes);
             }
             else
             {
                 Label pleaseAddChapter = new Label();
                 pleaseAddChapter.Text = "Vous n'avez pas encore de chapitre. Vous pouvez en créer un en utilisant le bouton +";
-                stackListNotes.Children.Add(pleaseAddChapter);
+                stackNotes.Children.Add(pleaseAddChapter);
             }
 
             verticalLayout.Children.Add(verticalColumn);
             verticalLayout.Children.Add(AddLayout);
             mainContent.Children.Add(verticalLayout);
-            mainContent.Children.Add(stackListNotes);
+            mainContent.Children.Add(stackNotes);
 
             this.Content = mainContent;
             this.BackgroundColor = Color.FromHex("57b1eb");
@@ -179,9 +182,14 @@ namespace ClarityNotes
         }
         private void OnNoteClicked(object sender, EventArgs e)
         {
-            stackListNotes.Children.Clear();
+            stackNotes.Children.Clear();
             currentDirectory = Directory.GetDirectoryByTitle(((Button)sender).Text).Id;
             Note[] notes = Note.GetNotesByIdDirectory(currentDirectory);
+            StackLayout stackListNotes = new StackLayout();
+            stackListNotes.Margin = 15 / divisor;
+            stackListNotes.VerticalOptions = LayoutOptions.CenterAndExpand;
+            stackListNotes.HorizontalOptions = LayoutOptions.FillAndExpand;
+            stackListNotes.Children.Clear();
             foreach (Note note in notes)
             {
                 Button temp = new Button();
@@ -195,8 +203,11 @@ namespace ClarityNotes
                 stackListNotes.Children.Add(temp);
             }
 
+            stackNotes.Children.Add(stackListNotes);
+
             StackLayout buttonListNotes = new StackLayout();
             buttonListNotes.Orientation = StackOrientation.Horizontal;
+            buttonListNotes.VerticalOptions = LayoutOptions.End;
             buttonListNotes.Margin = 20/ divisor;
 
             Button AddNote = new Button();
@@ -226,7 +237,7 @@ namespace ClarityNotes
             }
              
             buttonListNotes.Children.Add(removeNote);
-            stackListNotes.Children.Add(buttonListNotes);
+            stackNotes.Children.Add(buttonListNotes);
         }
         private void OnAddNotePageClicked(object sender, EventArgs e)
         {

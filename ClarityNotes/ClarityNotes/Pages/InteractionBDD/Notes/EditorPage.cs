@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -18,14 +19,13 @@ namespace ClarityNotes
             this.note = note;
             this.user = user;
 
-
             Button traduce = new Button();
             traduce.BackgroundColor = Color.Transparent;
             traduce.HeightRequest = 50;
             traduce.WidthRequest = 70;
             traduce.Text = "Traduire";
 
-            SfRichTextEditor editor = new SfRichTextEditor();
+            editor = new SfRichTextEditor();
             editor.AutoSize = AutoSizeOption.TextChanges;
             editor.VerticalOptions = LayoutOptions.CenterAndExpand;
             editor.HtmlText = note.Content;
