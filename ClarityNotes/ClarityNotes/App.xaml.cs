@@ -8,9 +8,15 @@ namespace ClarityNotes
     {
         public App()
         {
-            InitializeComponent();
-
-            MainPage = new NavigationPage(new LoginPage());
+            
+            try
+            {
+                InitializeComponent();
+                MainPage = new NavigationPage(new ErrorServerPage("Serveur Introuvable\nVeuillez vous assurer que votre appareil est connecté au réseau."));
+            } catch
+            {
+                MainPage = new NavigationPage(new ErrorServerPage("Serveur Introuvable"));
+            }
         }
 
         protected override void OnStart()

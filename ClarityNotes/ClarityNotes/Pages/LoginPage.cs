@@ -103,7 +103,15 @@ namespace ClarityNotes
         {
             var mdpEntryText = passwordEntry.Text;
             passwordEntry.Text = "";
-            User user = User.Connexion(usernameEntry.Text, mdpEntryText);
+            User user;
+            try
+            {
+                user = User.Connexion(usernameEntry.Text, mdpEntryText);
+            } catch
+            {
+                DisplayAlert("Serveur Introuvable", "Veuillez vous assurer que votre appareil est connecté au réseau.", "Ok");
+                return;
+            }
             if (user == null)
             {
                 errorLabel.Text = "Nom d'utilisateur ou mot de passe invalide";
