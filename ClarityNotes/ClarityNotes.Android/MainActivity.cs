@@ -23,7 +23,6 @@ namespace ClarityNotes.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            TEditorDroid.Initialize();
 
             LoadApplication(new App());
         }

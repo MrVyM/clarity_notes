@@ -13,18 +13,23 @@ namespace ClarityNotes
         User user;
         SfRichTextEditor editor;
 
+        public SfRichTextEditor _editor => editor;
+
 
         public EditorPage(Note note, User user)
         {
             this.note = note;
             this.user = user;
 
-            Button traduce = new Button();
-            traduce.BackgroundColor = Color.Transparent;
-            traduce.HeightRequest = 50;
-            traduce.WidthRequest = 70;
-            traduce.Text = "Traduire";
-            traduce.Clicked += OnTraduceCliked;
+            Button traduce = new Button
+            {
+                Text = "traduire",
+                HeightRequest = 50,
+                WidthRequest = 70
+            };
+
+            traduce.Clicked += OnTraduceCliked; 
+
 
             editor = new SfRichTextEditor();
             editor.AutoSize = AutoSizeOption.TextChanges;
@@ -32,8 +37,12 @@ namespace ClarityNotes
             editor.HtmlText = note.Content;
             editor.HeightRequest = 1000;
             editor.PlaceHolder = "Votre note";
-            editor.ToolbarItems.Add(traduce);
             editor.TextChanged += OnTextChanged;
+
+            if (editor.ToolbarItems.Count == 1)
+                editor.ToolbarItems.Add(traduce);
+            else
+                editor.ToolbarItems[1] = traduce;
 
             StackLayout stack = new StackLayout();
             stack.VerticalOptions = LayoutOptions.Start;

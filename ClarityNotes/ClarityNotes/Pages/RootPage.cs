@@ -185,7 +185,13 @@ namespace ClarityNotes
         private void OnEditorClicked(object sender, EventArgs e)
         {
             var page = new EditorPage(Note.GetNoteByTitle(((Button)sender).Text), user);
+
             Navigation.PushAsync(page);
+        }
+
+        public void OnTraduceCliked(object sender, EventArgs e)
+        {
+            
         }
         private void OnNoteClicked(object sender, EventArgs e)
         {
