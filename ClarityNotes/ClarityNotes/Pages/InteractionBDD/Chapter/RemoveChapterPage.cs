@@ -30,7 +30,7 @@ namespace ClarityNotes
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalOptions = LayoutOptions.CenterAndExpand };
 
-            foreach (Directory directory in Directory.GetAllDirectories())
+            foreach (Directory directory in Directory.GetUserDirectories(user))
                 picker.Items.Add(directory.Title);
 
             Button submit = new Button() { 
@@ -52,14 +52,14 @@ namespace ClarityNotes
             mainContent.Children.Add(new Frame() { Margin = 25, Content = stackLayout });
             mainContent.Children.Add(submit);
             this.Content = mainContent;
-            this.BackgroundColor = Color.FromHex("57b1eb");
+            this.BackgroundColor = user.ColorTheme;
 
         }
 
         private void OnSubmitClicked(object sender, EventArgs e)
         {
             if (picker.SelectedItem == null) return;
-            if (Directory.DeleteDirectory(Directory.GetDirectoryByTitle(picker.SelectedItem.ToString()).Id))
+            if (Directory.DeleteDirectory(Directory.GetDirectoryByTitleAndIdOwner(picker.SelectedItem.ToString(), user).Id, user))
             {
                 var page = new RootPage(user);
                 NavigationPage.SetHasNavigationBar(page, false);

@@ -69,14 +69,14 @@ namespace ClarityNotes
 
             if (title != "") this.Title = title;
             this.Content = mainContent;
-            this.BackgroundColor = Color.FromHex("57b1eb");
+            this.BackgroundColor = user.ColorTheme;
         }
 
         private void OnMailClicked(object sender, EventArgs e)
         {
             string temp = passwordEntry.Text;
             passwordEntry.Text = "";
-            if (user.Password != temp)
+            if (user.HashPassword != temp)
                 Navigation.PopToRootAsync();
             else
             {
@@ -89,7 +89,7 @@ namespace ClarityNotes
         {
             string temp = passwordEntry.Text;
             passwordEntry.Text = "";
-            if (user.Password != temp)
+            if (user.HashPassword != User.GetHashedPassword(temp))
             {
                 DisplayAlert("Erreur de mot de passe", "Nous vous avons déconnecté par mesure de précaution", "OK");
                 Navigation.PopToRootAsync();
@@ -106,7 +106,7 @@ namespace ClarityNotes
         {
             string temp = passwordEntry.Text;
             passwordEntry.Text = "";
-            if (user.Password != temp)
+            if (user.HashPassword != User.GetHashedPassword(temp))
                 Navigation.PopToRootAsync();
             else
             {

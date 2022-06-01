@@ -26,7 +26,7 @@ namespace ClarityNotes
                 divisor = 2;
             }   
 
-            Directory[] directories = Directory.GetAllDirectories();
+            Directory[] directories = Directory.GetUserDirectories(user);
 
             StackLayout mainContent = new StackLayout();
             mainContent.Orientation = StackOrientation.Horizontal;
@@ -80,20 +80,11 @@ namespace ClarityNotes
             settings.FontSize = fontsize;
             AddLayout.Children.Add(settings);
 
-            Button Website = new Button() { Text = "Site Internet" };
-            Website.BackgroundColor = Color.White;
-            Website.CornerRadius = 10;
-            Website.Margin = 10;
-            Website.Clicked += OnWebSiteCliked;
-            Website.FontSize = fontsize;
-
-
-
             stackNotes = new StackLayout();
             stackNotes.Margin = 15/divisor;
             stackNotes.HorizontalOptions = LayoutOptions.CenterAndExpand;
 
-            if (directories != new Directory[] { })
+            if (directories.Length > 0)
             {
                 StackLayout stackListNotes = new StackLayout();
                 stackListNotes.Margin = 15/divisor;
@@ -173,7 +164,7 @@ namespace ClarityNotes
             mainContent.Children.Add(stackNotes);
 
             this.Content = mainContent;
-            this.BackgroundColor = Color.FromHex("57b1eb");
+            this.BackgroundColor = user.ColorTheme;
         }
 
         private void test(object sender, EventArgs e)
@@ -184,7 +175,7 @@ namespace ClarityNotes
 
         private void OnEditorClicked(object sender, EventArgs e)
         {
-            var page = new EditorPage(Note.GetNoteByTitle(((Button)sender).Text), user);
+            var page = new EditorPage(Note.GetNoteByTitleAndIdDirectory(((Button)sender).Text, currentDirectory), user);
 
             Navigation.PushAsync(page);
         }
@@ -196,7 +187,7 @@ namespace ClarityNotes
         private void OnNoteClicked(object sender, EventArgs e)
         {
             stackNotes.Children.Clear();
-            currentDirectory = Directory.GetDirectoryByTitle(((Button)sender).Text).Id;
+            currentDirectory = Directory.GetDirectoryByTitleAndIdOwner(((Button)sender).Text, user).Id;
             Note[] notes = Note.GetNotesByIdDirectory(currentDirectory);
             StackLayout stackListNotes = new StackLayout();
             stackListNotes.Margin = 15 / divisor;
@@ -258,7 +249,7 @@ namespace ClarityNotes
         {
             string text = ((Button)sender).Text;
             string[] splited = text.Split(' ');
-            var page = new AddNotePage(user, Directory.GetDirectoryById(currentDirectory));
+            var page = new AddNotePage(user, Directory.GetDirectoryByIdAndIdOwner(currentDirectory, user));
             NavigationPage.SetHasNavigationBar(page, false);
             Navigation.PushAsync(page);
         }
@@ -270,12 +261,6 @@ namespace ClarityNotes
             Navigation.PushAsync(page);
         }
 
-        private void OnWebSiteCliked(object sender, EventArgs e)
-        {
-            var page = new WebPage("claritynotes.ml");
-            NavigationPage.SetHasNavigationBar(page, false);
-            Navigation.PushAsync(page);
-        }
         private void OnAddChapterClicked(object sender, EventArgs e)
         {
             var page = new AddChapterPage(user);

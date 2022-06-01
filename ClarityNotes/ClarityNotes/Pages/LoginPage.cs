@@ -85,7 +85,7 @@ namespace ClarityNotes
             mainContent.Children.Add(mdpFrame);
             mainContent.Children.Add(buttonStack);
             this.Content = mainContent;
-            this.BackgroundColor = Color.FromHex("33B0FF");
+            this.BackgroundColor = Database.DEFAULT_COLOR;
             this.Title = "ClarityNotes";
             usernameEntry.Placeholder = "Username";
             passwordEntry.Placeholder = "Password";
@@ -103,7 +103,15 @@ namespace ClarityNotes
         {
             var mdpEntryText = passwordEntry.Text;
             passwordEntry.Text = "";
-            User user = User.Connexion(usernameEntry.Text, mdpEntryText);
+            User user;
+            try
+            {
+                user = User.Connexion(usernameEntry.Text, mdpEntryText);
+            } catch
+            {
+                DisplayAlert("Serveur Introuvable", "Veuillez vous assurer que votre appareil est connecté au réseau.", "OK");
+                return;
+            }
             if (user == null)
             {
                 errorLabel.Text = "Nom d'utilisateur ou mot de passe invalide";

@@ -17,7 +17,6 @@ namespace ClarityNotes
         {
             this.user = user;
             this.directory = directory;
-
             StackLayout mainContent = new StackLayout();
             mainContent.Padding = 50;
             mainContent.HorizontalOptions = LayoutOptions.Center;
@@ -49,7 +48,7 @@ namespace ClarityNotes
 
             mainContent.Children.Add(submit);  
             this.Content = mainContent;
-            this.BackgroundColor = Color.FromHex("57b1eb");
+            this.BackgroundColor = user.ColorTheme;
         }
 
         private void OnSubmitClicked(object sender, EventArgs e)

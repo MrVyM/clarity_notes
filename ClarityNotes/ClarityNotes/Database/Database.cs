@@ -1,6 +1,6 @@
 ﻿using MySqlConnector;
 using System;
-
+using Xamarin.Forms;
 
 public static class Database
 {
@@ -9,6 +9,8 @@ public static class Database
     private static string username = "root";
     private static string password = "tAP4kN4SLEpit@";
     private static string port = "3306";
+
+    public static Color DEFAULT_COLOR = Color.FromHex("57b1eb");
 
     public static MySqlConnection GetConnection()
     {

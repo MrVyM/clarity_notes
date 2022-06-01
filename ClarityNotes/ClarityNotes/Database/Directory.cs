@@ -7,20 +7,20 @@ public class Directory
 {
     private int id;
     private string title;
+    private int idOwner;
     private string creationDate;
-    private int creationIdAuthor;
 
     public int Id => id;
     public string Title => title;
+    public int IdOwner => idOwner;
     public string CreationDate => creationDate;
-    public int CreationIdAuthor => creationIdAuthor;
-    
-    private Directory(int id, string title, string creationDate, int creationIdAuthor)
+
+    private Directory(int id, string title, int idOwner, string creationDate)
     {
         this.id = id;
         this.title = title;
+        this.idOwner = idOwner;
         this.creationDate = creationDate;
-        this.creationIdAuthor = creationIdAuthor;
     }
     
     public override string ToString()
@@ -44,9 +44,32 @@ public class Directory
             {
                 int id = Int32.Parse($"{reader["id"]}");
                 string title = $"{reader["title"]}";
-                string creationDate = $"{reader["creation_date"]}";
-                int creationIdAuthor = Int32.Parse($"{reader["creation_id_author"]}");
-                directories.Add(new Directory(id, title, creationDate, creationIdAuthor));
+                int idOwner = Int32.Parse($"{reader["idOwner"]}");
+                string creationDate = $"{reader["creationDate"]}";
+                directories.Add(new Directory(id, title, idOwner, creationDate));
+            }
+        }
+        mySqlConnection.Close();
+        return directories.ToArray();
+    }
+
+    public static Directory[] GetUserDirectories(User user)
+    {
+        List<Directory> directories = new List<Directory>();
+        MySqlConnection mySqlConnection = Database.GetConnection();
+        string query = "SELECT * FROM `directories` WHERE idOwner = @idOwner";
+        MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
+        mySqlCommand.Parameters.AddWithValue("@idOwner", user.Id);
+        mySqlCommand.ExecuteNonQuery();
+        using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+        {
+            while (reader.Read())
+            {
+                int id = Int32.Parse($"{reader["id"]}");
+                string title = $"{reader["title"]}";
+                int idOwner = Int32.Parse($"{reader["idOwner"]}");
+                string creationDate = $"{reader["creationDate"]}";
+                directories.Add(new Directory(id, title, idOwner, creationDate));
             }
         }
         mySqlConnection.Close();
@@ -55,39 +78,41 @@ public class Directory
 
     public static bool CreateDirectory(string title, User user)
     {
-        if (GetDirectoryByTitle(title) != null) return false;
+        if (GetDirectoryByTitleAndIdOwner(title, user) != null) return false;
         MySqlConnection mySqlConnection = Database.GetConnection();
-        string query = "INSERT INTO `directories` (title, creation_date, creation_id_author) VALUES(@title, @date, @id)";
+        string query = "INSERT INTO `directories` (id, title, idOwner, creationDate) VALUES(@id, @title, @idOwner, @creationDate)";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
+        mySqlCommand.Parameters.AddWithValue("@id", 0);
         mySqlCommand.Parameters.AddWithValue("@title", title);
-        mySqlCommand.Parameters.AddWithValue("@date", Database.GetCurrentDate());
-        mySqlCommand.Parameters.AddWithValue("@id", user.Id);
+        mySqlCommand.Parameters.AddWithValue("@idOwner", user.Id);
+        mySqlCommand.Parameters.AddWithValue("@creationDate", Database.GetCurrentDate());
         bool result = mySqlCommand.ExecuteNonQuery() > 0;
         mySqlConnection.Close();
         return result;
     }
 
-    public static bool DeleteDirectory(int id)
+    public static bool DeleteDirectory(int id, User user)
     {
         MySqlConnection mySqlConnection = Database.GetConnection();
-        string query = "DELETE FROM `directories` WHERE id = @id";
+        string query = "DELETE FROM `directories` WHERE id = @id AND idOwner = @idOwner";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
         mySqlCommand.Parameters.AddWithValue("@id", id);
+        mySqlCommand.Parameters.AddWithValue("@idOwner", user.Id);
         bool result = mySqlCommand.ExecuteNonQuery() > 0;
         mySqlConnection.Close();
         return result;
     }
     
-    public static Directory GetDirectoryById(int id)
+    public static Directory GetDirectoryByIdAndIdOwner(int id, User user)
     {
-        foreach (Directory directory in GetAllDirectories()) 
+        foreach (Directory directory in GetUserDirectories(user)) 
             if (directory.Id == id) return directory;
         return null;
     }
     
-    public static Directory GetDirectoryByTitle(string title)
+    public static Directory GetDirectoryByTitleAndIdOwner(string title, User user)
     {
-        foreach (Directory directory in GetAllDirectories()) 
+        foreach (Directory directory in GetUserDirectories(user)) 
             if (directory.Title == title) return directory;
         return null;
     }

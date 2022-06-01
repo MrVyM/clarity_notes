@@ -2,25 +2,34 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using Xamarin.Forms;
 
 public class User
 {
     private int id;
-    private string email;
     private string username;
-    private string password;
+    private string email;
+    private string hashPassword;
+    private bool premium;
+    private Color colorTheme;
 
     public int Id => id;
-    public string Email => email;
     public string Username => username;
-    public string Password => password;
+    public string Email => email;
+    public string HashPassword => hashPassword;
+    public bool Premium => premium;
+    public Color ColorTheme => colorTheme;
 
-    private User(int id, string email, string username, string password)
+    private User(int id, string username, string email, string hashPassword, bool premium, Color colorTheme)
     {
         this.id = id;
-        this.email = email;
         this.username = username;
-        this.password = password;
+        this.email = email;
+        this.hashPassword = hashPassword;
+        this.premium = premium;
+        this.colorTheme = colorTheme;
     }
 
     public override string ToString()
@@ -36,27 +45,29 @@ public class User
     {
         List<User> users = new List<User>();
         MySqlConnection mySqlConnection = Database.GetConnection();
-        string query = "SELECT * FROM `users`";
+        string query = "SELECT * FROM users INNER JOIN usersettings ON usersettings.userId = users.id";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
         mySqlCommand.ExecuteNonQuery();
         using (MySqlDataReader reader = mySqlCommand.ExecuteReader()) {
             while (reader.Read())
             {
                 int id = Int32.Parse($"{reader["id"]}");
+                string username = $"{reader["username"]}";
                 string email = $"{reader["email"]}";
-                string name = $"{reader["username"]}";
-                string password = $"{reader["password"]}";
-                users.Add(new User(id, email, name, password));
+                string hashPassword = $"{reader["hashPassword"]}";
+                bool premium = $"{reader["premium"]}" == "1";
+                Color colorTheme = Color.FromHex($"{reader["colorTheme"]}");
+                users.Add(new User(id, username, email, hashPassword, premium, colorTheme));
             }
         }
         mySqlConnection.Close();
         return users.ToArray();
     }
 
-    public static void Change(int id, string arg, string value)
+    public static void Change(int id, string field, string value)
     {
         MySqlConnection mySqlConnection = Database.GetConnection();
-        string query = "UPDATE `users` SET "+arg+" = @value WHERE id = @id";
+        string query = "UPDATE `users` SET " + field + " = @value WHERE id = @id";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
         mySqlCommand.Parameters.AddWithValue("@value", value);
         mySqlCommand.Parameters.AddWithValue("@id", id);
@@ -69,14 +80,20 @@ public class User
         foreach (User user in GetAllUsers()) 
             if (user.Username == username || user.Email == email) return false;
         MySqlConnection mySqlConnection = Database.GetConnection();
-        string query = "INSERT INTO `users` (username, email, password) VALUES(@username, @email, @password)";
-        MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
-        mySqlCommand.Parameters.AddWithValue("@username", username);
-        mySqlCommand.Parameters.AddWithValue("@email", email);
-        mySqlCommand.Parameters.AddWithValue("@password", password);
-        bool result = mySqlCommand.ExecuteNonQuery() > 0;
+
+        string queryUser = "INSERT INTO `users` (username, email, hashPassword) VALUES(@username, @email, @hashPassword)";
+        MySqlCommand mySqlCommandUser = new MySqlCommand(queryUser, mySqlConnection);
+        mySqlCommandUser.Parameters.AddWithValue("@username", username);
+        mySqlCommandUser.Parameters.AddWithValue("@email", email);
+        mySqlCommandUser.Parameters.AddWithValue("@hashPassword", GetHashedPassword(password));
+        bool resultUser = mySqlCommandUser.ExecuteNonQuery() > 0;
+
+        string querySettings = "INSERT INTO `usersettings` (colorTheme) VALUES(@colorTheme)";
+        MySqlCommand mySqlCommandSettings = new MySqlCommand(querySettings, mySqlConnection);
+        mySqlCommandSettings.Parameters.AddWithValue("@colorTheme", "57b1eb");
+        bool resultSettings = mySqlCommandSettings.ExecuteNonQuery() > 0;
         mySqlConnection.Close();
-        return result;
+        return resultUser && resultSettings;
     }
     
     public static bool DeleteUser(int id)
@@ -100,7 +117,29 @@ public class User
     public static User Connexion(string username, string password)
     {
         foreach (User user in GetAllUsers())
-            if (user.username == username && user.password == password) return user;
+            if (user.username == username && user.hashPassword == GetHashedPassword(password)) return user;
         return null;
+    }
+
+    public static string GetHashedPassword(string password)
+    {
+        SHA256 sha256 = SHA256.Create();
+        byte[] data = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+        StringBuilder sBuilder = new StringBuilder();
+        for (int i = 0; i < data.Length; i++)
+            sBuilder.Append(data[i].ToString("x2"));
+        return sBuilder.ToString();
+    }
+
+    public void UpdateColorTheme(Color color)
+    {
+        this.colorTheme = color;
+        MySqlConnection mySqlConnection = Database.GetConnection();
+        string query = "UPDATE `usersettings` SET colorTheme = @colorTheme WHERE userId = @userId";
+        MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
+        mySqlCommand.Parameters.AddWithValue("@colorTheme", color.ToHex());
+        mySqlCommand.Parameters.AddWithValue("@userId", id);
+        mySqlCommand.ExecuteNonQuery();
+        mySqlConnection.Close();
     }
 }

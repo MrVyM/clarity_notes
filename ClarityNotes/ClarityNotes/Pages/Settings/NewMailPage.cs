@@ -49,7 +49,7 @@ namespace ClarityNotes
             mainContent.Children.Add(submit);
 
             this.Content = mainContent;
-            this.BackgroundColor = Color.FromHex("57b1eb");
+            this.BackgroundColor = user.ColorTheme;
         }
 
         private void OnSubmitClicked(object sender, EventArgs e)

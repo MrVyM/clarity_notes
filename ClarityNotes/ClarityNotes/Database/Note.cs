@@ -6,34 +6,33 @@ using System.Linq;
 public class Note
 {
     private int id;
-    private string title;
     private int idDirectory;
+    private string title;
     private string content;
     private string creationDate;
     private string updateDate;
-    private int creationIdAuthor;
-    private int updateIdAuthor;
+    private int idCreator;
+    private int idUpdater;
 
     public int Id => id;
-    public string Title => title;
     public int IdDirectory => idDirectory;
+    public string Title => title;
     public string Content => content;
     public string CreationDate => creationDate;
     public string UpdateDate => updateDate;
-    public int CreationIdAuthor => creationIdAuthor;
-    public int UpdateIdAuthor => updateIdAuthor;
-    
-    private Note(int id, string title, int idDirectory, string content, string creationDate,
-        string updateDate, int creationIdAuthor, int updateIdAuthor)
+    public int IdCreator => idCreator;
+    public int IdUpdater => idUpdater;
+
+    private Note(int id, int idDirectory, string title, string content, string creationDate, string updateDate, int idCreator, int idUpdater)
     {
         this.id = id;
-        this.title = title;
         this.idDirectory = idDirectory;
+        this.title = title;
         this.content = content;
         this.creationDate = creationDate;
         this.updateDate = updateDate;
-        this.creationIdAuthor = creationIdAuthor;
-        this.updateIdAuthor = updateIdAuthor;
+        this.idCreator = idCreator;
+        this.idUpdater = idUpdater;
     }
     
     public override string ToString()
@@ -56,14 +55,14 @@ public class Note
             while (reader.Read())
             {
                 int id = Int32.Parse($"{reader["id"]}");
+                int idDirectory = Int32.Parse($"{reader["idDirectory"]}");
                 string title = $"{reader["title"]}";
-                int idDirectory = Int32.Parse($"{reader["id_directory"]}");
                 string content = $"{reader["content"]}";
-                string creationDate = $"{reader["creation_date"]}";
-                string updateDate = $"{reader["update_date"]}";
-                int creationIdAuthor = Int32.Parse($"{reader["creation_id_author"]}");
-                int updateIdAuthor = Int32.Parse($"{reader["update_id_author"]}");
-                notes.Add(new Note(id, title, idDirectory, content, creationDate, updateDate, creationIdAuthor, updateIdAuthor));
+                string creationDate = $"{reader["creationDate"]}";
+                string updateDate = $"{reader["updateDate"]}";
+                int idCreator = Int32.Parse($"{reader["idCreator"]}");
+                int idUpdater = Int32.Parse($"{reader["idUpdater"]}");
+                notes.Add(new Note(id, idDirectory, title, content, creationDate, updateDate, idCreator, idUpdater));
             }
         }
         mySqlConnection.Close();
@@ -77,10 +76,10 @@ public class Note
         return null;
     }
     
-    public static Note GetNoteByTitle(string title)
+    public static Note GetNoteByTitleAndIdDirectory(string title, int idDirectory)
     {
         foreach (Note note in GetAllNotes()) 
-            if (note.title == title) return note;
+            if (note.title == title && note.IdDirectory == idDirectory) return note;
         return null;
     }
     
@@ -94,19 +93,19 @@ public class Note
     
     public static bool CreateNote(string title, int idDirectory, User user)
     {
-        if (GetNoteByTitle(title) != null) return false;
+        if (GetNoteByTitleAndIdDirectory(title, idDirectory) != null) return false;
         MySqlConnection mySqlConnection = Database.GetConnection();
-        string query = "INSERT INTO `notes` (title, id_directory, content, creation_date, update_date, " 
-                       + "creation_id_author, update_id_author) VALUES(@title, @idDirectory, @content," 
-                       + " @creationDate, @updateDate, @creationIdAuthor, @updateIdAuthor)";
+        string query = "INSERT INTO `notes` (idDirectory, title, content, creationDate, updateDate, " 
+                       + "idCreator, idUpdater) VALUES(@idDirectory, @title, @content," 
+                       + " @creationDate, @updateDate, @idCreator, @idUpdater)";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
-        mySqlCommand.Parameters.AddWithValue("@title", title);
         mySqlCommand.Parameters.AddWithValue("@idDirectory", idDirectory);
+        mySqlCommand.Parameters.AddWithValue("@title", title);
         mySqlCommand.Parameters.AddWithValue("@content", "");
         mySqlCommand.Parameters.AddWithValue("@creationDate", Database.GetCurrentDate());
         mySqlCommand.Parameters.AddWithValue("@updateDate", Database.GetCurrentDate());
-        mySqlCommand.Parameters.AddWithValue("@creationIdAuthor", user.Id);
-        mySqlCommand.Parameters.AddWithValue("@updateIdAuthor", user.Id);
+        mySqlCommand.Parameters.AddWithValue("@idCreator", user.Id);
+        mySqlCommand.Parameters.AddWithValue("@idUpdater", user.Id);
         bool result = mySqlCommand.ExecuteNonQuery() > 0;
         mySqlConnection.Close();
         return result;
@@ -128,13 +127,13 @@ public class Note
         if (content == newContent) return false;
         content = newContent;
         updateDate = Database.GetCurrentDate();
-        updateIdAuthor = user.Id;
+        idUpdater = user.Id;
         MySqlConnection mySqlConnection = Database.GetConnection();
-        string query = "UPDATE `notes` SET content = @content, update_date = @updateDate, update_id_author = @updateIdAuthor WHERE id = @id";
+        string query = "UPDATE `notes` SET content = @content, updateDate = @updateDate, idUpdater = @idUpdater WHERE id = @id";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
         mySqlCommand.Parameters.AddWithValue("@content", content);
         mySqlCommand.Parameters.AddWithValue("@updateDate", updateDate);
-        mySqlCommand.Parameters.AddWithValue("@updateIdAuthor", updateIdAuthor);
+        mySqlCommand.Parameters.AddWithValue("@idUpdater", idUpdater);
         mySqlCommand.Parameters.AddWithValue("@id", id);
         bool result = mySqlCommand.ExecuteNonQuery() > 0;
         mySqlConnection.Close();

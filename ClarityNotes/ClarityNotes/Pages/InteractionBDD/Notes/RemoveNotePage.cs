@@ -11,10 +11,12 @@ namespace ClarityNotes
     {
         private Picker picker;
         private User user;
+        private int idDirectory;
 
-        public RemoveNotePage(User user,int IdDirectory)
+        public RemoveNotePage(User user, int idDirectory)
         {
             this.user = user;
+            this.idDirectory = idDirectory;
             StackLayout mainContent = new StackLayout()
             {
                 HorizontalOptions = LayoutOptions.Center,
@@ -27,7 +29,7 @@ namespace ClarityNotes
             Label questionLabel = new Label()
             {
                 FontSize = 16,
-                Text = "Quel note souhaitez-vous supprimer ?",
+                Text = "Quelle note souhaitez-vous supprimer ?",
                 TextColor = Color.Black,
                 HorizontalTextAlignment = TextAlignment.Center
             };
@@ -39,7 +41,7 @@ namespace ClarityNotes
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
 
-            foreach (Note n in Note.GetNotesByIdDirectory(IdDirectory))
+            foreach (Note n in Note.GetNotesByIdDirectory(idDirectory))
                 picker.Items.Add(n.Title);
 
             Button submit = new Button()
@@ -64,14 +66,14 @@ namespace ClarityNotes
             mainContent.Children.Add(new Frame() { Margin = 25, Content = stackLayout });
             mainContent.Children.Add(submit);
 
-            this.BackgroundColor = Color.FromHex("33B0FF");
+            this.BackgroundColor = user.ColorTheme;
             this.Content = mainContent;
         }
 
         private void OnSubmitClicked(object sender, EventArgs e)
         {
             if (picker.SelectedItem == null) return;
-            if (Note.DeleteNote(Note.GetNoteByTitle(picker.SelectedItem.ToString()).Id))
+            if (Note.DeleteNote(Note.GetNoteByTitleAndIdDirectory(picker.SelectedItem.ToString(), idDirectory).Id))
             {
                 var page = new RootPage(user);
                 NavigationPage.SetHasNavigationBar(page, false);
