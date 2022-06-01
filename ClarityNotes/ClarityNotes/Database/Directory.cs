@@ -53,9 +53,32 @@ public class Directory
         return directories.ToArray();
     }
 
+    public static Directory[] GetUserDirectories(User user)
+    {
+        List<Directory> directories = new List<Directory>();
+        MySqlConnection mySqlConnection = Database.GetConnection();
+        string query = "SELECT * FROM `directories` WHERE idOwner = @idOwner";
+        MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
+        mySqlCommand.Parameters.AddWithValue("@idOwner", user.Id);
+        mySqlCommand.ExecuteNonQuery();
+        using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+        {
+            while (reader.Read())
+            {
+                int id = Int32.Parse($"{reader["id"]}");
+                string title = $"{reader["title"]}";
+                int idOwner = Int32.Parse($"{reader["idOwner"]}");
+                string creationDate = $"{reader["creationDate"]}";
+                directories.Add(new Directory(id, title, idOwner, creationDate));
+            }
+        }
+        mySqlConnection.Close();
+        return directories.ToArray();
+    }
+
     public static bool CreateDirectory(string title, User user)
     {
-        if (GetDirectoryByTitleAndIdOwner(title, user.Id) != null) return false;
+        if (GetDirectoryByTitleAndIdOwner(title, user) != null) return false;
         MySqlConnection mySqlConnection = Database.GetConnection();
         string query = "INSERT INTO `directories` (id, title, idOwner, creationDate) VALUES(@id, @title, @idOwner, @creationDate)";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
@@ -80,17 +103,17 @@ public class Directory
         return result;
     }
     
-    public static Directory GetDirectoryByIdAndIdOwner(int id, int idOwner)
+    public static Directory GetDirectoryByIdAndIdOwner(int id, User user)
     {
-        foreach (Directory directory in GetAllDirectories()) 
-            if (directory.Id == id && directory.IdOwner == idOwner) return directory;
+        foreach (Directory directory in GetUserDirectories(user)) 
+            if (directory.Id == id) return directory;
         return null;
     }
     
-    public static Directory GetDirectoryByTitleAndIdOwner(string title, int idOwner)
+    public static Directory GetDirectoryByTitleAndIdOwner(string title, User user)
     {
-        foreach (Directory directory in GetAllDirectories()) 
-            if (directory.Title == title && directory.IdOwner == idOwner) return directory;
+        foreach (Directory directory in GetUserDirectories(user)) 
+            if (directory.Title == title) return directory;
         return null;
     }
 }

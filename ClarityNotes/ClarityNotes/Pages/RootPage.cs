@@ -26,7 +26,7 @@ namespace ClarityNotes
                 divisor = 2;
             }   
 
-            Directory[] directories = Directory.GetAllDirectories();
+            Directory[] directories = Directory.GetUserDirectories(user);
 
             StackLayout mainContent = new StackLayout();
             mainContent.Orientation = StackOrientation.Horizontal;
@@ -93,7 +93,7 @@ namespace ClarityNotes
             stackNotes.Margin = 15/divisor;
             stackNotes.HorizontalOptions = LayoutOptions.CenterAndExpand;
 
-            if (directories != new Directory[] { })
+            if (directories.Length > 0)
             {
                 StackLayout stackListNotes = new StackLayout();
                 stackListNotes.Margin = 15/divisor;
