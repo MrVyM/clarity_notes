@@ -24,6 +24,7 @@ namespace ClarityNotes
             traduce.HeightRequest = 50;
             traduce.WidthRequest = 70;
             traduce.Text = "Traduire";
+            traduce.Clicked += OnTraduceCliked;
 
             editor = new SfRichTextEditor();
             editor.AutoSize = AutoSizeOption.TextChanges;
@@ -38,7 +39,6 @@ namespace ClarityNotes
             stack.VerticalOptions = LayoutOptions.Start;
             stack.Children.Add(editor);
             this.Content = stack;
-            
         }
 
         public void OnTextChanged(object sender, Syncfusion.XForms.RichTextEditor.TextChangedEventArgs e)
@@ -49,7 +49,7 @@ namespace ClarityNotes
 
         public void OnTraduceCliked(object sender, EventArgs e)
         {
-
+            this.editor.Text += "traduire a marché";
         }
     }
 }
