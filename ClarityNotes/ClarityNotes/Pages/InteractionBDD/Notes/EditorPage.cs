@@ -129,8 +129,16 @@ namespace ClarityNotes
 
         public void OnTraduceCliked(object sender, EventArgs e)
         {
-            this.editor.Text += "traduire a marché";
+            TranslationServiceClient client = TranslationServiceClient.Create();
+            TranslateTextRequest request = new TranslateTextRequest
+            {
+                Contents = { this.editor.Text },
+                TargetLanguageCode = "fr-FR",
+                Parent = new ProjectName(projectID).ToString()
+            };
+            TranslateTextResponse response = client.TranslateText(request);
+            Translation translation = response.Translations[0];
+            this.editor.Text += translation.TranslatedText;
         }
     }
->>>>>>> 010f9b5dae74673fd03af954ac920bfd9c313317
 }
