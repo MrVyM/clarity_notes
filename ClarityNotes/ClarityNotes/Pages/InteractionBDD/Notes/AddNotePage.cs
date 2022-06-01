@@ -17,7 +17,6 @@ namespace ClarityNotes
         {
             this.user = user;
             this.directory = directory;
-
             StackLayout mainContent = new StackLayout();
             mainContent.Padding = 50;
             mainContent.HorizontalOptions = LayoutOptions.Center;
