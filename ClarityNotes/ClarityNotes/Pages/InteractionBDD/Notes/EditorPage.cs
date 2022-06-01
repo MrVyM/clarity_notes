@@ -17,30 +17,39 @@ namespace ClarityNotes
         {
             this.note = note;
             this.user = user;
-            StackLayout stack = new StackLayout();
-<<<<<<< HEAD
-            SfRichTextEditor editor = new SfRichTextEditor
-            {
-                AutoSize = AutoSizeOption.TextChanges,
-                VerticalOptions = LayoutOptions.CenterAndExpand,
-                Text = ""
-            };
-=======
-            stack.VerticalOptions = LayoutOptions.Start;
-            editor = new SfRichTextEditor();
+
+
+            Button traduce = new Button();
+            traduce.BackgroundColor = Color.Transparent;
+            traduce.HeightRequest = 50;
+            traduce.WidthRequest = 70;
+            traduce.Text = "Traduire";
+
+            SfRichTextEditor editor = new SfRichTextEditor();
             editor.AutoSize = AutoSizeOption.TextChanges;
-            editor.HeightRequest = 1000;
+            editor.VerticalOptions = LayoutOptions.CenterAndExpand;
             editor.HtmlText = note.Content;
+            editor.HeightRequest = 1000;
             editor.PlaceHolder = "Votre note";
+            editor.ToolbarItems.Add(traduce);
             editor.TextChanged += OnTextChanged;
->>>>>>> refs/remotes/origin/main
+
+            StackLayout stack = new StackLayout();
+            stack.VerticalOptions = LayoutOptions.Start;
             stack.Children.Add(editor);
             this.Content = stack;
+            
         }
 
-        public void OnTextChanged(object sender, EventArgs e)
+        public void OnTextChanged(object sender, Syncfusion.XForms.RichTextEditor.TextChangedEventArgs e)
         {
             note.Update(editor.HtmlText, user);
+            string text = e.Text;
+        }
+
+        public void OnTraduceCliked(object sender, EventArgs e)
+        {
+
         }
     }
 }
