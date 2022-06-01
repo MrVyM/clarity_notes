@@ -48,7 +48,7 @@ namespace ClarityNotes
             StackLayout stack = new StackLayout();
             stack.VerticalOptions = LayoutOptions.Start;
             stack.Children.Add(editor);
-            this.Title = Directory.GetDirectoryByIdAndIdOwner(note.IdDirectory, user.Id).Title + "/" + note.Title;
+            this.Title = Directory.GetDirectoryByIdAndIdOwner(note.IdDirectory, user).Title + "/" + note.Title;
             this.Content = stack;
         }
 

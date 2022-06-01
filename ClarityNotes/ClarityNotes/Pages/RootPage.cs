@@ -196,7 +196,7 @@ namespace ClarityNotes
         private void OnNoteClicked(object sender, EventArgs e)
         {
             stackNotes.Children.Clear();
-            currentDirectory = Directory.GetDirectoryByTitleAndIdOwner(((Button)sender).Text, user.Id).Id;
+            currentDirectory = Directory.GetDirectoryByTitleAndIdOwner(((Button)sender).Text, user).Id;
             Note[] notes = Note.GetNotesByIdDirectory(currentDirectory);
             StackLayout stackListNotes = new StackLayout();
             stackListNotes.Margin = 15 / divisor;
@@ -258,7 +258,7 @@ namespace ClarityNotes
         {
             string text = ((Button)sender).Text;
             string[] splited = text.Split(' ');
-            var page = new AddNotePage(user, Directory.GetDirectoryByIdAndIdOwner(currentDirectory, user.Id));
+            var page = new AddNotePage(user, Directory.GetDirectoryByIdAndIdOwner(currentDirectory, user));
             NavigationPage.SetHasNavigationBar(page, false);
             Navigation.PushAsync(page);
         }
