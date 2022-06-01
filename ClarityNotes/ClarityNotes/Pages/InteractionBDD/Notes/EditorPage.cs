@@ -32,10 +32,14 @@ namespace ClarityNotes
             editor.HtmlText = note.Content;
             editor.HeightRequest = 1000;
             editor.PlaceHolder = "Votre note";
-            editor.ToolbarItems.Add(traduce);
+            if (editor.ToolbarItems.Count == 1)
+                editor.ToolbarItems.Add(traduce);
+            else
+                editor.ToolbarItems[1] = traduce;
+            
             editor.TextChanged += OnTextChanged;
 
-            StackLayout stack = new StackLayout();
+            StackLayout stack = new StackLayout();      
             stack.VerticalOptions = LayoutOptions.Start;
             stack.Children.Add(editor);
             this.Content = stack;

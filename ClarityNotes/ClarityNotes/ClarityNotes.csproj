@@ -14,9 +14,8 @@
     <PackageReference Include="MySqlConnector" Version="2.1.9" />
     <PackageReference Include="QRCoder" Version="1.4.3" />
     <PackageReference Include="Syncfusion.Xamarin.SfRichTextEditor" Version="20.1.0.58" />
-    <PackageReference Include="TEditor2" Version="1.4.4" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
     <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />
   </ItemGroup>
 
