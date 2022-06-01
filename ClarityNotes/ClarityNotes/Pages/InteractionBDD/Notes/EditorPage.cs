@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Syncfusion.XForms.RichTextEditor;
-using Google.Cloud.Translate.V3;
+using Google.Cloud.Translation.V2;
 using Google.Api.Gax.ResourceNames;
 
 namespace ClarityNotes
@@ -12,7 +12,6 @@ namespace ClarityNotes
         Note note;
         User user;
         SfRichTextEditor editor;
-        private string projectID;
 
         public SfRichTextEditor _editor => editor;
 
@@ -60,16 +59,10 @@ namespace ClarityNotes
 
         public void OnTraduceCliked(object sender, EventArgs e)
         {
-            TranslationServiceClient client = TranslationServiceClient.Create();
-            TranslateTextRequest request = new TranslateTextRequest
-            {
-                Contents = { this.editor.Text },
-                TargetLanguageCode = "fr-FR",
-                Parent = new ProjectName(projectID).ToString()
-            };
-            TranslateTextResponse response = client.TranslateText(request);
-            Translation translation = response.Translations[0];
-            this.editor.Text = translation.TranslatedText;
+            string text = editor.HtmlText;
+            TranslationClient client = TranslationClient.Create();
+            TranslationResult result = client.TranslateText(text, LanguageCodes.French);
+            editor.HtmlText = result.TranslatedText;
         }
     }
 }
