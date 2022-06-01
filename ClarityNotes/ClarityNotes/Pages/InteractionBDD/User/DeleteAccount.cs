@@ -42,7 +42,7 @@ namespace ClarityNotes
             mainContent.Children.Add(delete);
 
 
-            this.BackgroundColor = Color.FromHex("57b1eb");
+            this.BackgroundColor = user.ColorTheme;
             this.Title = "Supression de compte";
             this.Content = mainContent;
         }

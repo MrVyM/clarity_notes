@@ -164,7 +164,7 @@ namespace ClarityNotes
             mainContent.Children.Add(stackNotes);
 
             this.Content = mainContent;
-            this.BackgroundColor = Color.FromHex("57b1eb");
+            this.BackgroundColor = user.ColorTheme;
         }
 
         private void test(object sender, EventArgs e)

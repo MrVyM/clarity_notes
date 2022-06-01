@@ -77,7 +77,7 @@ namespace ClarityNotes
             deleteAccount.Margin = 20;
             mainContent.Children.Add(deleteAccount);
 
-            this.BackgroundColor = Color.FromHex("57b1eb");
+            this.BackgroundColor = user.ColorTheme;
             this.Content = mainContent;
         }
 
