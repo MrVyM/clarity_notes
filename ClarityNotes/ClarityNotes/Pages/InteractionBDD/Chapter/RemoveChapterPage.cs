@@ -30,7 +30,7 @@ namespace ClarityNotes
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalOptions = LayoutOptions.CenterAndExpand };
 
-            foreach (Directory directory in Directory.GetAllDirectories())
+            foreach (Directory directory in Directory.GetUserDirectories(user))
                 picker.Items.Add(directory.Title);
 
             Button submit = new Button() { 

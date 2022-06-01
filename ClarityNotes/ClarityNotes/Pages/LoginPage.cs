@@ -85,7 +85,7 @@ namespace ClarityNotes
             mainContent.Children.Add(mdpFrame);
             mainContent.Children.Add(buttonStack);
             this.Content = mainContent;
-            this.BackgroundColor = Color.FromHex("72eb57");
+            this.BackgroundColor = Color.FromHex("57b1eb");
             this.Title = "ClarityNotes";
             usernameEntry.Placeholder = "Username";
             passwordEntry.Placeholder = "Password";
