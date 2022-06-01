@@ -59,7 +59,7 @@ namespace ClarityNotes
         private void OnSubmitClicked(object sender, EventArgs e)
         {
             if (picker.SelectedItem == null) return;
-            if (Directory.DeleteDirectory(Directory.GetDirectoryByTitle(picker.SelectedItem.ToString()).Id))
+            if (Directory.DeleteDirectory(Directory.GetDirectoryByTitleAndIdOwner(picker.SelectedItem.ToString(), user.Id).Id, user))
             {
                 var page = new RootPage(user);
                 NavigationPage.SetHasNavigationBar(page, false);

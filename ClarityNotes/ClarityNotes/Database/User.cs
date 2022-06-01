@@ -6,21 +6,24 @@ using System.Linq;
 public class User
 {
     private int id;
-    private string email;
     private string username;
-    private string password;
+    private string email;
+    private string hashPassword;
+    private bool premium;
 
     public int Id => id;
-    public string Email => email;
     public string Username => username;
-    public string Password => password;
+    public string Email => email;
+    public string HashPassword => hashPassword;
+    public bool Premium => premium;
 
-    private User(int id, string email, string username, string password)
+    private User(int id, string username, string email, string hashPassword, bool premium)
     {
         this.id = id;
-        this.email = email;
         this.username = username;
-        this.password = password;
+        this.email = email;
+        this.hashPassword = hashPassword;
+        this.premium = premium;
     }
 
     public override string ToString()
@@ -43,20 +46,21 @@ public class User
             while (reader.Read())
             {
                 int id = Int32.Parse($"{reader["id"]}");
+                string username = $"{reader["username"]}";
                 string email = $"{reader["email"]}";
-                string name = $"{reader["username"]}";
-                string password = $"{reader["password"]}";
-                users.Add(new User(id, email, name, password));
+                string hashPassword = $"{reader["hashPassword"]}";
+                bool premium = $"{reader["premium"]}" == "1";
+                users.Add(new User(id, username, email, hashPassword, premium));
             }
         }
         mySqlConnection.Close();
         return users.ToArray();
     }
 
-    public static void Change(int id, string arg, string value)
+    public static void Change(int id, string field, string value)
     {
         MySqlConnection mySqlConnection = Database.GetConnection();
-        string query = "UPDATE `users` SET "+arg+" = @value WHERE id = @id";
+        string query = "UPDATE `users` SET " + field + " = @value WHERE id = @id";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
         mySqlCommand.Parameters.AddWithValue("@value", value);
         mySqlCommand.Parameters.AddWithValue("@id", id);
@@ -69,11 +73,11 @@ public class User
         foreach (User user in GetAllUsers()) 
             if (user.Username == username || user.Email == email) return false;
         MySqlConnection mySqlConnection = Database.GetConnection();
-        string query = "INSERT INTO `users` (username, email, password) VALUES(@username, @email, @password)";
+        string query = "INSERT INTO `users` (username, email, hashPassword) VALUES(@username, @email, @hashPassword)";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
         mySqlCommand.Parameters.AddWithValue("@username", username);
         mySqlCommand.Parameters.AddWithValue("@email", email);
-        mySqlCommand.Parameters.AddWithValue("@password", password);
+        mySqlCommand.Parameters.AddWithValue("@hashPassword", GetHashedPassword(password));
         bool result = mySqlCommand.ExecuteNonQuery() > 0;
         mySqlConnection.Close();
         return result;
@@ -100,7 +104,12 @@ public class User
     public static User Connexion(string username, string password)
     {
         foreach (User user in GetAllUsers())
-            if (user.username == username && user.password == password) return user;
+            if (user.username == username && user.hashPassword == GetHashedPassword(password)) return user;
         return null;
+    }
+
+    public static string GetHashedPassword(string password)
+    {
+        return password;
     }
 }
