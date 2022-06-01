@@ -29,7 +29,7 @@ namespace ClarityNotes
             Label questionLabel = new Label()
             {
                 FontSize = 16,
-                Text = "Quel note souhaitez-vous supprimer ?",
+                Text = "Quelle note souhaitez-vous supprimer ?",
                 TextColor = Color.Black,
                 HorizontalTextAlignment = TextAlignment.Center
             };

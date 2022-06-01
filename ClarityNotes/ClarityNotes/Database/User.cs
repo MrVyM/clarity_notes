@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 public class User
 {
@@ -110,6 +112,11 @@ public class User
 
     public static string GetHashedPassword(string password)
     {
-        return password;
+        SHA256 sha256 = SHA256.Create();
+        byte[] data = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+        StringBuilder sBuilder = new StringBuilder();
+        for (int i = 0; i < data.Length; i++)
+            sBuilder.Append(data[i].ToString("x2"));
+        return sBuilder.ToString();
     }
 }
