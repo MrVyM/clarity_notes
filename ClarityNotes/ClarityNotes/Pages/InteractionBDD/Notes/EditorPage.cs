@@ -18,6 +18,7 @@ namespace ClarityNotes
             StackLayout stack = new StackLayout();
             SfRichTextEditor editor = new SfRichTextEditor
             {
+                AutoSize = AutoSizeOption.TextChanges,
                 VerticalOptions = LayoutOptions.CenterAndExpand,
                 Text = ""
             };
