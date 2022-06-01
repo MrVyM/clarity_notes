@@ -69,7 +69,7 @@ namespace ClarityNotes
 
             if (title != "") this.Title = title;
             this.Content = mainContent;
-            this.BackgroundColor = Color.FromHex("57b1eb");
+            this.BackgroundColor = user.ColorTheme;
         }
 
         private void OnMailClicked(object sender, EventArgs e)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using Xamarin.Forms;
 
 public class User
 {
@@ -12,20 +13,23 @@ public class User
     private string email;
     private string hashPassword;
     private bool premium;
+    private Color colorTheme;
 
     public int Id => id;
     public string Username => username;
     public string Email => email;
     public string HashPassword => hashPassword;
     public bool Premium => premium;
+    public Color ColorTheme => colorTheme;
 
-    private User(int id, string username, string email, string hashPassword, bool premium)
+    private User(int id, string username, string email, string hashPassword, bool premium, Color colorTheme)
     {
         this.id = id;
         this.username = username;
         this.email = email;
         this.hashPassword = hashPassword;
         this.premium = premium;
+        this.colorTheme = colorTheme;
     }
 
     public override string ToString()
@@ -41,7 +45,7 @@ public class User
     {
         List<User> users = new List<User>();
         MySqlConnection mySqlConnection = Database.GetConnection();
-        string query = "SELECT * FROM `users`";
+        string query = "SELECT * FROM users INNER JOIN usersettings ON usersettings.userId = users.id";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
         mySqlCommand.ExecuteNonQuery();
         using (MySqlDataReader reader = mySqlCommand.ExecuteReader()) {
@@ -52,7 +56,8 @@ public class User
                 string email = $"{reader["email"]}";
                 string hashPassword = $"{reader["hashPassword"]}";
                 bool premium = $"{reader["premium"]}" == "1";
-                users.Add(new User(id, username, email, hashPassword, premium));
+                Color colorTheme = Color.FromHex($"{reader["colorTheme"]}");
+                users.Add(new User(id, username, email, hashPassword, premium, colorTheme));
             }
         }
         mySqlConnection.Close();
@@ -75,14 +80,20 @@ public class User
         foreach (User user in GetAllUsers()) 
             if (user.Username == username || user.Email == email) return false;
         MySqlConnection mySqlConnection = Database.GetConnection();
-        string query = "INSERT INTO `users` (username, email, hashPassword) VALUES(@username, @email, @hashPassword)";
-        MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
-        mySqlCommand.Parameters.AddWithValue("@username", username);
-        mySqlCommand.Parameters.AddWithValue("@email", email);
-        mySqlCommand.Parameters.AddWithValue("@hashPassword", GetHashedPassword(password));
-        bool result = mySqlCommand.ExecuteNonQuery() > 0;
+
+        string queryUser = "INSERT INTO `users` (username, email, hashPassword) VALUES(@username, @email, @hashPassword)";
+        MySqlCommand mySqlCommandUser = new MySqlCommand(queryUser, mySqlConnection);
+        mySqlCommandUser.Parameters.AddWithValue("@username", username);
+        mySqlCommandUser.Parameters.AddWithValue("@email", email);
+        mySqlCommandUser.Parameters.AddWithValue("@hashPassword", GetHashedPassword(password));
+        bool resultUser = mySqlCommandUser.ExecuteNonQuery() > 0;
+
+        string querySettings = "INSERT INTO `usersettings` (colorTheme) VALUES(@colorTheme)";
+        MySqlCommand mySqlCommandSettings = new MySqlCommand(querySettings, mySqlConnection);
+        mySqlCommandSettings.Parameters.AddWithValue("@colorTheme", "57b1eb");
+        bool resultSettings = mySqlCommandSettings.ExecuteNonQuery() > 0;
         mySqlConnection.Close();
-        return result;
+        return resultUser && resultSettings;
     }
     
     public static bool DeleteUser(int id)

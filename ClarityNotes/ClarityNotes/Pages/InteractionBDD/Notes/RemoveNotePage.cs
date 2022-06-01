@@ -66,7 +66,7 @@ namespace ClarityNotes
             mainContent.Children.Add(new Frame() { Margin = 25, Content = stackLayout });
             mainContent.Children.Add(submit);
 
-            this.BackgroundColor = Color.FromHex("33B0FF");
+            this.BackgroundColor = user.ColorTheme;
             this.Content = mainContent;
         }
 
