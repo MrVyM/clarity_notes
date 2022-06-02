@@ -25,7 +25,7 @@ namespace ClarityNotes
                 WidthRequest = 70
             };
 
-            traduce.Clicked += OnTraduceCliked; 
+            traduce.Clicked += OnTraduceClicked;
 
             editor = new SfRichTextEditor();
             editor.AutoSize = AutoSizeOption.TextChanges;
@@ -54,12 +54,15 @@ namespace ClarityNotes
             string text = e.Text;
         }
 
-        public void OnTraduceCliked(object sender, EventArgs e)
+        public void OnTraduceClicked(object sender, EventArgs e)
         {
+            string route = "/translate?api-version=3.0&to=de&to=it&to=ja&to=th";
             string text = editor.HtmlText;
-            TranslationClient client = TranslationClient.Create();
-            TranslationResult result = client.TranslateText(text, LanguageCodes.French);
-            editor.HtmlText = result.TranslatedText;
+            editor.HtmlText = Traductor.Traduce(Traductor.SubscriptionKey, Traductor.Endpoint, route, text).ToString();
         }
     }
-}
+}       
+            
+            
+       
+ 
