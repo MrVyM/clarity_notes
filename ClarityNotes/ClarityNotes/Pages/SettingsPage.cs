@@ -91,7 +91,10 @@ namespace ClarityNotes
         }
         private void OnThemeChange(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new ThemeChangePage(user));
+            if(user.Premium)
+                Navigation.PushAsync(new ThemeChangePage(user));
+            else
+                DisplayAlert("Accès Restreint", "Pour accéder à cette option, vous devez bénéficier de l'offre Premium.", "OK");
         }
         private void OnNameChange(object sender, EventArgs e)
         {

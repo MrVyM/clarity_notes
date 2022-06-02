@@ -55,7 +55,7 @@ public class User
                 string username = $"{reader["username"]}";
                 string email = $"{reader["email"]}";
                 string hashPassword = $"{reader["hashPassword"]}";
-                bool premium = $"{reader["premium"]}" == "1";
+                bool premium = reader["premium"].ToString() == "True";
                 Color colorTheme = Color.FromHex($"{reader["colorTheme"]}");
                 users.Add(new User(id, username, email, hashPassword, premium, colorTheme));
             }
