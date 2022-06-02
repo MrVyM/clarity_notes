@@ -61,22 +61,22 @@ namespace ClarityNotes
             switch (picker.SelectedItem.ToString())
             {
                 case "Blue":
-                    user.UpdateColorTheme(Color.Blue);
+                    user.UpdateColorTheme(Color.FromHex("57B1EB"));
                     break;
                 case "Green":
-                    user.UpdateColorTheme(Color.Green);
+                    user.UpdateColorTheme(Color.FromHex("66A37B"));
                     break;
                 case "Red":
-                    user.UpdateColorTheme(Color.Red);
+                    user.UpdateColorTheme(Color.FromHex("E87C6B"));
                     break;
                 case "Yellow":
-                    user.UpdateColorTheme(Color.Yellow);
+                    user.UpdateColorTheme(Color.FromHex("D1C860"));
                     break;
                 case "Pink":
-                    user.UpdateColorTheme(Color.Pink);
+                    user.UpdateColorTheme(Color.FromHex("FD7A89"));
                     break;
                 case "Orange":
-                    user.UpdateColorTheme(Color.Orange);
+                    user.UpdateColorTheme(Color.FromHex("E77E22"));
                     break;
             }
             var page = new RootPage(user);

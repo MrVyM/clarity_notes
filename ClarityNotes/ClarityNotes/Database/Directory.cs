@@ -80,13 +80,23 @@ public class Directory
     {
         if (GetDirectoryByTitleAndIdOwner(title, user) != null) return false;
         MySqlConnection mySqlConnection = Database.GetConnection();
-        string query = "INSERT INTO `directories` (id, title, idOwner, creationDate) VALUES(@id, @title, @idOwner, @creationDate)";
-        MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
-        mySqlCommand.Parameters.AddWithValue("@id", 0);
-        mySqlCommand.Parameters.AddWithValue("@title", title);
-        mySqlCommand.Parameters.AddWithValue("@idOwner", user.Id);
-        mySqlCommand.Parameters.AddWithValue("@creationDate", Database.GetCurrentDate());
-        bool result = mySqlCommand.ExecuteNonQuery() > 0;
+
+        string queryMax = "SELECT COALESCE(MAX(id), 0) FROM directories";
+        MySqlCommand mySqlCommandMax = new MySqlCommand(queryMax, mySqlConnection);
+        mySqlCommandMax.ExecuteNonQuery();
+        int resultMax = 0;
+        using (MySqlDataReader reader = mySqlCommandMax.ExecuteReader())
+        {
+            while (reader.Read())
+                resultMax = Int32.Parse($"{reader["COALESCE(MAX(id), 0)"]}");
+        }
+        string queryCreate = "INSERT INTO `directories` (id, title, idOwner, creationDate) VALUES(@id, @title, @idOwner, @creationDate)";
+        MySqlCommand mySqlCommandCreate = new MySqlCommand(queryCreate, mySqlConnection);
+        mySqlCommandCreate.Parameters.AddWithValue("@id", resultMax + 1);
+        mySqlCommandCreate.Parameters.AddWithValue("@title", title);
+        mySqlCommandCreate.Parameters.AddWithValue("@idOwner", user.Id);
+        mySqlCommandCreate.Parameters.AddWithValue("@creationDate", Database.GetCurrentDate());
+        bool result = mySqlCommandCreate.ExecuteNonQuery() > 0;
         mySqlConnection.Close();
         return result;
     }
