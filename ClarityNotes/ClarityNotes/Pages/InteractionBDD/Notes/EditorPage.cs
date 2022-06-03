@@ -11,62 +11,89 @@ namespace ClarityNotes
     {
         Note note;
         User user;
-        SfRichTextEditor editor;
+        SfRichTextEditor editorWindows;
+        Editor editorAndroid;
 
         public EditorPage(Note note, User user)
         {
             this.note = note;
             this.user = user;
 
-            Button traduce = new Button
+
+            if (Device.RuntimePlatform == Device.UWP)
             {
-                Text = "traduire",
-                HeightRequest = 50,
-                WidthRequest = 70
-            };
+                Button traduce = new Button
+                {
+                    Text = "traduire",
+                    HeightRequest = 50,
+                    WidthRequest = 70
+                };
 
-            traduce.Clicked += OnTraduceClicked;
+                traduce.Clicked += OnTraduceClicked;
 
-            Button QRCode = new Button
+                Button QRCode = new Button
+                {
+                    Text = "Obtenir un QRCode",
+
+                    HeightRequest = 50,
+                    WidthRequest = 100,
+                };
+
+                QRCode.Clicked += OnQRCodeGeneratorClicked;
+
+                editorWindows = new SfRichTextEditor();
+                editorWindows.AutoSize = AutoSizeOption.TextChanges;
+                editorWindows.VerticalOptions = LayoutOptions.CenterAndExpand;
+                editorWindows.HtmlText = note.Content;
+                editorWindows.HeightRequest = 1000;
+                editorWindows.PlaceHolder = "Votre note";
+
+                if (editorWindows.ToolbarItems.Count == 1)
+                    editorWindows.ToolbarItems.Add(traduce);
+                else
+                    editorWindows.ToolbarItems[1] = traduce;
+
+                if (editorWindows.ToolbarItems.Count == 1)
+                    editorWindows.ToolbarItems.Add(QRCode);
+                else
+                    editorWindows.ToolbarItems[1] = QRCode;
+
+                editorWindows.TextChanged += OnTextChangedWindows;
+
+                StackLayout stack = new StackLayout();
+                stack.VerticalOptions = LayoutOptions.Start;
+                stack.Children.Add(editorWindows);
+                this.Content = stack;
+            }
+            else 
             {
-                Text = "Obtenir un QRCode",
+                editorAndroid = new Editor();
+                editorAndroid.Text = note.Content;
+                editorAndroid.TextChanged += OnTextChangedAndroid;
+                editorAndroid.AutoSize = EditorAutoSizeOption.TextChanges;
 
-                HeightRequest = 50,
-                WidthRequest = 100,
-            };
+                StackLayout stack = new StackLayout();
+                stack.VerticalOptions = LayoutOptions.Start;
+                stack.Children.Add(editorAndroid);
+                this.Content = stack;
 
-            QRCode.Clicked += OnQRCodeGeneratorClicked;
-
-            editor = new SfRichTextEditor();
-            editor.AutoSize = AutoSizeOption.TextChanges;
-            editor.VerticalOptions = LayoutOptions.CenterAndExpand;
-            editor.HtmlText = note.Content;
-            editor.HeightRequest = 1000;
-            editor.PlaceHolder = "Votre note";
-
-            if (editor.ToolbarItems.Count == 1)
-                editor.ToolbarItems.Add(traduce);
-            else
-                editor.ToolbarItems[1] = traduce;
-
-            if (editor.ToolbarItems.Count == 1)
-                editor.ToolbarItems.Add(QRCode);
-            else
-                editor.ToolbarItems[1] = QRCode;
-
-            editor.TextChanged += OnTextChanged;
-
-            StackLayout stack = new StackLayout();
-            stack.VerticalOptions = LayoutOptions.Start;
-            stack.Children.Add(editor);
+            }
             this.Title = Directory.GetDirectoryByIdAndIdOwner(note.IdDirectory, user).Title + "/" + note.Title;
-            this.Content = stack;
+            
         }
 
-        public void OnTextChanged(object sender, Syncfusion.XForms.RichTextEditor.TextChangedEventArgs e)
+        public void OnTextChangedWindows(object sender, Syncfusion.XForms.RichTextEditor.TextChangedEventArgs e)
         {
-            note.Update(editor.HtmlText, user);
-            string text = e.Text;
+            note.Update(editorWindows.HtmlText, user);
+            string text = editorWindows.Text;
+            note.Update(text, user);
+        }
+
+        public void OnTextChangedAndroid(object sender,EventArgs e)
+        {
+            note.Update(editorAndroid.Text, user);
+            string text = editorAndroid.Text;
+            note.Update(text,user);
         }
 
         public void OnQRCodeGeneratorClicked(object sender, EventArgs e)
@@ -78,10 +105,17 @@ namespace ClarityNotes
         public void OnTraduceClicked(object sender, EventArgs e)
         {
             string route = "/translate?api-version=3.0&to=de&to=it&to=ja&to=th";
-            string text = editor.Text;
+            string text;
+            if (editorAndroid == null)
+                text = editorWindows.Text;
+            else
+                text = editorAndroid.Text;
             var rep = Traductor.Traduce(Traductor.SubscriptionKey, Traductor.Endpoint, route, text);
             rep.Wait();
-            editor.HtmlText = rep.Result;
+            if (editorAndroid == null)
+                editorWindows.HtmlText = rep.Result;
+            else
+                editorAndroid.Text = rep.Result;
         }
     }
 }       
