@@ -94,17 +94,27 @@ namespace ClarityNotes
                 stackListNotes.Children.Clear();
                 currentDirectory = directories[0].Id;
                 Note[] notes = Note.GetNotesByIdDirectory(directories[0].Id);
-                foreach (Note note in notes)
+                if (notes.Length == 0)
                 {
-                    Button temp = new Button();
-                    temp.FontSize = fontsize;
-                    temp.CornerRadius = 25;
-                    temp.BorderWidth = 1;
-                    temp.Text = note.Title;
-                    //temp.BackgroundColor = Color.White;
-                    temp.FontAttributes = FontAttributes.Italic;
-                    temp.Clicked += OnEditorClicked;
-                    stackListNotes.Children.Add(temp);
+                    Label pleaseAddChapter = new Label();
+                    pleaseAddChapter.Text = "Vous n'avez pas encore de notes. Vous pouvez en créer un en utilisant le bouton ci-dessous";
+                    pleaseAddChapter.Padding = 100;
+                    stackNotes.Children.Add(pleaseAddChapter);
+                }
+                else
+                {
+                    foreach (Note note in notes)
+                    {
+                        Button temp = new Button();
+                        temp.FontSize = fontsize;
+                        temp.CornerRadius = 25;
+                        temp.BorderWidth = 1;
+                        temp.Text = note.Title;
+                        //temp.BackgroundColor = Color.White;
+                        temp.FontAttributes = FontAttributes.Italic;
+                        temp.Clicked += OnEditorClicked;
+                        stackListNotes.Children.Add(temp);
+                    }
                 }
 
                 ScrollView scrollNotes = new ScrollView();
@@ -153,6 +163,7 @@ namespace ClarityNotes
             {
                 Label pleaseAddChapter = new Label();
                 pleaseAddChapter.Text = "Vous n'avez pas encore de chapitre. Vous pouvez en créer un en utilisant le bouton +";
+                pleaseAddChapter.Padding = 100;
                 stackNotes.Children.Add(pleaseAddChapter);
             }
 
@@ -166,12 +177,6 @@ namespace ClarityNotes
 
             this.Content = mainContent;
             this.BackgroundColor = user.ColorTheme;
-        }
-
-        private void test(object sender, EventArgs e)
-        {
-            var page = new SettingsPage(user);
-            Navigation.PushAsync(page);
         }
 
         private void OnEditorClicked(object sender, EventArgs e)
@@ -195,18 +200,28 @@ namespace ClarityNotes
             stackListNotes.VerticalOptions = LayoutOptions.CenterAndExpand;
             stackListNotes.HorizontalOptions = LayoutOptions.FillAndExpand;
             stackListNotes.Children.Clear();
-            foreach (Note note in notes)
-            {
-                Button temp = new Button();
-                temp.FontSize = fontsize;
-                temp.BorderWidth = 1;
-                temp.Text = note.Title;
-                temp.CornerRadius = 25;
-                temp.FontAttributes = FontAttributes.Italic;
-                temp.Clicked += OnEditorClicked;
-                stackListNotes.Children.Add(temp);
-            }
 
+            if (notes.Length == 0)
+            {
+                Label pleaseAddChapter = new Label();
+                pleaseAddChapter.Text = "Vous n'avez pas encore de notes. Vous pouvez en créer un en utilisant le bouton ci-dessous";
+                pleaseAddChapter.Padding = 100;
+                stackNotes.Children.Add(pleaseAddChapter);
+            }
+            else
+            {
+                foreach (Note note in notes)
+                {
+                    Button temp = new Button();
+                    temp.FontSize = fontsize;
+                    temp.BorderWidth = 1;
+                    temp.Text = note.Title;
+                    temp.CornerRadius = 25;
+                    temp.FontAttributes = FontAttributes.Italic;
+                    temp.Clicked += OnEditorClicked;
+                    stackListNotes.Children.Add(temp);
+                }
+            }
             ScrollView scrollNotes = new ScrollView();
             scrollNotes.Content = stackListNotes;
             stackNotes.Children.Add(scrollNotes);

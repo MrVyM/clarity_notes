@@ -140,7 +140,7 @@ namespace ClarityNotes
             if (result)
             {
                 DisplayAlert("Inscription effectuée", "Votre compte a été crée avec succès.", "OK");
-                Navigation.PopAsync();
+                Application.Current.MainPage = new NavigationPage(new LoginPage());
             }
             else
             {

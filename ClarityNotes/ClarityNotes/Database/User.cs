@@ -77,7 +77,8 @@ public class User
 
     public static bool CreateUser(string email, string username, string password)
     {
-        foreach (User user in GetAllUsers()) 
+        var test = GetAllUsers();
+        foreach (User user in  test) 
             if (user.Username == username || user.Email == email) return false;
         MySqlConnection mySqlConnection = Database.GetConnection();
 
