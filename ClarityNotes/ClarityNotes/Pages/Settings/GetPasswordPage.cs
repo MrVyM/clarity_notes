@@ -23,7 +23,7 @@ namespace ClarityNotes
 
             Frame frame = new Frame();
             frame.HasShadow = true;
-            frame.BackgroundColor = Color.FromHex("94c6ff");
+            frame.BackgroundColor = Color.White;
             frame.HorizontalOptions = LayoutOptions.Center;
 
             StackLayout framStack = new StackLayout();
@@ -39,7 +39,6 @@ namespace ClarityNotes
 
             Button submit = new Button();
             submit.HorizontalOptions = LayoutOptions.Center;
-            submit.BackgroundColor = Color.FromHex("94c6ff");
             submit.Margin = 20;
             submit.VerticalOptions = LayoutOptions.Center;
 
@@ -76,8 +75,11 @@ namespace ClarityNotes
         {
             string temp = passwordEntry.Text;
             passwordEntry.Text = "";
-            if (user.HashPassword != temp)
-                Navigation.PopToRootAsync();
+            if (user.HashPassword != User.GetHashedPassword(temp))
+            {
+                DisplayAlert("Erreur de mot de passe", "Nous vous avons déconnecté par mesure de précaution", "OK");
+                Application.Current.MainPage = new NavigationPage(new LoginPage());
+            }
             else
             {
                 var page = new NewMailPage(user);
@@ -92,7 +94,7 @@ namespace ClarityNotes
             if (user.HashPassword != User.GetHashedPassword(temp))
             {
                 DisplayAlert("Erreur de mot de passe", "Nous vous avons déconnecté par mesure de précaution", "OK");
-                Navigation.PopToRootAsync();
+                Application.Current.MainPage = new NavigationPage(new LoginPage());
             }
             else
             {
@@ -107,7 +109,7 @@ namespace ClarityNotes
             string temp = passwordEntry.Text;
             passwordEntry.Text = "";
             if (user.HashPassword != User.GetHashedPassword(temp))
-                Navigation.PopToRootAsync();
+                Application.Current.MainPage = new NavigationPage(new LoginPage());
             else
             {
                 var page = new NewNamePage(user);
@@ -119,7 +121,8 @@ namespace ClarityNotes
         private void OnDelete(object sender, EventArgs e)
         {
             User.DeleteUser(user.Id);
-            Navigation.PopToRootAsync();
+            var page = new RootPage(user);
+            NavigationPage.SetHasNavigationBar(page, false);
         }
 
     }

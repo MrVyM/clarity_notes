@@ -115,10 +115,8 @@ namespace ClarityNotes
             }
             else
             {
-                Navigation.PopAsync();
                 var page = new RootPage(user);
                 NavigationPage.SetHasNavigationBar(page, false);
-                Navigation.PushAsync(page);
             }
         }
     }

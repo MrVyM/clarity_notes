@@ -17,6 +17,7 @@ namespace ClarityNotes
         public RootPage(User user)
         {
             this.user = user;
+            Application.Current.MainPage = new NavigationPage(this);
 
             if (Device.RuntimePlatform == Device.UWP)
                 divisor = 0.8;

@@ -107,7 +107,8 @@ namespace ClarityNotes
 
         private void OnLogOut(Object sender, EventArgs e)
         {
-            Navigation.PopToRootAsync();
+            Application.Current.MainPage = new NavigationPage(new LoginPage());
+
         }
     }
 }

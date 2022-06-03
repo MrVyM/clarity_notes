@@ -7,7 +7,6 @@ namespace ClarityNotes
     {
         private User user;
         private Picker picker;
-
         public ThemeChangePage(User user)
         {
             this.user = user;
@@ -49,7 +48,7 @@ namespace ClarityNotes
             stackLayout.Children.Add(questionLabel);
             stackLayout.Children.Add(picker);
 
-            mainContent.Children.Add(new Frame() { Margin = 25, Content = stackLayout });
+            mainContent.Children.Add(new Frame() { Margin = 25,BackgroundColor = Color.White, Content = stackLayout });
             mainContent.Children.Add(submit);
             this.Content = mainContent;
             this.BackgroundColor = user.ColorTheme;
@@ -81,8 +80,6 @@ namespace ClarityNotes
             }
             var page = new RootPage(user);
             NavigationPage.SetHasNavigationBar(page, false);
-            Navigation.PushAsync(page);
-            Navigation.RemovePage(this);
         }
     }
 }

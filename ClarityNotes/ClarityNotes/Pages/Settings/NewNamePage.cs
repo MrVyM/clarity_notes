@@ -22,14 +22,14 @@ namespace ClarityNotes
 
             Frame frame = new Frame();
             frame.HasShadow = true;
-            frame.BackgroundColor = Color.FromHex("94c6ff");
+            frame.BackgroundColor = Color.White;
             frame.HorizontalOptions = LayoutOptions.Center;
 
             StackLayout framStack = new StackLayout();
 
             Label label = new Label();
             label.FontSize = 16;
-            label.Text = "Veuillez entrer votre nouveau nom d'utilisateur";
+            label.Text = $"Veuillez entrer votre nouveau nom d'utilisateur\n\nVotre ancien nom : {user.Username}";
             framStack.Children.Add(label);
 
             nameEntry = new Entry();
@@ -38,7 +38,6 @@ namespace ClarityNotes
             Button submit = new Button();
             submit.HorizontalOptions = LayoutOptions.Center;
             submit.VerticalOptions = LayoutOptions.Center;
-            submit.BackgroundColor = Color.FromHex("94c6ff");
             submit.Clicked += OnSubmitClicked;
             submit.Text = "Valider";
 
@@ -53,7 +52,8 @@ namespace ClarityNotes
         private void OnSubmitClicked(object sender, EventArgs e)
         {
             User.Change(user.Id, "username", nameEntry.Text);
-            Navigation.PopToRootAsync();
+            var page = new RootPage(user);
+            NavigationPage.SetHasNavigationBar(page, false);
         }
     }
 }

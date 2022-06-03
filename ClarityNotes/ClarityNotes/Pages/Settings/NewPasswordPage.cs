@@ -25,7 +25,7 @@ namespace ClarityNotes
 
             Frame frame = new Frame();
             frame.HasShadow = true;
-            frame.BackgroundColor = Color.FromHex("94c6ff");
+            frame.BackgroundColor = Color.White;
             frame.HorizontalOptions = LayoutOptions.Center;
             StackLayout framStack = new StackLayout();
 
@@ -54,7 +54,6 @@ namespace ClarityNotes
             submit.VerticalOptions = LayoutOptions.Center;
             submit.Margin = 20;
             submit.IsEnabled = false;
-            submit.BackgroundColor = Color.FromHex("94c6ff");
             submit.Clicked += OnSubmitClicked;
             submit.Text = "Valider";
 
@@ -87,8 +86,8 @@ namespace ClarityNotes
 
         private void OnSubmitClicked(object sender, EventArgs e)
         {
-            User.Change(user.Id, "password", passwordEntry.Text);
-            Navigation.PopToRootAsync();
+            User.Change(user.Id, "hashPassword", User.GetHashedPassword(passwordEntry.Text));
+            Application.Current.MainPage = new NavigationPage(new LoginPage());
         }
     }
 }

@@ -63,8 +63,6 @@ namespace ClarityNotes
             {
                 var page = new RootPage(user);
                 NavigationPage.SetHasNavigationBar(page, false);
-                Navigation.PushAsync(page);
-                Navigation.RemovePage(this);
             }
         }
     }
