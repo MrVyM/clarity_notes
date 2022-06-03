@@ -123,6 +123,11 @@ namespace ClarityNotes
 
         private void OnCreateClicked(object sender, EventArgs e)
         {
+            if (usernameEntry.Text.Contains("@")){
+                DisplayAlert("Inscription échouée", "Le nom d'utilisateur n'est pas correcte (il ne doit pas contenir de @).", "OK");
+                usernameEntry.Text = "";
+                return;
+            }
             Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             Match match = regex.Match(emailEntry.Text.ToLower());
             if (!match.Success)
