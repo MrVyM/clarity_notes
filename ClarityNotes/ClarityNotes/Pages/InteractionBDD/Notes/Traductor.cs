@@ -82,16 +82,7 @@ namespace ClarityNotes
                 TranslationResult[] deserializedOutput = JsonConvert.DeserializeObject<TranslationResult[]>(result);
                 // Iterate over the deserialized results.
 
-                foreach (TranslationResult o in deserializedOutput)
-                {
-                    // Print the detected input languge and confidence score.
-                    textResult += string.Format("Detected input language: {0}\n\n", o.DetectedLanguage.Language);
-                    // Iterate over the results and print each translation.
-                    foreach (Translation t in o.Translations)
-                    {
-                        textResult += string.Format("Translated to {0}: {1}\n", t.To, t.Text);
-                    }
-                }
+                textResult += deserializedOutput[0].Translations[0].Text;
             }
             return textResult;
         }

@@ -58,7 +58,9 @@ namespace ClarityNotes
         {
             string route = "/translate?api-version=3.0&to=de&to=it&to=ja&to=th";
             string text = editor.HtmlText;
-            editor.HtmlText = Traductor.Traduce(Traductor.SubscriptionKey, Traductor.Endpoint, route, text).ToString();
+            var rep = Traductor.Traduce(Traductor.SubscriptionKey, Traductor.Endpoint, route, text);
+            rep.Wait();
+            editor.HtmlText = rep.Result;
         }
     }
 }       

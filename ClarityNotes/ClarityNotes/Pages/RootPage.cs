@@ -97,10 +97,10 @@ namespace ClarityNotes
                 {
                     Button temp = new Button();
                     temp.FontSize = fontsize;
-                    temp.BackgroundColor = Color.FromHex("249eed");
                     temp.CornerRadius = 25;
                     temp.BorderWidth = 1;
                     temp.Text = note.Title;
+                    temp.BackgroundColor = Color.White;
                     temp.FontAttributes = FontAttributes.Italic;
                     temp.Clicked += OnEditorClicked;
                     stackListNotes.Children.Add(temp);
@@ -198,7 +198,6 @@ namespace ClarityNotes
             {
                 Button temp = new Button();
                 temp.FontSize = fontsize;
-                temp.BackgroundColor = Color.FromHex("249eed");
                 temp.BorderWidth = 1;
                 temp.Text = note.Title;
                 temp.CornerRadius = 25;
