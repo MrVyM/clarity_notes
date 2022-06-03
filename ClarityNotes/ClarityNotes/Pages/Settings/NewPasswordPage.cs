@@ -87,6 +87,7 @@ namespace ClarityNotes
 
         private void OnSubmitClicked(object sender, EventArgs e)
         {
+            if (passwordEntry.Text == null) return ;
             User.Change(user.Id, "hashPassword", User.GetHashedPassword(passwordEntry.Text));
             Application.Current.MainPage = new NavigationPage(new LoginPage());
         }

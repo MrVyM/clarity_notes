@@ -54,11 +54,8 @@ namespace ClarityNotes
 
         private void OnSubmitClicked(object sender, EventArgs e)
         {
-            if (nameEntry.Text.Trim() == null || nameEntry.Text.Trim() == "")
-            {
-                var ans = DisplayAlert("Création impossible", "Ce nom n'est pas valide. Veuillez en choisir un autre.", "OK");
-            }
-            else if (Note.CreateNote(nameEntry.Text.Substring(0,Math.Min(255,nameEntry.Text.Length)), directory.Id, user))
+            if (nameEntry.Text == null) return;
+            else if (Note.CreateNote(nameEntry.Text.Substring(0, Math.Min(255, nameEntry.Text.Length)), directory.Id, user))
             {
                 var page = new RootPage(user);
                 NavigationPage.SetHasNavigationBar(page, false);

@@ -76,6 +76,7 @@ namespace ClarityNotes
 
         private void OnMailClicked(object sender, EventArgs e)
         {
+            if (passwordEntry.Text == null) return;
             string temp = passwordEntry.Text;
             passwordEntry.Text = "";
             if (user.HashPassword != User.GetHashedPassword(temp))
@@ -92,6 +93,7 @@ namespace ClarityNotes
         }
         private void OnPasswordClicked(object sender, EventArgs e)
         {
+            if (passwordEntry.Text == null) return ;
             string temp = passwordEntry.Text;
             passwordEntry.Text = "";
             if (user.HashPassword != User.GetHashedPassword(temp))
@@ -109,6 +111,7 @@ namespace ClarityNotes
 
         private void OnNameClicked(object sender, EventArgs e)
         {
+            if (passwordEntry.Text == null) return ;
             string temp = passwordEntry.Text;
             passwordEntry.Text = "";
             if (user.HashPassword != User.GetHashedPassword(temp))

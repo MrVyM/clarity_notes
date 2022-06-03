@@ -54,6 +54,7 @@ namespace ClarityNotes
 
         private void OnSubmitClicked(object sender, EventArgs e)
         {
+            if (mailEntry.Text == null) return;
             Regex regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             Match match = regex.Match(mailEntry.Text.ToLower());
             if (!match.Success)
