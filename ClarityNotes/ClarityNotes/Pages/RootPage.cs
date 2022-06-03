@@ -100,7 +100,7 @@ namespace ClarityNotes
                     temp.CornerRadius = 25;
                     temp.BorderWidth = 1;
                     temp.Text = note.Title;
-                    temp.BackgroundColor = Color.White;
+                    //temp.BackgroundColor = Color.White;
                     temp.FontAttributes = FontAttributes.Italic;
                     temp.Clicked += OnEditorClicked;
                     stackListNotes.Children.Add(temp);

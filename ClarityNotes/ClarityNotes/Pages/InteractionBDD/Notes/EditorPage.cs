@@ -57,7 +57,7 @@ namespace ClarityNotes
         public void OnTraduceClicked(object sender, EventArgs e)
         {
             string route = "/translate?api-version=3.0&to=de&to=it&to=ja&to=th";
-            string text = editor.HtmlText;
+            string text = editor.Text;
             var rep = Traductor.Traduce(Traductor.SubscriptionKey, Traductor.Endpoint, route, text);
             rep.Wait();
             editor.HtmlText = rep.Result;
