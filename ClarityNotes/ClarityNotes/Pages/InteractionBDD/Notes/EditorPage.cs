@@ -27,6 +27,16 @@ namespace ClarityNotes
 
             traduce.Clicked += OnTraduceClicked;
 
+            Button QRCode = new Button
+            {
+                Text = "Obtenir un QRCode",
+
+                HeightRequest = 50,
+                WidthRequest = 100,
+            };
+
+            QRCode.Clicked += OnQRCodeGeneratorClicked;
+
             editor = new SfRichTextEditor();
             editor.AutoSize = AutoSizeOption.TextChanges;
             editor.VerticalOptions = LayoutOptions.CenterAndExpand;
@@ -38,6 +48,11 @@ namespace ClarityNotes
                 editor.ToolbarItems.Add(traduce);
             else
                 editor.ToolbarItems[1] = traduce;
+
+            if (editor.ToolbarItems.Count == 1)
+                editor.ToolbarItems.Add(QRCode);
+            else
+                editor.ToolbarItems[1] = QRCode;
 
             editor.TextChanged += OnTextChanged;
 
@@ -54,6 +69,12 @@ namespace ClarityNotes
             string text = e.Text;
         }
 
+        public void OnQRCodeGeneratorClicked(object sender, EventArgs e)
+        {
+            var QRpage = new QRCodeGeneratorPage(user, note);
+            NavigationPage.SetHasNavigationBar(QRpage, false);
+            Navigation.PushAsync(QRpage);
+        }
         public void OnTraduceClicked(object sender, EventArgs e)
         {
             string route = "/translate?api-version=3.0&to=de&to=it&to=ja&to=th";
