@@ -27,7 +27,7 @@ namespace ClarityNotes
             passwordChange.Text = "Changer mon mot de passe";
             passwordChange.FontSize = fontSize;
             passwordChange.Clicked += OnPasswordChange;             
-            passwordChange.BackgroundColor = Color.FromHex("249eed");
+            passwordChange.BackgroundColor = Color.White;
             passwordChange.CornerRadius = 25;
             passwordChange.Margin = 20;
             mainContent.Children.Add(passwordChange);
@@ -36,7 +36,7 @@ namespace ClarityNotes
             nameChange.Text = "Changer mon nom d'utilisateur";
             nameChange.Clicked += OnNameChange;
             nameChange.FontSize = fontSize;
-            nameChange.BackgroundColor = Color.FromHex("249eed");
+            nameChange.BackgroundColor = Color.White;
             nameChange.CornerRadius = 25;
             nameChange.Margin = 20;
             mainContent.Children.Add(nameChange);
@@ -44,7 +44,7 @@ namespace ClarityNotes
             Button mailChange = new Button();
             mailChange.Text = "Changer mon mail";
             mailChange.FontSize = fontSize;
-            mailChange.BackgroundColor = Color.FromHex("249eed");
+            mailChange.BackgroundColor = Color.White;
             mailChange.CornerRadius = 25;
             mailChange.Margin = 20;
             mailChange.Clicked += OnMailChange;
@@ -53,7 +53,7 @@ namespace ClarityNotes
             Button themeChange = new Button();
             themeChange.Text = "Changer de thème";
             themeChange.FontSize = fontSize;
-            themeChange.BackgroundColor = Color.FromHex("249eed");
+            themeChange.BackgroundColor = Color.White;
             themeChange.CornerRadius = 25;
             themeChange.Margin = 20;
             themeChange.Clicked += OnThemeChange;
@@ -61,7 +61,7 @@ namespace ClarityNotes
 
             Button logOut = new Button();
             logOut.Text = "Déconnexion";
-            logOut.BackgroundColor = Color.FromHex("249eed");
+            logOut.BackgroundColor = Color.White;
             logOut.CornerRadius = 25;
             logOut.Margin = 20;
             logOut.FontSize = fontSize;
@@ -72,7 +72,7 @@ namespace ClarityNotes
             deleteAccount.Text = "Supprimer mon compte";
             deleteAccount.Clicked += OnDelete;
             deleteAccount.FontSize = fontSize;
-            deleteAccount.BackgroundColor = Color.FromHex("249eed");
+            deleteAccount.BackgroundColor = Color.White;
             deleteAccount.CornerRadius = 25;
             deleteAccount.Margin = 20;
             mainContent.Children.Add(deleteAccount);

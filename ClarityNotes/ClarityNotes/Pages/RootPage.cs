@@ -97,7 +97,6 @@ namespace ClarityNotes
                 {
                     Button temp = new Button();
                     temp.FontSize = fontsize;
-                    temp.BackgroundColor = Color.FromHex("249eed");
                     temp.CornerRadius = 25;
                     temp.BorderWidth = 1;
                     temp.Text = note.Title;
@@ -198,7 +197,6 @@ namespace ClarityNotes
             {
                 Button temp = new Button();
                 temp.FontSize = fontsize;
-                temp.BackgroundColor = Color.FromHex("249eed");
                 temp.BorderWidth = 1;
                 temp.Text = note.Title;
                 temp.CornerRadius = 25;
