@@ -34,6 +34,7 @@ namespace ClarityNotes
             framStack.Children.Add(label);
 
             mailEntry = new Entry();
+            mailEntry.Completed += OnSubmitClicked;
             framStack.Children.Add(mailEntry);
 
             Button submit = new Button();

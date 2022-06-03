@@ -29,6 +29,7 @@ namespace ClarityNotes
             framStack.Children.Add(label);
 
             nameEntry = new Entry();
+            nameEntry.Completed += OnSubmitClicked;
             framStack.Children.Add(nameEntry);
 
             Button submit = new Button();
@@ -48,9 +49,9 @@ namespace ClarityNotes
 
         private void OnSubmitClicked(object sender, EventArgs e)
         {
-            if (Directory.CreateDirectory(nameEntry.Text, user))
+            if (Directory.CreateDirectory(nameEntry.Text.Substring(0, Math.Min(255, nameEntry.Text.Length)), user))
             {   
-                var page = new RootPage(user);
+                var page = new RootPage(user); 
                 NavigationPage.SetHasNavigationBar(page, false);
             }
             else

@@ -29,6 +29,7 @@ namespace ClarityNotes
 
             password = new Entry();
             password.IsPassword = true;
+            password.Completed += OnDelete;
             framStack.Children.Add(password);
 
             frame.Content = framStack;

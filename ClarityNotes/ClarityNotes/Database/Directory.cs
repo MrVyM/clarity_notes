@@ -96,7 +96,7 @@ public class Directory
         mySqlCommandCreate.Parameters.AddWithValue("@title", title);
         mySqlCommandCreate.Parameters.AddWithValue("@idOwner", user.Id);
         mySqlCommandCreate.Parameters.AddWithValue("@creationDate", Database.GetCurrentDate());
-        bool result = mySqlCommandCreate.ExecuteNonQuery() > 0;
+                                                                         bool result = mySqlCommandCreate.ExecuteNonQuery() > 0;
         mySqlConnection.Close();
         return result;
     }

@@ -53,6 +53,7 @@ namespace ClarityNotes
             mdpStack.Children.Add(mdpLabel);
 
             passwordEntry = new Entry();
+            passwordEntry.Completed += OnConnexionClicked;
             passwordEntry.IsPassword = true;
             mdpStack.Children.Add(passwordEntry);
 

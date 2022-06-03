@@ -62,7 +62,8 @@ namespace ClarityNotes
             StackLayout passStack = new StackLayout();
 
             Label passWordLabel = new Label();
-            passWordLabel.Text = "Choisissez votre mot de passe :";
+            passWordLabel.Text = "Choisissez votre mot de passe :\n\n" +
+            "Minimum 8 caractères, au moins une majuscule, une minuscule, un nombre et un caractère spécial.";
             passStack.Children.Add(passWordLabel);
 
             passwordEntry = new Entry();

@@ -47,6 +47,7 @@ namespace ClarityNotes
             passwordEntryCompare = new Entry();
             passwordEntryCompare.IsPassword = true;
             passwordEntryCompare.TextChanged += OnCompare;
+            passwordEntryCompare.Completed += OnSubmitClicked;
             framStack.Children.Add(passwordEntryCompare);
 
             submit = new Button();

@@ -33,6 +33,7 @@ namespace ClarityNotes
             framStack.Children.Add(label);
 
             nameEntry = new Entry();
+            nameEntry.Completed += OnSubmitClicked;
             framStack.Children.Add(nameEntry);
 
             Button submit = new Button();

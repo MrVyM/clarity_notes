@@ -138,7 +138,8 @@ public class User
         MySqlConnection mySqlConnection = Database.GetConnection();
         string query = "UPDATE `usersettings` SET colorTheme = @colorTheme WHERE userId = @userId";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
-        mySqlCommand.Parameters.AddWithValue("@colorTheme", color.ToHex());
+        var t = color.ToHex();
+        mySqlCommand.Parameters.AddWithValue("@colorTheme", t);
         mySqlCommand.Parameters.AddWithValue("@userId", id);
         mySqlCommand.ExecuteNonQuery();
         mySqlConnection.Close();

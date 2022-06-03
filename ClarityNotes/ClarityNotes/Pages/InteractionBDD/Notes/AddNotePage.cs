@@ -34,6 +34,7 @@ namespace ClarityNotes
             framStack.Children.Add(label);
 
             nameEntry = new Entry();
+            nameEntry.Completed += OnSubmitClicked;
             framStack.Children.Add(nameEntry);
 
             Button submit = new Button();
@@ -57,7 +58,7 @@ namespace ClarityNotes
             {
                 var ans = DisplayAlert("Création impossible", "Ce nom n'est pas valide. Veuillez en choisir un autre.", "OK");
             }
-            else if (Note.CreateNote(nameEntry.Text, directory.Id, user))
+            else if (Note.CreateNote(nameEntry.Text.Substring(0,Math.Min(255,nameEntry.Text.Length)), directory.Id, user))
             {
                 var page = new RootPage(user);
                 NavigationPage.SetHasNavigationBar(page, false);

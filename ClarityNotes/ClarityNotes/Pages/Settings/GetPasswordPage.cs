@@ -46,11 +46,14 @@ namespace ClarityNotes
             {
                 case "mail":
                     submit.Clicked += OnMailClicked;
+                    passwordEntry.Completed += OnMailClicked;
                     break;
                 case "password":
                     submit.Clicked += OnPasswordClicked;
+                    passwordEntry.Completed += OnPasswordClicked;
                     break;
                 case "name":
+                    passwordEntry.Completed += OnNameClicked;
                     submit.Clicked += OnNameClicked;
                     break;
                 default : 
