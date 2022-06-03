@@ -101,6 +101,27 @@ public class Directory
         return result;
     }
 
+    public static bool ShareDirectory(int idDirectory, User owner, string rep)
+    {
+        User shared;
+        if (rep.Contains("@"))
+            shared = User.GetUserByMail(rep);
+        else 
+            shared = User.GetUserByUsername(rep);
+        if (shared == null) return false;
+
+        string queryCreate = "INSERT INTO `directories` (id, title, idOwner, creationDate) VALUES(@id, @title, @idOwner, @creationDate)";
+        MySqlConnection mySqlConnection = Database.GetConnection();
+        MySqlCommand mySqlCommandCreate = new MySqlCommand(queryCreate, mySqlConnection);
+        mySqlCommandCreate.Parameters.AddWithValue("@id", idDirectory);
+        mySqlCommandCreate.Parameters.AddWithValue("@title", Directory.GetDirectoryByIdAndIdOwner(idDirectory,owner).Title);
+        mySqlCommandCreate.Parameters.AddWithValue("@idOwner", shared.Id);
+        mySqlCommandCreate.Parameters.AddWithValue("@creationDate", Database.GetCurrentDate());
+        mySqlCommandCreate.ExecuteNonQuery();
+        mySqlConnection.Close();
+        return true;
+    }
+
     public static bool DeleteDirectory(int id, User user)
     {
         MySqlConnection mySqlConnection = Database.GetConnection();

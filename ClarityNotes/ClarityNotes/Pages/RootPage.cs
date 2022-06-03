@@ -53,6 +53,7 @@ namespace ClarityNotes
                 buttonChapter.Text = directory.Title;
                 verticalColumn.Children.Add(buttonChapter);
             }
+
             StackLayout AddLayout = new StackLayout();
             AddLayout.HorizontalOptions = LayoutOptions.Center;
             AddLayout.VerticalOptions = LayoutOptions.EndAndExpand;
@@ -121,10 +122,13 @@ namespace ClarityNotes
                 scrollNotes.Content = stackListNotes;
                 stackNotes.Children.Add(scrollNotes);
 
+                StackLayout allButtonList = new StackLayout();
+                allButtonList.VerticalOptions = LayoutOptions.EndAndExpand;
+                allButtonList.Margin = 20 / divisor;
+
                 StackLayout buttonListNotes = new StackLayout();
                 buttonListNotes.Orientation = StackOrientation.Horizontal;
-                buttonListNotes.VerticalOptions = LayoutOptions.EndAndExpand;
-                buttonListNotes.Margin = 20/divisor;
+                
 
                 Button AddNote = new Button();
                 AddNote.VerticalOptions = LayoutOptions.EndAndExpand;
@@ -144,10 +148,23 @@ namespace ClarityNotes
                 removeNote.BackgroundColor = Color.White;
                 removeNote.Clicked += OnRemoveNotePageCliked;
 
+                buttonListNotes.Children.Add(removeNote);
+
+                allButtonList.Children.Add(buttonListNotes);
+
+                Button share = new Button();
+                share.Text = "Partager";
+                share.BackgroundColor = Color.White;
+                share.Clicked += OnShareClicked;
+                share.FontSize = fontsize;
+
+                allButtonList.Children.Add(share);
+
                 if (Device.RuntimePlatform == Device.UWP)
                 {
                     AddNote.Text = "Ajouter une note";
                     removeNote.Text = "Retirer une note";
+                    share.Text = "Partager ce chapitre";
                 }
                
 
@@ -155,9 +172,9 @@ namespace ClarityNotes
                     removeNote.IsEnabled = false;
                 }
 
-                buttonListNotes.Children.Add(removeNote);
+                
 
-                stackNotes.Children.Add(buttonListNotes);
+                stackNotes.Children.Add(allButtonList);
             }
             else
             {
@@ -186,10 +203,11 @@ namespace ClarityNotes
             Navigation.PushAsync(page);
         }
 
-        public void OnTraduceCliked(object sender, EventArgs e)
+        public void OnShareClicked(object sender, EventArgs e)
         {
-            
+            Navigation.PushAsync(new ShareChapterPage(user, currentDirectory));
         }
+
         private void OnNoteClicked(object sender, EventArgs e)
         {
             stackNotes.Children.Clear();

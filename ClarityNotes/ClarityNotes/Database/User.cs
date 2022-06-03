@@ -66,12 +66,13 @@ public class User
 
     public static void Change(int id, string field, string value)
     {
+          
         MySqlConnection mySqlConnection = Database.GetConnection();
         string query = "UPDATE `users` SET " + field + " = @value WHERE id = @id";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
         mySqlCommand.Parameters.AddWithValue("@value", value);
         mySqlCommand.Parameters.AddWithValue("@id", id);
-        mySqlCommand.ExecuteNonQuery();
+        mySqlCommand.ExecuteNonQuery(); 
         mySqlConnection.Close();
     }
 
@@ -112,6 +113,20 @@ public class User
     {
         foreach (User user in GetAllUsers()) 
             if (user.Id == id) return user;
+        return null;
+    }
+
+    public static User GetUserByMail(string mail)
+    {
+        foreach (User user in GetAllUsers())
+            if (user.Email == mail) return user;
+        return null;
+    }
+
+    public static User GetUserByUsername(string name)
+    {
+        foreach (User user in GetAllUsers())
+            if (user.Username == name) return user;
         return null;
     }
 
