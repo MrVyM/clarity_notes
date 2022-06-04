@@ -24,7 +24,7 @@ namespace ClarityNotes
             {
                 Button traduce = new Button
                 {
-                    Text = "traduire",
+                    Text = "Traduire",
                     HeightRequest = 50,
                     WidthRequest = 70
                 };
@@ -33,10 +33,10 @@ namespace ClarityNotes
 
                 Button QRCode = new Button
                 {
-                    Text = "Obtenir un QRCode",
+                    Text = "Obtenir un QR Code",
 
                     HeightRequest = 50,
-                    WidthRequest = 100,
+                    WidthRequest = 150,
                 };
 
                 QRCode.Clicked += OnQRCodeGeneratorClicked;
@@ -49,14 +49,15 @@ namespace ClarityNotes
                 editorWindows.PlaceHolder = "Votre note";
 
                 if (editorWindows.ToolbarItems.Count == 1)
-                    editorWindows.ToolbarItems.Add(traduce);
-                else
-                    editorWindows.ToolbarItems[1] = traduce;
-
-                if (editorWindows.ToolbarItems.Count == 1)
+                {
                     editorWindows.ToolbarItems.Add(QRCode);
-                else
-                    editorWindows.ToolbarItems[1] = QRCode;
+                    editorWindows.ToolbarItems.Add(traduce);
+                }
+                else 
+                {
+                    editorWindows.ToolbarItems[1] = traduce;
+                    editorWindows.ToolbarItems[2] = QRCode;
+                }
 
                 editorWindows.TextChanged += OnTextChangedWindows;
 

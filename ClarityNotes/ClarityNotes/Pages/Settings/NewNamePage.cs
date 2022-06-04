@@ -54,6 +54,7 @@ namespace ClarityNotes
         {
             if (nameEntry.Text == null) return ;
             User.Change(user.Id, "username", nameEntry.Text);
+            user.Username = nameEntry.Text;
             var page = new RootPage(user);
             NavigationPage.SetHasNavigationBar(page, false);
         }

@@ -64,12 +64,14 @@ namespace ClarityNotes
             add.FontSize = fontsize;
             add.Clicked += OnAddChapterClicked;
             add.CornerRadius = 10;
+            add.Padding = 15;
             add.Margin = 10/divisor;
             add.BackgroundColor = Color.White;
             AddLayout.Children.Add(add);
 
             Button remove = new Button() { Text = "-" };
             remove.Clicked += OnRemoveClicked;
+            remove.Padding = 15;
             remove.FontSize = fontsize;
             remove.CornerRadius = 10;
             remove.Margin = 10/divisor;
@@ -79,6 +81,7 @@ namespace ClarityNotes
             Button settings = new Button() { Text = "⋮" };
             settings.BackgroundColor = Color.White;
             settings.CornerRadius = 10;
+            settings.Padding = 15;
             settings.Margin = 10/divisor;
             settings.Clicked += OnSettingsPageCliked;
             settings.FontSize = fontsize;
@@ -246,6 +249,10 @@ namespace ClarityNotes
             scrollNotes.Content = stackListNotes;
             stackNotes.Children.Add(scrollNotes);
 
+            StackLayout allButtonList = new StackLayout();
+            allButtonList.VerticalOptions = LayoutOptions.EndAndExpand;
+            allButtonList.Margin = 20 / divisor;
+
             StackLayout buttonListNotes = new StackLayout();
             buttonListNotes.Orientation = StackOrientation.Horizontal;
             buttonListNotes.VerticalOptions = LayoutOptions.EndAndExpand;
@@ -266,6 +273,17 @@ namespace ClarityNotes
             removeNote.BackgroundColor = Color.White;
             removeNote.Clicked += OnRemoveNotePageCliked;
 
+            allButtonList.Children.Add(buttonListNotes);
+
+            Button share = new Button();
+            share.Text = "Partager";
+            share.BackgroundColor = Color.White;
+            share.Clicked += OnShareClicked;
+            share.FontSize = fontsize;
+
+            allButtonList.Children.Add(share);
+
+
             if (Device.RuntimePlatform == Device.UWP)
             {
                 AddNote.Text = "Ajouter une note";
@@ -278,7 +296,7 @@ namespace ClarityNotes
             }
              
             buttonListNotes.Children.Add(removeNote);
-            stackNotes.Children.Add(buttonListNotes);
+            stackNotes.Children.Add(allButtonList);
         }
         private void OnAddNotePageClicked(object sender, EventArgs e)
         {

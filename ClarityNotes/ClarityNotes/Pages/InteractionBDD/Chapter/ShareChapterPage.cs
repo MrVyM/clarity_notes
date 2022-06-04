@@ -23,6 +23,33 @@ namespace ClarityNotes
             mainContent.HorizontalOptions = LayoutOptions.Center;
             mainContent.VerticalOptions = LayoutOptions.CenterAndExpand;
 
+            Frame containScroll = new Frame();
+            containScroll.BackgroundColor = Color.White;
+            Label label1 = new Label();
+            label1.Text = "Personne possedant les acces :";
+            StackLayout container = new StackLayout();
+            container.Children.Add(label1);
+            ScrollView scrollListShare = new ScrollView();
+            StackLayout listShare = new StackLayout();
+            foreach (User share in Directory.GetUsersByDirectory(idDirectory))
+            {
+                Label people = new Label();
+                people.Text = share.Username +" "+share.Email;
+                people.HorizontalOptions = LayoutOptions.Center;
+                people.VerticalOptions = LayoutOptions.CenterAndExpand;
+                people.FontSize = 15;
+                listShare.Children.Add(people);
+            }
+
+            scrollListShare.Content = listShare;
+            container.Children.Add(scrollListShare);
+
+            containScroll.Content = container;
+
+
+            mainContent.Children.Add(containScroll);
+
+
             Frame frame = new Frame();
             frame.HasShadow = true;
             frame.HorizontalOptions = LayoutOptions.Center;

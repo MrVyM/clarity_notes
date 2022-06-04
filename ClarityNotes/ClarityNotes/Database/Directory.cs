@@ -22,7 +22,7 @@ public class Directory
         this.idOwner = idOwner;
         this.creationDate = creationDate;
     }
-    
+
     public override string ToString()
     {
         string result = $"[{GetType().Name}]\n";
@@ -31,7 +31,7 @@ public class Directory
             result += $"    {p.Name} : {p.GetValue(this, null)}\n";
         return result.Substring(0, result.Length - 1);
     }
-    
+
     public static Directory[] GetAllDirectories()
     {
         List<Directory> directories = new List<Directory>();
@@ -96,7 +96,7 @@ public class Directory
         mySqlCommandCreate.Parameters.AddWithValue("@title", title);
         mySqlCommandCreate.Parameters.AddWithValue("@idOwner", user.Id);
         mySqlCommandCreate.Parameters.AddWithValue("@creationDate", Database.GetCurrentDate());
-                                                                         bool result = mySqlCommandCreate.ExecuteNonQuery() > 0;
+        bool result = mySqlCommandCreate.ExecuteNonQuery() > 0;
         mySqlConnection.Close();
         return result;
     }
@@ -106,7 +106,7 @@ public class Directory
         User shared;
         if (rep.Contains("@"))
             shared = User.GetUserByMail(rep);
-        else 
+        else
             shared = User.GetUserByUsername(rep);
         if (shared == null) return false;
 
@@ -114,7 +114,7 @@ public class Directory
         MySqlConnection mySqlConnection = Database.GetConnection();
         MySqlCommand mySqlCommandCreate = new MySqlCommand(queryCreate, mySqlConnection);
         mySqlCommandCreate.Parameters.AddWithValue("@id", idDirectory);
-        mySqlCommandCreate.Parameters.AddWithValue("@title", Directory.GetDirectoryByIdAndIdOwner(idDirectory,owner).Title);
+        mySqlCommandCreate.Parameters.AddWithValue("@title", Directory.GetDirectoryByIdAndIdOwner(idDirectory, owner).Title);
         mySqlCommandCreate.Parameters.AddWithValue("@idOwner", shared.Id);
         mySqlCommandCreate.Parameters.AddWithValue("@creationDate", Database.GetCurrentDate());
         mySqlCommandCreate.ExecuteNonQuery();
@@ -133,14 +133,26 @@ public class Directory
         mySqlConnection.Close();
         return result;
     }
-    
+
     public static Directory GetDirectoryByIdAndIdOwner(int id, User user)
     {
-        foreach (Directory directory in GetUserDirectories(user)) 
+        foreach (Directory directory in GetUserDirectories(user))
             if (directory.Id == id) return directory;
         return null;
     }
-    
+
+    public static User[] GetUsersByDirectory(int idDirectory)
+    {
+        List<User> final = new List<User>();
+
+        foreach (Directory dir in GetAllDirectories())
+        {
+            if (dir.id == idDirectory)
+                final.Add(User.GetUserById(dir.idOwner));
+        }
+        return final.ToArray();
+    }
+
     public static Directory GetDirectoryByTitleAndIdOwner(string title, User user)
     {
         foreach (Directory directory in GetUserDirectories(user)) 

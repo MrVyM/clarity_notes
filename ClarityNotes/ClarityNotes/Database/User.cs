@@ -16,7 +16,11 @@ public class User
     private Color colorTheme;
 
     public int Id => id;
-    public string Username => username;
+    public string Username
+    {
+        get => username;
+        set => username = value;
+    }
     public string Email => email;
     public string HashPassword => hashPassword;
     public bool Premium => premium;
