@@ -46,17 +46,20 @@ namespace ClarityNotes
                 editorWindows.VerticalOptions = LayoutOptions.CenterAndExpand;
                 editorWindows.HtmlText = note.Content;
                 editorWindows.HeightRequest = 1000;
+                editorWindows.ReadOnly = Directory.GetReadOnlyByNoteAndIdOwner(note, user);
                 editorWindows.PlaceHolder = "Votre note";
-
-                if (editorWindows.ToolbarItems.Count == 1)
+                if (!Directory.GetReadOnlyByNoteAndIdOwner(note, user))
                 {
-                    editorWindows.ToolbarItems.Add(QRCode);
-                    editorWindows.ToolbarItems.Add(traduce);
-                }
-                else 
-                {
-                    editorWindows.ToolbarItems[1] = traduce;
-                    editorWindows.ToolbarItems[2] = QRCode;
+                    if (editorWindows.ToolbarItems.Count == 1)
+                    {
+                        editorWindows.ToolbarItems.Add(QRCode);
+                        editorWindows.ToolbarItems.Add(traduce);
+                    }
+                    else
+                    {
+                        editorWindows.ToolbarItems[1] = traduce;
+                        editorWindows.ToolbarItems[2] = QRCode;
+                    }
                 }
 
                 editorWindows.TextChanged += OnTextChangedWindows;
@@ -70,6 +73,7 @@ namespace ClarityNotes
             {
                 editorAndroid = new Editor();
                 editorAndroid.Text = note.Content;
+                editorAndroid.IsReadOnly = Directory.GetReadOnlyByNoteAndIdOwner(note, user);
                 editorAndroid.TextChanged += OnTextChangedAndroid;
                 editorAndroid.AutoSize = EditorAutoSizeOption.TextChanges;
 

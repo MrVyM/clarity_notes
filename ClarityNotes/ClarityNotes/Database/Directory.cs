@@ -9,18 +9,22 @@ public class Directory
     private string title;
     private int idOwner;
     private string creationDate;
+    private bool readOnly;
 
     public int Id => id;
+
+    public bool ReadOnly => readOnly;
     public string Title => title;
     public int IdOwner => idOwner;
     public string CreationDate => creationDate;
 
-    private Directory(int id, string title, int idOwner, string creationDate)
+    private Directory(int id, string title, int idOwner, string creationDate,bool ReadOnly = false)
     {
         this.id = id;
         this.title = title;
         this.idOwner = idOwner;
         this.creationDate = creationDate;
+        this.readOnly = ReadOnly;
     }
 
     public override string ToString()
@@ -46,7 +50,8 @@ public class Directory
                 string title = $"{reader["title"]}";
                 int idOwner = Int32.Parse($"{reader["idOwner"]}");
                 string creationDate = $"{reader["creationDate"]}";
-                directories.Add(new Directory(id, title, idOwner, creationDate));
+                bool ReadOnly = reader["ReadOnly"].ToString() == "True";
+                directories.Add(new Directory(id, title, idOwner, creationDate,ReadOnly));
             }
         }
         mySqlConnection.Close();
@@ -91,7 +96,8 @@ public class Directory
                 string title = $"{reader["title"]}";
                 int idOwner = Int32.Parse($"{reader["idOwner"]}");
                 string creationDate = $"{reader["creationDate"]}";
-                directories.Add(new Directory(id, title, idOwner, creationDate));
+                bool ReadOnly = reader["ReadOnly"].ToString() == "True";
+                directories.Add(new Directory(id, title, idOwner, creationDate, ReadOnly));
             }
         }
         mySqlConnection.Close();
@@ -154,6 +160,14 @@ public class Directory
         bool result = mySqlCommand.ExecuteNonQuery() > 0;
         mySqlConnection.Close();
         return result;
+    }
+
+    public static bool GetReadOnlyByNoteAndIdOwner(Note note, User user)
+    {
+        Directory[] list = GetUserDirectories(user);
+        foreach (Directory directory in list)
+            if (directory.Id == note.IdDirectory && directory.idOwner == user.Id) return directory.ReadOnly;
+        return false;
     }
 
     public static Directory GetDirectoryByIdAndIdOwner(int id, User user)
