@@ -68,6 +68,7 @@ namespace ClarityNotes
             connexion.Text = "Se connecter";
             connexion.HorizontalOptions = LayoutOptions.Center;
             connexion.VerticalOptions = LayoutOptions.Center;
+            connexion.FontAttributes = FontAttributes.Bold;
             connexion.Clicked += OnConnexionClicked;
             connexion.CornerRadius = 10;
             buttonStack.Children.Add(connexion);
@@ -75,6 +76,7 @@ namespace ClarityNotes
             Button create = new Button();
             create.Text = "S'inscrire";
             create.Clicked += OnCreatePage;
+            create.FontAttributes = FontAttributes.Bold;
             create.HorizontalOptions = LayoutOptions.Center;
             create.VerticalOptions = LayoutOptions.Center;
             create.CornerRadius = 10;

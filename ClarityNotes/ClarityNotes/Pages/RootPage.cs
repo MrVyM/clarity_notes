@@ -28,6 +28,7 @@ namespace ClarityNotes
             }   
 
             Directory[] directories = Directory.GetUserDirectories(user);
+            SortList(directories);
 
             StackLayout mainContent = new StackLayout();
             mainContent.Orientation = StackOrientation.Horizontal;
@@ -58,9 +59,10 @@ namespace ClarityNotes
             AddLayout.HorizontalOptions = LayoutOptions.Center;
             AddLayout.VerticalOptions = LayoutOptions.EndAndExpand;
 
-            Button add = new Button() { Text = "+" };
-            add.Clicked += OnAddChapterClicked;
+            Button add = new Button();
+            add.Text = "+";
             add.FontSize = fontsize;
+            add.Clicked += OnAddChapterClicked;
             add.CornerRadius = 10;
             add.Margin = 10/divisor;
             add.BackgroundColor = Color.White;
@@ -74,7 +76,7 @@ namespace ClarityNotes
             remove.BackgroundColor = Color.White;
             AddLayout.Children.Add(remove);
 
-            Button settings = new Button() { Text = "SET" };
+            Button settings = new Button() { Text = "⋮" };
             settings.BackgroundColor = Color.White;
             settings.CornerRadius = 10;
             settings.Margin = 10/divisor;
@@ -98,7 +100,7 @@ namespace ClarityNotes
                 if (notes.Length == 0)
                 {
                     Label pleaseAddChapter = new Label();
-                    pleaseAddChapter.Text = "Vous n'avez pas encore de notes. Vous pouvez en créer un en utilisant le bouton ci-dessous";
+                    pleaseAddChapter.Text = "Vous n'avez pas encore de notes. \nVous pouvez en créer un en utilisant le bouton ci-dessous";
                     pleaseAddChapter.Padding = 100;
                     stackNotes.Children.Add(pleaseAddChapter);
                 }
@@ -222,7 +224,7 @@ namespace ClarityNotes
             if (notes.Length == 0)
             {
                 Label pleaseAddChapter = new Label();
-                pleaseAddChapter.Text = "Vous n'avez pas encore de notes. Vous pouvez en créer un en utilisant le bouton ci-dessous";
+                pleaseAddChapter.Text = "Vous n'avez pas encore de notes.\nVous pouvez en créer un en utilisant le bouton ci-dessous";
                 pleaseAddChapter.Padding = 100;
                 stackNotes.Children.Add(pleaseAddChapter);
             }
@@ -280,6 +282,12 @@ namespace ClarityNotes
         }
         private void OnAddNotePageClicked(object sender, EventArgs e)
         {
+            int noteMax = 12;
+            if (Note.GetNotesByIdDirectory(currentDirectory).Length > noteMax && !user.Premium)
+            {
+                DisplayAlert("Option Premium", $"Vous ne pouvez pas créer plus de {noteMax} notes sans l'option Premium", "Ok");
+                return;
+            }
             string text = ((Button)sender).Text;
             string[] splited = text.Split(' ');
             var page = new AddNotePage(user, Directory.GetDirectoryByIdAndIdOwner(currentDirectory, user));
@@ -296,6 +304,12 @@ namespace ClarityNotes
 
         private void OnAddChapterClicked(object sender, EventArgs e)
         {
+            int chapMax = 8;
+            if (Directory.GetUserDirectories(user).Length > chapMax && !user.Premium)
+            {
+                DisplayAlert("Option Premium", $"Vous ne pouvez pas créer plus de {chapMax} chapitres sans l'option Premium", "Ok");
+                return;
+            }
             var page = new AddChapterPage(user);
             NavigationPage.SetHasNavigationBar(page, false);
             Navigation.PushAsync(page);
@@ -313,6 +327,16 @@ namespace ClarityNotes
             var page = new RemoveChapterPage(user);
             NavigationPage.SetHasNavigationBar(page, false);
             Navigation.PushAsync(page);
+        }
+
+        private void SortList(Directory[] rep)
+        {
+            for (int i = 0; i < rep.Length; i++)
+            {
+                for (int j = i + 1; j < rep.Length; j++)
+                    if (String.Compare(rep[j].Title, rep[i].Title, true) == -1)
+                        (rep[i], rep[j]) = (rep[j], rep[i]);
+            }
         }
     }
 }

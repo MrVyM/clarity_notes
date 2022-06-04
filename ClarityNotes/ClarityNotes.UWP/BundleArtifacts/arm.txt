@@ -1,0 +1,6 @@
+MainPackage=C:\Users\Vym\Desktop\clarity_notes\ClarityNotes\ClarityNotes.UWP\bin\ARM\Release\ClarityNotes.UWP_1.0.2.0_ARM.appx
+SymbolPackage=C:\Users\Vym\Desktop\clarity_notes\ClarityNotes\ClarityNotes.UWP\obj\ARM\Release\Symbols\ClarityNotes.UWP_1.0.2.0_ARM.appxsym
+ResourcePack=C:\Users\Vym\Desktop\clarity_notes\ClarityNotes\ClarityNotes.UWP\bin\ARM\Release\ClarityNotes.UWP_1.0.2.0_scale-100.appx
+ResourcePack=C:\Users\Vym\Desktop\clarity_notes\ClarityNotes\ClarityNotes.UWP\bin\ARM\Release\ClarityNotes.UWP_1.0.2.0_scale-125.appx
+ResourcePack=C:\Users\Vym\Desktop\clarity_notes\ClarityNotes\ClarityNotes.UWP\bin\ARM\Release\ClarityNotes.UWP_1.0.2.0_scale-150.appx
+ResourcePack=C:\Users\Vym\Desktop\clarity_notes\ClarityNotes\ClarityNotes.UWP\bin\ARM\Release\ClarityNotes.UWP_1.0.2.0_scale-400.appx

@@ -64,7 +64,6 @@ namespace ClarityNotes
             {
                 var ans = DisplayAlert("Création impossible", "Une note existe déjà sous ce nom.", "OK");
             }
-
         }
     }
 }

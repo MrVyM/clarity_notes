@@ -30,6 +30,7 @@ namespace ClarityNotes
             passwordChange.BackgroundColor = Color.White;
             passwordChange.CornerRadius = 25;
             passwordChange.Margin = 20;
+            passwordChange.Padding = 20;
             mainContent.Children.Add(passwordChange);
 
             Button nameChange = new Button();
@@ -39,6 +40,7 @@ namespace ClarityNotes
             nameChange.BackgroundColor = Color.White;
             nameChange.CornerRadius = 25;
             nameChange.Margin = 20;
+            nameChange.Padding = 20;
             mainContent.Children.Add(nameChange);
 
             Button mailChange = new Button();
@@ -47,6 +49,7 @@ namespace ClarityNotes
             mailChange.BackgroundColor = Color.White;
             mailChange.CornerRadius = 25;
             mailChange.Margin = 20;
+            mailChange.Padding = 20;
             mailChange.Clicked += OnMailChange;
             mainContent.Children.Add(mailChange);
 
@@ -56,6 +59,7 @@ namespace ClarityNotes
             themeChange.BackgroundColor = Color.White;
             themeChange.CornerRadius = 25;
             themeChange.Margin = 20;
+            themeChange.Padding = 20;
             themeChange.Clicked += OnThemeChange;
             mainContent.Children.Add(themeChange);
 
@@ -64,6 +68,7 @@ namespace ClarityNotes
             logOut.BackgroundColor = Color.White;
             logOut.CornerRadius = 25;
             logOut.Margin = 20;
+            logOut.Padding = 20;
             logOut.FontSize = fontSize;
             logOut.Clicked += OnLogOut;
             mainContent.Children.Add(logOut);
@@ -75,6 +80,7 @@ namespace ClarityNotes
             deleteAccount.BackgroundColor = Color.White;
             deleteAccount.CornerRadius = 25;
             deleteAccount.Margin = 20;
+            deleteAccount.Padding = 20;
             mainContent.Children.Add(deleteAccount);
 
             this.BackgroundColor = user.ColorTheme;
