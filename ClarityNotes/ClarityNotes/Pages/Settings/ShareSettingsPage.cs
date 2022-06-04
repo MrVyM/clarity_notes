@@ -44,7 +44,12 @@ namespace ClarityNotes
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
 
-            foreach (string colorName in new string[] { "Retirer le partage de l'utilisateur", "Donner la propriété"})
+            foreach (string colorName in new string[] 
+            { 
+                "Retirer le partage de l'utilisateur", 
+                "Donner la propriété",
+                (Directory.GetReadOnlyByDirectoryAndIdOwner(idDirectory,target) ? "Accorder l'ecriture" : "Accorder seulement la lecture")
+            })
                 picker.Items.Add(colorName);
 
             Button submit = new Button()
@@ -72,6 +77,10 @@ namespace ClarityNotes
                     break;
                 case "Donner la propriété":
                     Directory.ChangeRootOwner(user.Id, target.Id, idDirectory);
+                    break;
+                case "Accorder l'ecriture": 
+                case "Accorder seulement la lecture" :
+                    Directory.ChangeReadOnly(idDirectory, target);
                     break;
                 default:
                     break;

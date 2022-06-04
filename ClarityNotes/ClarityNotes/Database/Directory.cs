@@ -80,7 +80,17 @@ public class Directory
     }
 
 
-    public static Directory[] GetUserDirectories(User user)
+    public static void ChangeReadOnly(int idDirectory, User Owner)
+    {
+        MySqlConnection mySqlConnection = Database.GetConnection();
+        int change = Directory.GetReadOnlyByDirectoryAndIdOwner(idDirectory, Owner) ? 0 : 1;
+        string query = $"UPDATE `directories` SET ReadOnly = {change} WHERE id = {idDirectory} AND idOwner = {Owner.Id}";
+        MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
+        mySqlCommand.ExecuteNonQuery();
+        mySqlConnection.Close();
+    }
+
+        public static Directory[] GetUserDirectories(User user)
     {
         List<Directory> directories = new List<Directory>();
         MySqlConnection mySqlConnection = Database.GetConnection();
@@ -167,6 +177,14 @@ public class Directory
         Directory[] list = GetUserDirectories(user);
         foreach (Directory directory in list)
             if (directory.Id == note.IdDirectory && directory.idOwner == user.Id) return directory.ReadOnly;
+        return false;
+    }
+
+    public static bool GetReadOnlyByDirectoryAndIdOwner(int idDirectory, User user)
+    {
+        Directory[] list = GetUserDirectories(user);
+        foreach (Directory directory in list)
+            if (directory.Id == idDirectory && directory.idOwner == user.Id) return directory.ReadOnly;
         return false;
     }
 
