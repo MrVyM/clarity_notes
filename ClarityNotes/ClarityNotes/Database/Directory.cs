@@ -53,6 +53,28 @@ public class Directory
         return directories.ToArray();
     }
 
+    public static void ChangeRootOwner(int idOldRoot, int idNewRoot,int idDirectory)
+    {
+        MySqlConnection mySqlConnection = Database.GetConnection();
+        string query = $"UPDATE `directories` SET idOwner = {-1} WHERE id = {idDirectory} AND idOwner = {idOldRoot}";
+        MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
+        mySqlCommand.ExecuteNonQuery();
+        mySqlConnection.Close();
+
+        mySqlConnection = Database.GetConnection();
+        query = $"UPDATE `directories` SET idOwner = {idOldRoot} WHERE id = {idDirectory} AND idOwner = {idNewRoot}";
+        mySqlCommand = new MySqlCommand(query, mySqlConnection);
+        mySqlCommand.ExecuteNonQuery();
+        mySqlConnection.Close();
+
+        mySqlConnection = Database.GetConnection();
+        query = $"UPDATE `directories` SET idOwner = {idNewRoot} WHERE id = {idDirectory} AND idOwner = {-1}";
+        mySqlCommand = new MySqlCommand(query, mySqlConnection);
+        mySqlCommand.ExecuteNonQuery();
+        mySqlConnection.Close();
+    }
+
+
     public static Directory[] GetUserDirectories(User user)
     {
         List<Directory> directories = new List<Directory>();
