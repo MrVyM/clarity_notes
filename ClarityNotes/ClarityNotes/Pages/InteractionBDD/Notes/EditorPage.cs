@@ -11,8 +11,8 @@ namespace ClarityNotes
     {
         Note note;
         User user;
-        SfRichTextEditor editorWindows;
-        Editor editorAndroid;
+        public SfRichTextEditor editorWindows;
+        public Editor editorAndroid;
 
         public EditorPage(Note note, User user)
         {
@@ -48,6 +48,7 @@ namespace ClarityNotes
                 editorWindows.HeightRequest = 1000;
                 editorWindows.ReadOnly = Directory.GetReadOnlyByNoteAndIdOwner(note, user);
                 editorWindows.PlaceHolder = "Votre note";
+
                 if (!Directory.GetReadOnlyByNoteAndIdOwner(note, user))
                 {
                     if (editorWindows.ToolbarItems.Count == 1)
@@ -107,20 +108,18 @@ namespace ClarityNotes
             NavigationPage.SetHasNavigationBar(QRpage, false);
             Navigation.PushAsync(QRpage);
         }
+
         public void OnTraduceClicked(object sender, EventArgs e)
         {
-            string route = "/translate?api-version=3.0&to=de&to=it&to=ja&to=th";
             string text;
             if (editorAndroid == null)
-                text = editorWindows.Text;
+                text = editorWindows.HtmlText;
             else
                 text = editorAndroid.Text;
-            var rep = Traductor.Traduce(Traductor.SubscriptionKey, Traductor.Endpoint, route, text);
-            rep.Wait();
-            if (editorAndroid == null)
-                editorWindows.HtmlText = rep.Result;
-            else
-                editorAndroid.Text = rep.Result;
+            note.Update(text, user);
+            var page = new LanguageTraductorPage(this, user, note.Id);
+            NavigationPage.SetHasNavigationBar(page, false);
+            Navigation.PushAsync(page);
         }
     }
 }       

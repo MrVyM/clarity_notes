@@ -72,7 +72,7 @@ namespace ClarityNotes
                     user.UpdateColorTheme(Color.FromHex("D1C860"));
                     break;
                 case "Pink":
-                    user.UpdateColorTheme(Color.FromHex("FD7A89"));
+                    user.UpdateColorTheme(Color.FromHex("FFC0CB"));
                     break;
                 case "Orange":
                     user.UpdateColorTheme(Color.FromHex("E77E22"));
