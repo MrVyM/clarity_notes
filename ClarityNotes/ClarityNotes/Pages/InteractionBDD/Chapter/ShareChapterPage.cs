@@ -52,9 +52,10 @@ namespace ClarityNotes
                     param.Text = "⋮";
                     param.FontSize = 15;
                     param.CornerRadius = 5;
-                    param.Margin = 5;
+                    param.Margin = 15 ;
                     param.BackgroundColor = Color.White;
-                    param.HorizontalOptions = LayoutOptions.EndAndExpand;
+                    param.Scale = (Device.RuntimePlatform == Device.UWP ? 1 : 0.8);
+                    param.HorizontalOptions = LayoutOptions.End;
                     param.VerticalOptions = LayoutOptions.Center;
                     param.Clicked += (sender,e) => 
                     { 
