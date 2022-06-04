@@ -9,7 +9,8 @@ ClarityNotes/ClarityNotes.Android/bin/
 ClarityNotes/ClarityNotes.UWP/bin/
 ClarityNotes/ClarityNotes.iOS/bin/
 ClarityNotes/ClarityNotes/bin/
-
+ClarityNotes/ClarityNotes.UWP/AppPackages/
+ClarityNotes/ClarityNotes.UWP/BundleArtifacts/
 .vs/
 obj/
 bin/

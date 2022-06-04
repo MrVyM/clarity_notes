@@ -105,12 +105,24 @@ public class User
     public static bool DeleteUser(int id)
     {
         MySqlConnection mySqlConnection = Database.GetConnection();
-        string query = "DELETE FROM `users` WHERE id = @id";
-        MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
-        mySqlCommand.Parameters.AddWithValue("@id", id);
-        bool result = mySqlCommand.ExecuteNonQuery() > 0;
+
+        string queryUser = "DELETE FROM `users` WHERE id = @id";
+        MySqlCommand mySqlCommandUser = new MySqlCommand(queryUser, mySqlConnection);
+        mySqlCommandUser.Parameters.AddWithValue("@id", id);
+        bool resultUser = mySqlCommandUser.ExecuteNonQuery() > 0;
+
+        string queryUserSettings = "DELETE FROM `usersettings` WHERE userId = @userId";
+        MySqlCommand mySqlCommandUserSettings = new MySqlCommand(queryUserSettings, mySqlConnection);
+        mySqlCommandUserSettings.Parameters.AddWithValue("@userId", id);
+        bool resultUserSettings = mySqlCommandUser.ExecuteNonQuery() > 0;
+
+        string queryDirectories = "DELETE FROM `directories` WHERE idOwner = @idOwner";
+        MySqlCommand mySqlCommandDirectories = new MySqlCommand(queryDirectories, mySqlConnection);
+        mySqlCommandDirectories.Parameters.AddWithValue("@idOwner", id);
+        bool resultDirectories = mySqlCommandUser.ExecuteNonQuery() > 0;
+
         mySqlConnection.Close();
-        return result;
+        return resultUser && resultUserSettings && resultDirectories;
     }
     
     public static User GetUserById(int id)
