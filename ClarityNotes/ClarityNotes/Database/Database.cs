@@ -1,5 +1,6 @@
 ﻿using MySqlConnector;
 using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 public static class Database
