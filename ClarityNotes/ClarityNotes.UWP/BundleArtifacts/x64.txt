@@ -1,2 +1,0 @@
-MainPackage=C:\Users\Vym\Desktop\clarity_notes\ClarityNotes\ClarityNotes.UWP\bin\x64\Release\ClarityNotes.UWP_1.0.2.0_x64.appx
-SymbolPackage=C:\Users\Vym\Desktop\clarity_notes\ClarityNotes\ClarityNotes.UWP\obj\x64\Release\Symbols\ClarityNotes.UWP_1.0.2.0_x64.appxsym
