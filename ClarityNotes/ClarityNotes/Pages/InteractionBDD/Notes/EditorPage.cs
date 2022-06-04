@@ -31,16 +31,6 @@ namespace ClarityNotes
 
                 traduce.Clicked += OnTraduceClicked;
 
-                Button QRCode = new Button
-                {
-                    Text = "Obtenir un QR Code",
-
-                    HeightRequest = 50,
-                    WidthRequest = 150,
-                };
-
-                QRCode.Clicked += OnQRCodeGeneratorClicked;
-
                 editorWindows = new SfRichTextEditor();
                 editorWindows.AutoSize = AutoSizeOption.TextChanges;
                 editorWindows.VerticalOptions = LayoutOptions.CenterAndExpand;
@@ -53,13 +43,11 @@ namespace ClarityNotes
                 {
                     if (editorWindows.ToolbarItems.Count == 1)
                     {
-                        editorWindows.ToolbarItems.Add(QRCode);
                         editorWindows.ToolbarItems.Add(traduce);
                     }
                     else
                     {
                         editorWindows.ToolbarItems[1] = traduce;
-                        editorWindows.ToolbarItems[2] = QRCode;
                     }
                 }
 
@@ -100,13 +88,6 @@ namespace ClarityNotes
             note.Update(editorAndroid.Text, user);
             string text = editorAndroid.Text;
             note.Update(text,user);
-        }
-
-        public void OnQRCodeGeneratorClicked(object sender, EventArgs e)
-        {
-            var QRpage = new QRCodeGeneratorPage(user, note);
-            NavigationPage.SetHasNavigationBar(QRpage, false);
-            Navigation.PushAsync(QRpage);
         }
 
         public void OnTraduceClicked(object sender, EventArgs e)

@@ -165,11 +165,20 @@ namespace ClarityNotes
 
                 allButtonList.Children.Add(share);
 
+                Button QRbutton = new Button();
+                QRbutton.Text = "Générer";
+                QRbutton.BackgroundColor = Color.White;
+                QRbutton.Clicked += OnQRCodeClicked;
+                QRbutton.FontSize = fontsize;
+
+                allButtonList.Children.Add(QRbutton);
+
                 if (Device.RuntimePlatform == Device.UWP)
                 {
                     AddNote.Text = "Ajouter une note";
                     removeNote.Text = "Retirer une note";
                     share.Text = "Partager ce chapitre";
+                    QRbutton.Text = "Générer un QR Code";
                 }
                
 
@@ -211,6 +220,11 @@ namespace ClarityNotes
         public void OnShareClicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new ShareChapterPage(user, currentDirectory));
+        }
+
+        public void OnQRCodeClicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new QRCodeGeneratorPage(user, currentDirectory));
         }
 
         private void OnNoteClicked(object sender, EventArgs e)
