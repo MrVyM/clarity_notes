@@ -251,7 +251,8 @@ namespace ClarityNotes
                 Directory.ShareDirectory(directoryID, owner, user.Username);
 
                 scan.DisplayAlert("QR code trouvé", owner.Username + " vous a partagé un chapitre", "OK");
-                Navigation.PopAsync();
+
+                Application.Current.MainPage = new NavigationPage(new RootPage(user));
             }); 
         }
 
