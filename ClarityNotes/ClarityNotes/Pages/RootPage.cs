@@ -61,7 +61,7 @@ namespace ClarityNotes
 
             Button add = new Button();
             add.Text = "+";
-            add.FontSize = fontsize;
+            add.FontSize = FontSize * divisor; ;
             add.Clicked += OnAddChapterClicked;
             add.CornerRadius = 10;
             add.Padding = 15;
@@ -72,7 +72,7 @@ namespace ClarityNotes
             Button remove = new Button() { Text = "-" };
             remove.Clicked += OnRemoveClicked;
             remove.Padding = 15;
-            remove.FontSize = fontsize;
+            remove.FontSize = FontSize * divisor;
             remove.CornerRadius = 10;
             remove.Margin = 10/divisor;
             remove.BackgroundColor = Color.White;
@@ -84,7 +84,7 @@ namespace ClarityNotes
             settings.Padding = 15;
             settings.Margin = 10/divisor;
             settings.Clicked += OnSettingsPageCliked;
-            settings.FontSize = fontsize;
+            settings.FontSize = FontSize * divisor; ;
             AddLayout.Children.Add(settings);
 
             stackNotes = new StackLayout();
@@ -171,7 +171,7 @@ namespace ClarityNotes
                 QRbutton.Clicked += OnQRCodeClicked;
                 QRbutton.FontSize = fontsize;
 
-                allButtonList.Children.Add(QRbutton);
+                //allButtonList.Children.Add(QRbutton);
 
                 if (Device.RuntimePlatform == Device.UWP)
                 {
@@ -213,7 +213,7 @@ namespace ClarityNotes
         private void OnEditorClicked(object sender, EventArgs e)
         {
             var page = new EditorPage(Note.GetNoteByTitleAndIdDirectory(((Button)sender).Text, currentDirectory), user);
-
+            NavigationPage.SetHasNavigationBar(page, false);
             Navigation.PushAsync(page);
         }
 

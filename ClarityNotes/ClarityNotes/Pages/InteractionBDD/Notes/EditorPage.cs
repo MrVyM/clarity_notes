@@ -32,10 +32,14 @@ namespace ClarityNotes
                 traduce.Clicked += OnTraduceClicked;
 
                 editorWindows = new SfRichTextEditor();
-                editorWindows.AutoSize = AutoSizeOption.TextChanges;
+                editorWindows.IsVisible = true;
+                editorWindows.IsEnabled = true;
+                //editorWindows.AutoSize = AutoSizeOption.TextChanges;
                 editorWindows.VerticalOptions = LayoutOptions.CenterAndExpand;
+                editorWindows.HorizontalOptions = LayoutOptions.CenterAndExpand;
                 editorWindows.HtmlText = note.Content;
-                editorWindows.HeightRequest = 1000;
+                editorWindows.HeightRequest = 200;
+                editorWindows.WidthRequest = 200;
                 editorWindows.ReadOnly = Directory.GetReadOnlyByNoteAndIdOwner(note, user);
                 editorWindows.PlaceHolder = $"Bienvenue sur la note [{note.Title}], vous pouvez insérer votre propre texte.";
 
@@ -54,7 +58,9 @@ namespace ClarityNotes
                 editorWindows.TextChanged += OnTextChangedWindows;
 
                 StackLayout stack = new StackLayout();
-                stack.VerticalOptions = LayoutOptions.Start;
+                stack.VerticalOptions = LayoutOptions.Fill;
+                stack.HorizontalOptions = LayoutOptions.Fill;
+                stack.BackgroundColor = Color.Red;
                 stack.Children.Add(editorWindows);
                 this.Content = stack;
             }
