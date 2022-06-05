@@ -15,12 +15,16 @@ namespace ClarityNotes
             this.user = user;
             this.idDirectory = idDirectory;
 
+            string QRcontent = user.Username + "/" + idDirectory;
+
             QRCodeGenerator qrGenerator = new QRCodeGenerator();
-            QRCodeData qrCodeData = qrGenerator.CreateQrCode(user.Email, QRCodeGenerator.ECCLevel.L);
+            QRCodeData qrCodeData = qrGenerator.CreateQrCode(QRcontent, QRCodeGenerator.ECCLevel.L);
             PngByteQRCode qRCode = new PngByteQRCode(qrCodeData);
             byte[] qrCodeBytes = qRCode.GetGraphic(100);
             ImageSource QrCodeImage = ImageSource.FromStream(() => new MemoryStream(qrCodeBytes));
             
+            StackLayout stack = new StackLayout();
+   
             BackgroundImageSource = QrCodeImage;
         }
     }
