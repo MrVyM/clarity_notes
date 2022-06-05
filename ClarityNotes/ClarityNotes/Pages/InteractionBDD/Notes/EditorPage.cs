@@ -37,7 +37,7 @@ namespace ClarityNotes
                 editorWindows.HtmlText = note.Content;
                 editorWindows.HeightRequest = 1000;
                 editorWindows.ReadOnly = Directory.GetReadOnlyByNoteAndIdOwner(note, user);
-                editorWindows.PlaceHolder = "Votre note";
+                editorWindows.PlaceHolder = $"Bienvenue sur la note [{note.Title}], vous pouvez insérer votre propre texte.";
 
                 if (!Directory.GetReadOnlyByNoteAndIdOwner(note, user))
                 {

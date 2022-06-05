@@ -32,7 +32,7 @@ namespace ClarityNotes
             {
                 FontSize = 16,
                 Text = $"Options de partage avec l'utilisateur {target.Username.ToUpper()} \n" +
-                $"l'adresse mail de l'utilisateur est {target.Email} \n",
+                $"L'adresse mail de l'utilisateur est {target.Email}.\n",
                 TextColor = Color.Black,
                 HorizontalTextAlignment = TextAlignment.Center
             };
@@ -48,7 +48,7 @@ namespace ClarityNotes
             { 
                 "Retirer le partage de l'utilisateur", 
                 "Donner la propriété",
-                (Directory.GetReadOnlyByDirectoryAndIdOwner(idDirectory,target) ? "Accorder l'ecriture" : "Accorder seulement la lecture")
+                (Directory.GetReadOnlyByDirectoryAndIdOwner(idDirectory,target) ? "Accorder l'écriture" : "Accorder seulement la lecture")
             })
                 picker.Items.Add(colorName);
 
@@ -78,7 +78,7 @@ namespace ClarityNotes
                 case "Donner la propriété":
                     Directory.ChangeRootOwner(user.Id, target.Id, idDirectory);
                     break;
-                case "Accorder l'ecriture": 
+                case "Accorder l'écriture": 
                 case "Accorder seulement la lecture" :
                     Directory.ChangeReadOnly(idDirectory, target);
                     break;

@@ -26,7 +26,7 @@ namespace ClarityNotes
             Frame containScroll = new Frame();
             containScroll.BackgroundColor = Color.White;
             Label label1 = new Label();
-            label1.Text = "Personnes ayant les accès au chapitre:\n";
+            label1.Text = "Utilisateurs ayant l'accès au chapitre :\n";
             StackLayout container = new StackLayout();
             container.Children.Add(label1);
             ScrollView scrollListShare = new ScrollView();
@@ -74,7 +74,7 @@ namespace ClarityNotes
                 foreach (User share in listUsers)
                 {
                     Label people = new Label();
-                    people.Text = ((share == root) ? "♛ " : "") + share.Username + "     " + share.Email;
+                    people.Text = ((share == root) ? "♛ " : "   ") + share.Username + "     " + share.Email;
                     people.HorizontalOptions = LayoutOptions.Center;
                     people.VerticalOptions = LayoutOptions.CenterAndExpand;
                     people.FontSize = 15;
@@ -102,7 +102,7 @@ namespace ClarityNotes
 
                 Label label = new Label();
                 label.FontSize = 16;
-                label.Text = $"Veuillez entrer l'email ou le pseudo de la personne :";
+                label.Text = $"Veuillez entrer l'email ou le nom d'utilisateur de la cible :";
                 framStack.Children.Add(label);
 
                 peopleToShare = new Entry();
@@ -128,7 +128,7 @@ namespace ClarityNotes
         private void OnSubmitClicked(object sender, EventArgs e)
         {
             if (!Directory.ShareDirectory(idDirectory,user, peopleToShare.Text))
-                DisplayAlert("Erreur", "La personne est introuvable", "OK");
+                DisplayAlert("Erreur", "L'utilisateur est introuvable.", "OK");
             else
             {
                 var page = new RootPage(user);
