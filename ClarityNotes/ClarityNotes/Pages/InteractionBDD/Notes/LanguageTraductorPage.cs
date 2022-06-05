@@ -39,7 +39,7 @@ namespace ClarityNotes
 
             picker = new Picker
             {
-                Title = "Sélection de la note",
+                Title = "Sélection de la langue de traduction",
                 HorizontalTextAlignment = TextAlignment.Center,
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
