@@ -87,6 +87,15 @@ namespace ClarityNotes
             settings.FontSize = fontsize;
             AddLayout.Children.Add(settings);
 
+            Button scan = new Button() { Text = "*"};
+            scan.BackgroundColor = Color.White;
+            scan.CornerRadius = 10;
+            scan.Padding = 15;
+            scan.Margin = 10 / divisor;
+            scan.Clicked += OnScannerClicked;
+            scan.FontSize = fontsize;
+            AddLayout.Children.Add(scan);
+
             stackNotes = new StackLayout();
             stackNotes.Margin = 15/divisor;
             stackNotes.HorizontalOptions = LayoutOptions.CenterAndExpand;
@@ -182,7 +191,8 @@ namespace ClarityNotes
                 }
                
 
-                if (notes.Length == 0) {
+                if (notes.Length == 0) 
+                {
                     removeNote.IsEnabled = false;
                 }
 
@@ -222,10 +232,35 @@ namespace ClarityNotes
             Navigation.PushAsync(new ShareChapterPage(user, currentDirectory));
         }
 
+        public void OnScannerClicked(object sender, EventArgs e)
+        {
+            var scan = new ScannerPage(user);
+            Navigation.PushAsync(scan);
+          
+            scan.OnScanResult += (result) => Device.BeginInvokeOnMainThread(() =>
+            {
+                var sort = result.Text;
+                
+                var split = sort.Split('/');
+
+                int directoryID = Int32.Parse(split[1]);
+
+                string ownername = split[0];
+                var owner = User.GetUserByUsername(ownername);
+
+                Directory.ShareDirectory(directoryID, owner, user.Username);
+
+                scan.DisplayAlert("QR code trouvé", owner.Username + " vous a partagé un chapitre", "OK");
+                Navigation.PopAsync();
+            }); 
+        }
+
         public void OnQRCodeClicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new QRCodeGeneratorPage(user, currentDirectory));
         }
+
+        
 
         private void OnNoteClicked(object sender, EventArgs e)
         {
@@ -296,7 +331,6 @@ namespace ClarityNotes
             share.FontSize = fontsize;
 
             allButtonList.Children.Add(share);
-
 
             if (Device.RuntimePlatform == Device.UWP)
             {
