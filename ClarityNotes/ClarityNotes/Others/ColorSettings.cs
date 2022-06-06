@@ -21,7 +21,7 @@ namespace ClarityNotes
             switch (colorSettings)
             {
                 case ColorSettings.Blue:
-                    colors = new Color[]{ Color.FromHex("33B0FF"), Color.White, Color.FromHex("298dcc") };
+                    colors = new Color[] { Color.FromHex("33B0FF"), Color.White, Color.FromHex("298dcc") };
                     break;
                 case ColorSettings.Green:
                     break;

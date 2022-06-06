@@ -1,6 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 
 namespace ClarityNotes
 {
@@ -15,7 +13,7 @@ namespace ClarityNotes
         }
 
         protected override void OnStart()
-        { 
+        {
         }
 
         protected override void OnSleep()

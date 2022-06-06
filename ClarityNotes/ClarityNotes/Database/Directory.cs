@@ -18,7 +18,7 @@ public class Directory
     public int IdOwner => idOwner;
     public string CreationDate => creationDate;
 
-    private Directory(int id, string title, int idOwner, string creationDate,bool ReadOnly = false)
+    private Directory(int id, string title, int idOwner, string creationDate, bool ReadOnly = false)
     {
         this.id = id;
         this.title = title;
@@ -43,7 +43,8 @@ public class Directory
         string query = "SELECT * FROM `directories`";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
         mySqlCommand.ExecuteNonQuery();
-        using (MySqlDataReader reader = mySqlCommand.ExecuteReader()) {
+        using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+        {
             while (reader.Read())
             {
                 int id = Int32.Parse($"{reader["id"]}");
@@ -51,14 +52,14 @@ public class Directory
                 int idOwner = Int32.Parse($"{reader["idOwner"]}");
                 string creationDate = $"{reader["creationDate"]}";
                 bool ReadOnly = reader["ReadOnly"].ToString() == "True";
-                directories.Add(new Directory(id, title, idOwner, creationDate,ReadOnly));
+                directories.Add(new Directory(id, title, idOwner, creationDate, ReadOnly));
             }
         }
         mySqlConnection.Close();
         return directories.ToArray();
     }
 
-    public static void ChangeRootOwner(int idOldRoot, int idNewRoot,int idDirectory)
+    public static void ChangeRootOwner(int idOldRoot, int idNewRoot, int idDirectory)
     {
         MySqlConnection mySqlConnection = Database.GetConnection();
         string query = $"UPDATE `directories` SET idOwner = {-1} WHERE id = {idDirectory} AND idOwner = {idOldRoot}";
@@ -90,7 +91,7 @@ public class Directory
         mySqlConnection.Close();
     }
 
-        public static Directory[] GetUserDirectories(User user)
+    public static Directory[] GetUserDirectories(User user)
     {
         List<Directory> directories = new List<Directory>();
         MySqlConnection mySqlConnection = Database.GetConnection();
@@ -142,6 +143,7 @@ public class Directory
     public static bool ShareDirectory(int idDirectory, User owner, string rep)
     {
         User shared;
+        if (rep == null || rep == "") return false;
         if (rep.Contains("@"))
             shared = User.GetUserByMail(rep);
         else
@@ -218,7 +220,7 @@ public class Directory
 
     public static Directory GetDirectoryByTitleAndIdOwner(string title, User user)
     {
-        foreach (Directory directory in GetUserDirectories(user)) 
+        foreach (Directory directory in GetUserDirectories(user))
             if (directory.Title == title) return directory;
         return null;
     }

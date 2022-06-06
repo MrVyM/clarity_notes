@@ -12,38 +12,48 @@ namespace ClarityNotes
         {
             this.user = user;
 
-            StackLayout mainContent = new StackLayout() {
+            StackLayout mainContent = new StackLayout()
+            {
                 HorizontalOptions = LayoutOptions.Center,
                 VerticalOptions = LayoutOptions.Center,
-                WidthRequest = 500 };
+                WidthRequest = 500
+            };
 
             StackLayout stackLayout = new StackLayout();
 
-            Label questionLabel = new Label() { 
+            Label questionLabel = new Label()
+            {
                 FontSize = 16,
                 Text = "Quel chapitre souhaitez-vous supprimer ?",
-                TextColor = Color.Black, 
-                HorizontalTextAlignment = TextAlignment.Center };
+                TextColor = Color.Black,
+                HorizontalTextAlignment = TextAlignment.Center
+            };
 
-            picker = new Picker {
+            picker = new Picker
+            {
                 Title = "Sélection du chapitre",
                 HorizontalTextAlignment = TextAlignment.Center,
-                VerticalOptions = LayoutOptions.CenterAndExpand };
+                VerticalOptions = LayoutOptions.CenterAndExpand
+            };
 
             foreach (Directory directory in Directory.GetUserDirectories(user))
                 picker.Items.Add(directory.Title);
 
-            Button submit = new Button() { 
+            Button submit = new Button()
+            {
                 Text = "Confirmation",
-                HorizontalOptions = LayoutOptions.Center };
+                HorizontalOptions = LayoutOptions.Center
+            };
             submit.Clicked += OnSubmitClicked;
-            
-            Label warningLabel = new Label() { 
+
+            Label warningLabel = new Label()
+            {
                 FontSize = 12,
                 Text = "Attention, la suppression d'un chapitre est irréversible et " +
                 "supprime définitivement toutes les notes incluses dans ce dernier.",
-                TextColor = Color.Red, 
-                HorizontalTextAlignment = TextAlignment.Center };
+                TextColor = Color.Red,
+                HorizontalTextAlignment = TextAlignment.Center
+            };
 
             stackLayout.Children.Add(questionLabel);
             stackLayout.Children.Add(picker);

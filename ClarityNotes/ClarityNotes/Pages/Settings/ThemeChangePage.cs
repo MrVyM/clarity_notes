@@ -1,14 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
-
 namespace ClarityNotes
 {
     public class ThemeChangePage : ContentPage
     {
         private User user;
         private Picker picker;
+
+        private Dictionary<string, string> Theme = new Dictionary<string, string>();
         public ThemeChangePage(User user)
         {
+            Theme.Add("Pink", "FFC0CB");
+            Theme.Add("Blue", "57B1EB");
+            Theme.Add("Green", "66A37B");
+            Theme.Add("Red", "E87C6B");
+            Theme.Add("Yellow", "D1C860");
+            Theme.Add("Orange", "E77E22");
+            Theme.Add("Purple", "A87CA0");
+            Theme.Add("Cyan", "20B2AA");
+            Theme.Add("Brown", "A0522D");
+            Theme.Add("White", "d6d6d6");
+            Theme.Add("Gray", "363636");
+            Theme.Add("Gold", "f7d705");
+
+
             this.user = user;
 
             StackLayout mainContent = new StackLayout()
@@ -35,7 +51,7 @@ namespace ClarityNotes
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
 
-            foreach (string colorName in new string[] { "Blue", "Green", "Red", "Yellow", "Pink", "Orange" })
+            foreach (string colorName in Theme.Keys)
                 picker.Items.Add(colorName);
 
             Button submit = new Button()
@@ -48,7 +64,7 @@ namespace ClarityNotes
             stackLayout.Children.Add(questionLabel);
             stackLayout.Children.Add(picker);
 
-            mainContent.Children.Add(new Frame() { Margin = 25,BackgroundColor = Color.White, Content = stackLayout });
+            mainContent.Children.Add(new Frame() { Margin = 25, BackgroundColor = Color.White, Content = stackLayout });
             mainContent.Children.Add(submit);
             this.Content = mainContent;
             this.BackgroundColor = user.ColorTheme;
@@ -57,27 +73,7 @@ namespace ClarityNotes
         private void OnSubmitClicked(object sender, EventArgs e)
         {
             if (picker.SelectedItem == null) return;
-            switch (picker.SelectedItem.ToString())
-            {
-                case "Blue":
-                    user.UpdateColorTheme(Color.FromHex("57B1EB"));
-                    break;
-                case "Green":
-                    user.UpdateColorTheme(Color.FromHex("66A37B"));
-                    break;
-                case "Red":
-                    user.UpdateColorTheme(Color.FromHex("E87C6B"));
-                    break;
-                case "Yellow":
-                    user.UpdateColorTheme(Color.FromHex("D1C860"));
-                    break;
-                case "Pink":
-                    user.UpdateColorTheme(Color.FromHex("FFC0CB"));
-                    break;
-                case "Orange":
-                    user.UpdateColorTheme(Color.FromHex("E77E22"));
-                    break;
-            }
+            user.UpdateColorTheme(Color.FromHex(Theme[picker.SelectedItem.ToString()]));
             var page = new RootPage(user);
             NavigationPage.SetHasNavigationBar(page, false);
         }

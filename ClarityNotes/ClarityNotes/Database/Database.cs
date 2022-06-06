@@ -1,6 +1,5 @@
 ﻿using MySqlConnector;
 using System;
-using System.Collections.Generic;
 using Xamarin.Forms;
 
 public static class Database
@@ -15,7 +14,7 @@ public static class Database
 
     public static MySqlConnection GetConnection()
     {
-        string parameters = $"server={ip};port={port};uid={username};pwd={password};initial catalog={database}"; 
+        string parameters = $"server={ip};port={port};uid={username};pwd={password};initial catalog={database}";
         MySqlConnection mySqlConnection = new MySqlConnection();
         mySqlConnection.ConnectionString = parameters;
         mySqlConnection.Open();

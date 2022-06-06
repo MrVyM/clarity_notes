@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Xamarin.Forms;
 
@@ -52,7 +49,7 @@ namespace ClarityNotes
 
         private void OnSubmitClicked(object sender, EventArgs e)
         {
-            if (nameEntry.Text == null) return ;
+            if (nameEntry.Text == null) return;
             User.Change(user.Id, "username", nameEntry.Text);
             user.Username = nameEntry.Text;
             var page = new RootPage(user);

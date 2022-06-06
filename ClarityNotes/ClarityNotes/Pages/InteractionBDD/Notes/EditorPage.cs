@@ -1,9 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using Syncfusion.XForms.RichTextEditor;
+using System;
 using Xamarin.Forms;
-using Syncfusion.XForms.RichTextEditor;
-using Google.Cloud.Translation.V2;
-using Google.Api.Gax.ResourceNames;
 
 namespace ClarityNotes
 {
@@ -56,7 +53,7 @@ namespace ClarityNotes
                 stack.Children.Add(editorWindows);
                 this.Content = stack;
             }
-            else 
+            else
             {
                 editorAndroid = new Editor();
                 editorAndroid.Text = note.Content;
@@ -71,7 +68,7 @@ namespace ClarityNotes
 
             }
             this.Title = Directory.GetDirectoryByIdAndIdOwner(note.IdDirectory, user).Title + "/" + note.Title;
-            
+
         }
 
         public void OnTextChangedWindows(object sender, Syncfusion.XForms.RichTextEditor.TextChangedEventArgs e)
@@ -79,11 +76,11 @@ namespace ClarityNotes
             note.Update(editorWindows.HtmlText, user);
         }
 
-        public void OnTextChangedAndroid(object sender,EventArgs e)
+        public void OnTextChangedAndroid(object sender, EventArgs e)
         {
             note.Update(editorAndroid.Text, user);
             string text = editorAndroid.Text;
-            note.Update(text,user);
+            note.Update(text, user);
         }
 
         public void OnTraduceClicked(object sender, EventArgs e)
@@ -99,8 +96,7 @@ namespace ClarityNotes
             Navigation.PushAsync(page);
         }
     }
-}       
-            
-            
-       
- 
+}
+
+
+

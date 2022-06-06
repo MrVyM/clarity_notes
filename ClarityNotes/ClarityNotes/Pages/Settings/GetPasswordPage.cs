@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Xamarin.Forms;
 
@@ -42,7 +39,7 @@ namespace ClarityNotes
             submit.Margin = 20;
             submit.VerticalOptions = LayoutOptions.Center;
 
-            switch (change) 
+            switch (change)
             {
                 case "mail":
                     submit.Clicked += OnMailClicked;
@@ -56,7 +53,7 @@ namespace ClarityNotes
                     passwordEntry.Completed += OnNameClicked;
                     submit.Clicked += OnNameClicked;
                     break;
-                default : 
+                default:
                     {
                         Console.Error.WriteLine("GetPasswordPage : Wrong argument");
                         Environment.Exit(1);
@@ -93,7 +90,7 @@ namespace ClarityNotes
         }
         private void OnPasswordClicked(object sender, EventArgs e)
         {
-            if (passwordEntry.Text == null) return ;
+            if (passwordEntry.Text == null) return;
             string temp = passwordEntry.Text;
             passwordEntry.Text = "";
             if (user.HashPassword != User.GetHashedPassword(temp))
@@ -111,7 +108,7 @@ namespace ClarityNotes
 
         private void OnNameClicked(object sender, EventArgs e)
         {
-            if (passwordEntry.Text == null) return ;
+            if (passwordEntry.Text == null) return;
             string temp = passwordEntry.Text;
             passwordEntry.Text = "";
             if (user.HashPassword != User.GetHashedPassword(temp))

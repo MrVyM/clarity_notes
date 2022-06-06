@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
 using Xamarin.Forms;
 
 namespace ClarityNotes
@@ -25,7 +21,7 @@ namespace ClarityNotes
             Frame frame = new Frame();
             frame.HasShadow = true;
             frame.BackgroundColor = Color.Beige;
-            frame.HorizontalOptions = LayoutOptions.Center;    
+            frame.HorizontalOptions = LayoutOptions.Center;
             StackLayout framStack = new StackLayout();
 
             Label label = new Label();
@@ -47,7 +43,7 @@ namespace ClarityNotes
             mainContent.Children.Add(frame);
 
 
-            mainContent.Children.Add(submit);  
+            mainContent.Children.Add(submit);
             this.Content = mainContent;
             this.BackgroundColor = user.ColorTheme;
         }

@@ -26,7 +26,7 @@ namespace ClarityNotes
             Button passwordChange = new Button();
             passwordChange.Text = "Changer mon mot de passe";
             passwordChange.FontSize = fontSize;
-            passwordChange.Clicked += OnPasswordChange;             
+            passwordChange.Clicked += OnPasswordChange;
             passwordChange.BackgroundColor = Color.White;
             passwordChange.CornerRadius = 25;
             passwordChange.Margin = 20;
@@ -97,7 +97,7 @@ namespace ClarityNotes
         }
         private void OnThemeChange(object sender, EventArgs e)
         {
-            if(user.Premium)
+            if (user.Premium)
                 Navigation.PushAsync(new ThemeChangePage(user));
             else
                 DisplayAlert("Accès Restreint", "Pour accéder à cette option, vous devez bénéficier de l'offre Premium.", "OK");

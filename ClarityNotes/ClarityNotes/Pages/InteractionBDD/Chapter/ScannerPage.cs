@@ -1,7 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-using QRCoder;
-using System.IO;
+﻿using Xamarin.Forms;
 using ZXing.Net.Mobile.Forms;
 
 namespace ClarityNotes
@@ -11,7 +8,14 @@ namespace ClarityNotes
         User user;
         public ScannerPage(User user)
         {
-            this.user = user;            
+            this.user = user;
+
+        }
+
+        public void GoToRootPage()
+        {
+            var page = new RootPage(user);
+            NavigationPage.SetHasNavigationBar(page, false);
         }
     }
 }

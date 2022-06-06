@@ -124,7 +124,8 @@ namespace ClarityNotes
 
         private void OnCreateClicked(object sender, EventArgs e)
         {
-            if (usernameEntry.Text.Contains("@") || usernameEntry.Text == null){
+            if (usernameEntry.Text.Contains("@") || usernameEntry.Text == null)
+            {
                 DisplayAlert("Inscription échouée", "Le nom d'utilisateur n'est pas correcte (il ne doit pas contenir de @).", "OK");
                 usernameEntry.Text = "";
                 return;

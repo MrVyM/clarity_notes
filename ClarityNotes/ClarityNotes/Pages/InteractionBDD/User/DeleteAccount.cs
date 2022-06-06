@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Xamarin.Forms;
 
@@ -22,7 +19,7 @@ namespace ClarityNotes
             frame.BackgroundColor = Color.White;
 
             StackLayout framStack = new StackLayout();
-            
+
             Label texte = new Label();
             texte.Text = "Veuillez entrer votre mot de passe";
             framStack.Children.Add(texte);

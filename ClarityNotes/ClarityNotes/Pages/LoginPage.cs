@@ -10,7 +10,7 @@ namespace ClarityNotes
         private Label errorLabel;
 
         public LoginPage()
-        { 
+        {
 
             StackLayout mainContent = new StackLayout();
             mainContent.HorizontalOptions = LayoutOptions.Center;
@@ -27,7 +27,7 @@ namespace ClarityNotes
             errorLabel.FontSize = 18;
             errorLabel.TextColor = Color.Red;
             errorLabel.HorizontalOptions = LayoutOptions.Center;
-            errorLabel.VerticalOptions = LayoutOptions.Center;   
+            errorLabel.VerticalOptions = LayoutOptions.Center;
             mainContent.Children.Add(errorLabel);
 
             Label idLabel = new Label();
@@ -60,7 +60,7 @@ namespace ClarityNotes
             mdpFrame.Content = mdpStack;
 
             StackLayout buttonStack = new StackLayout();
-            buttonStack.Orientation = StackOrientation.Horizontal; 
+            buttonStack.Orientation = StackOrientation.Horizontal;
             buttonStack.HorizontalOptions = LayoutOptions.Center;
             buttonStack.VerticalOptions = LayoutOptions.FillAndExpand;
 
@@ -106,7 +106,8 @@ namespace ClarityNotes
             try
             {
                 user = User.Connexion(usernameEntry.Text, mdpEntryText);
-            } catch
+            }
+            catch
             {
                 DisplayAlert("Serveur Introuvable", "Veuillez vous assurer que votre appareil est connecté au réseau.", "OK");
                 return;

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Xamarin.Forms;
 
@@ -32,7 +29,7 @@ namespace ClarityNotes
             ScrollView scrollListShare = new ScrollView();
             StackLayout listShare = new StackLayout();
             listShare.BackgroundColor = user.ColorTheme;
-            User[] listUsers =  Directory.GetUsersByDirectory(idDirectory);
+            User[] listUsers = Directory.GetUsersByDirectory(idDirectory);
             User root = listUsers[0];
             if (user.Email == root.Email)
             {
@@ -52,19 +49,19 @@ namespace ClarityNotes
                     param.Text = "⋮";
                     param.FontSize = 15;
                     param.CornerRadius = 5;
-                    param.Margin = 15 ;
+                    param.Margin = 15;
                     param.BackgroundColor = Color.White;
                     param.Scale = (Device.RuntimePlatform == Device.UWP ? 1 : 0.8);
                     param.HorizontalOptions = LayoutOptions.End;
                     param.VerticalOptions = LayoutOptions.Center;
-                    param.Clicked += (sender,e) => 
-                    { 
-                        OnSettingsClicked(share); 
+                    param.Clicked += (sender, e) =>
+                    {
+                        OnSettingsClicked(share);
                     };
                     peopleButton.Children.Add(people);
                     if (share.Email != root.Email)
                         peopleButton.Children.Add(param);
-                    
+
                     listShare.Children.Add(peopleButton);
 
                 }
@@ -127,8 +124,9 @@ namespace ClarityNotes
 
         private void OnSubmitClicked(object sender, EventArgs e)
         {
-            if (peopleToShare.Text == user.Username || peopleToShare.Text == user.Email) return;
-            if (!Directory.ShareDirectory(idDirectory,user, peopleToShare.Text))
+            if (peopleToShare.Text == user.Username || peopleToShare.Text == user.Email)
+                DisplayAlert("Erreur", "Vous ne pouvez pas vous partager une note.", "OK");
+            else if (!Directory.ShareDirectory(idDirectory, user, peopleToShare.Text))
                 DisplayAlert("Erreur", "L'utilisateur est introuvable.", "OK");
             else
             {
@@ -139,7 +137,7 @@ namespace ClarityNotes
 
         private void OnSettingsClicked(User currentUser)
         {
-            var page = new ShareSettingsPage(user,currentUser, idDirectory);
+            var page = new ShareSettingsPage(user, currentUser, idDirectory);
             NavigationPage.SetHasNavigationBar(page, false);
             Navigation.PushAsync(page);
         }

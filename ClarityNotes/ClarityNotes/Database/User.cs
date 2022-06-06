@@ -52,7 +52,8 @@ public class User
         string query = "SELECT * FROM users INNER JOIN usersettings ON usersettings.userId = users.id";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
         mySqlCommand.ExecuteNonQuery();
-        using (MySqlDataReader reader = mySqlCommand.ExecuteReader()) {
+        using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+        {
             while (reader.Read())
             {
                 int id = Int32.Parse($"{reader["id"]}");
@@ -70,20 +71,20 @@ public class User
 
     public static void Change(int id, string field, string value)
     {
-          
+
         MySqlConnection mySqlConnection = Database.GetConnection();
         string query = "UPDATE `users` SET " + field + " = @value WHERE id = @id";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
         mySqlCommand.Parameters.AddWithValue("@value", value);
         mySqlCommand.Parameters.AddWithValue("@id", id);
-        mySqlCommand.ExecuteNonQuery(); 
+        mySqlCommand.ExecuteNonQuery();
         mySqlConnection.Close();
     }
 
     public static bool CreateUser(string email, string username, string password)
     {
         var test = GetAllUsers();
-        foreach (User user in  test) 
+        foreach (User user in test)
             if (user.Username == username || user.Email == email) return false;
         MySqlConnection mySqlConnection = Database.GetConnection();
 
@@ -101,7 +102,7 @@ public class User
         mySqlConnection.Close();
         return resultUser && resultSettings;
     }
-    
+
     public static bool DeleteUser(int id)
     {
         MySqlConnection mySqlConnection = Database.GetConnection();
@@ -124,10 +125,10 @@ public class User
         mySqlConnection.Close();
         return resultUser && resultUserSettings && resultDirectories;
     }
-    
+
     public static User GetUserById(int id)
     {
-        foreach (User user in GetAllUsers()) 
+        foreach (User user in GetAllUsers())
             if (user.Id == id) return user;
         return null;
     }

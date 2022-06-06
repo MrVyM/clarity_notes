@@ -34,7 +34,7 @@ public class Note
         this.idCreator = idCreator;
         this.idUpdater = idUpdater;
     }
-    
+
     public override string ToString()
     {
         string result = $"[{GetType().Name}]\n";
@@ -43,7 +43,7 @@ public class Note
             result += $"    {p.Name} : {p.GetValue(this, null)}\n";
         return result.Substring(0, result.Length - 1);
     }
-    
+
     public static Note[] GetAllNotes()
     {
         List<Note> notes = new List<Note>();
@@ -51,7 +51,8 @@ public class Note
         string query = "SELECT * FROM `notes`";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
         mySqlCommand.ExecuteNonQuery();
-        using (MySqlDataReader reader = mySqlCommand.ExecuteReader()) {
+        using (MySqlDataReader reader = mySqlCommand.ExecuteReader())
+        {
             while (reader.Read())
             {
                 int id = Int32.Parse($"{reader["id"]}");
@@ -68,35 +69,35 @@ public class Note
         mySqlConnection.Close();
         return notes.ToArray();
     }
-    
+
     public static Note GetNoteById(int id)
     {
-        foreach (Note note in GetAllNotes()) 
+        foreach (Note note in GetAllNotes())
             if (note.Id == id) return note;
         return null;
     }
-    
+
     public static Note GetNoteByTitleAndIdDirectory(string title, int idDirectory)
     {
-        foreach (Note note in GetAllNotes()) 
+        foreach (Note note in GetAllNotes())
             if (note.title == title && note.IdDirectory == idDirectory) return note;
         return null;
     }
-    
+
     public static Note[] GetNotesByIdDirectory(int idDirectory)
     {
         List<Note> notes = new List<Note>();
-        foreach (Note note in GetAllNotes()) 
+        foreach (Note note in GetAllNotes())
             if (note.idDirectory == idDirectory) notes.Add(note);
         return notes.ToArray();
     }
-    
+
     public static bool CreateNote(string title, int idDirectory, User user)
     {
         if (GetNoteByTitleAndIdDirectory(title, idDirectory) != null) return false;
         MySqlConnection mySqlConnection = Database.GetConnection();
-        string query = "INSERT INTO `notes` (idDirectory, title, content, creationDate, updateDate, " 
-                       + "idCreator, idUpdater) VALUES(@idDirectory, @title, @content," 
+        string query = "INSERT INTO `notes` (idDirectory, title, content, creationDate, updateDate, "
+                       + "idCreator, idUpdater) VALUES(@idDirectory, @title, @content,"
                        + " @creationDate, @updateDate, @idCreator, @idUpdater)";
         MySqlCommand mySqlCommand = new MySqlCommand(query, mySqlConnection);
         mySqlCommand.Parameters.AddWithValue("@idDirectory", idDirectory);
@@ -110,7 +111,7 @@ public class Note
         mySqlConnection.Close();
         return result;
     }
-    
+
     public static bool DeleteNote(int id)
     {
         MySqlConnection mySqlConnection = Database.GetConnection();

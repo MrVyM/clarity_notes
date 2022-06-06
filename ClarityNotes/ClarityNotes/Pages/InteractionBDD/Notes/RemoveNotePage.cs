@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Xamarin.Forms;
 
@@ -75,7 +72,7 @@ namespace ClarityNotes
             if (picker.SelectedItem == null) return;
             if (Note.DeleteNote(Note.GetNoteByTitleAndIdDirectory(picker.SelectedItem.ToString(), idDirectory).Id))
             {
-                var page = new RootPage(user,idDirectory);
+                var page = new RootPage(user, idDirectory);
                 NavigationPage.SetHasNavigationBar(page, false);
             }
         }

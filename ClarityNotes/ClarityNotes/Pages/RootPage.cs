@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Xamarin.Forms;
 
 namespace ClarityNotes
@@ -25,7 +24,7 @@ namespace ClarityNotes
             {
                 fontsize = 13;
                 divisor = 2;
-            }   
+            }
 
             Directory[] directories = Directory.GetUserDirectories(user);
             SortList(directories);
@@ -36,11 +35,11 @@ namespace ClarityNotes
 
             StackLayout verticalLayout = new StackLayout();
             verticalLayout.VerticalOptions = LayoutOptions.FillAndExpand;
-            verticalLayout.Margin = 20/divisor;
+            verticalLayout.Margin = 20 / divisor;
 
             StackLayout verticalColumn = new StackLayout();
             verticalColumn.VerticalOptions = LayoutOptions.StartAndExpand;
-            verticalColumn.Margin = 10/divisor;
+            verticalColumn.Margin = 10 / divisor;
 
             Button buttonChapter;
             foreach (Directory directory in directories)
@@ -65,7 +64,7 @@ namespace ClarityNotes
             add.Clicked += OnAddChapterClicked;
             add.CornerRadius = 10;
             add.Padding = 15;
-            add.Margin = 10/divisor;
+            add.Margin = 10 / divisor;
             add.BackgroundColor = Color.White;
             AddLayout.Children.Add(add);
 
@@ -74,7 +73,7 @@ namespace ClarityNotes
             remove.Padding = 15;
             remove.FontSize = FontSize * divisor;
             remove.CornerRadius = 10;
-            remove.Margin = 10/divisor;
+            remove.Margin = 10 / divisor;
             remove.BackgroundColor = Color.White;
             AddLayout.Children.Add(remove);
 
@@ -82,12 +81,12 @@ namespace ClarityNotes
             settings.BackgroundColor = Color.White;
             settings.CornerRadius = 10;
             settings.Padding = 15;
-            settings.Margin = 10/divisor;
+            settings.Margin = 10 / divisor;
             settings.Clicked += OnSettingsPageCliked;
             settings.FontSize = FontSize * divisor; ;
             AddLayout.Children.Add(settings);
 
-            Button scan = new Button() { Text = "*"};
+            Button scan = new Button() { Text = "*" };
             scan.BackgroundColor = Color.White;
             scan.CornerRadius = 10;
             scan.Padding = 15;
@@ -97,13 +96,13 @@ namespace ClarityNotes
             AddLayout.Children.Add(scan);
 
             stackNotes = new StackLayout();
-            stackNotes.Margin = 15/divisor;
+            stackNotes.Margin = 15 / divisor;
             stackNotes.HorizontalOptions = LayoutOptions.CenterAndExpand;
 
             if (directories.Length > 0)
             {
                 StackLayout stackListNotes = new StackLayout();
-                stackListNotes.Margin = 15/divisor;
+                stackListNotes.Margin = 15 / divisor;
                 stackListNotes.VerticalOptions = LayoutOptions.CenterAndExpand;
                 stackListNotes.HorizontalOptions = LayoutOptions.FillAndExpand;
                 stackListNotes.Children.Clear();
@@ -142,7 +141,7 @@ namespace ClarityNotes
 
                 StackLayout buttonListNotes = new StackLayout();
                 buttonListNotes.Orientation = StackOrientation.Horizontal;
-                
+
 
                 Button AddNote = new Button();
                 AddNote.VerticalOptions = LayoutOptions.EndAndExpand;
@@ -189,14 +188,14 @@ namespace ClarityNotes
                     share.Text = "Partager ce chapitre";
                     QRbutton.Text = "Générer un QR Code";
                 }
-               
 
-                if (notes.Length == 0) 
+
+                if (notes.Length == 0)
                 {
                     removeNote.IsEnabled = false;
                 }
 
-                
+
 
                 stackNotes.Children.Add(allButtonList);
             }
@@ -236,11 +235,11 @@ namespace ClarityNotes
         {
             var scan = new ScannerPage(user);
             Navigation.PushAsync(scan);
-          
+
             scan.OnScanResult += (result) => Device.BeginInvokeOnMainThread(() =>
             {
                 var sort = result.Text;
-                
+
                 var split = sort.Split('/');
 
                 int directoryID = Int32.Parse(split[1]);
@@ -253,8 +252,9 @@ namespace ClarityNotes
 
                 scan.DisplayAlert("QR code trouvé", owner.Username + " vous a partagé un chapitre", "OK");
 
-                Application.Current.MainPage = new NavigationPage(new RootPage(user));
-            }); 
+                scan.GoToRootPage();
+
+            });
         }
 
         public void OnQRCodeClicked(object sender, EventArgs e)
@@ -262,7 +262,7 @@ namespace ClarityNotes
             Navigation.PushAsync(new QRCodeGeneratorPage(user, currentDirectory));
         }
 
-        
+
 
         private void OnNoteClicked(object sender, EventArgs e)
         {
@@ -307,7 +307,7 @@ namespace ClarityNotes
             StackLayout buttonListNotes = new StackLayout();
             buttonListNotes.Orientation = StackOrientation.Horizontal;
             buttonListNotes.VerticalOptions = LayoutOptions.EndAndExpand;
-            buttonListNotes.Margin = 20/ divisor;
+            buttonListNotes.Margin = 20 / divisor;
 
             Button AddNote = new Button();
             AddNote.VerticalOptions = LayoutOptions.EndAndExpand;
@@ -344,14 +344,14 @@ namespace ClarityNotes
             {
                 removeNote.IsEnabled = false;
             }
-             
+
             buttonListNotes.Children.Add(removeNote);
             stackNotes.Children.Add(allButtonList);
         }
         private void OnAddNotePageClicked(object sender, EventArgs e)
         {
             int noteMax = 12;
-            if (Note.GetNotesByIdDirectory(currentDirectory).Length > noteMax && !user.Premium)
+            if (Note.GetNotesByIdDirectory(currentDirectory).Length >= noteMax && !user.Premium)
             {
                 DisplayAlert("Option Premium", $"Vous ne pouvez pas créer plus de {noteMax} notes sans l'option Premium", "Ok");
                 return;
@@ -373,7 +373,7 @@ namespace ClarityNotes
         private void OnAddChapterClicked(object sender, EventArgs e)
         {
             int chapMax = 8;
-            if (Directory.GetUserDirectories(user).Length > chapMax && !user.Premium)
+            if (Directory.GetUserDirectories(user).Length >= chapMax && !user.Premium)
             {
                 DisplayAlert("Option Premium", $"Vous ne pouvez pas créer plus de {chapMax} chapitres sans l'option Premium", "Ok");
                 return;
@@ -385,7 +385,7 @@ namespace ClarityNotes
 
         private void OnRemoveNotePageCliked(object sender, EventArgs e)
         {
-            var page = new RemoveNotePage(user,currentDirectory);
+            var page = new RemoveNotePage(user, currentDirectory);
             NavigationPage.SetHasNavigationBar(page, false);
             Navigation.PushAsync(page);
         }

@@ -49,10 +49,10 @@ namespace ClarityNotes
 
         private void OnSubmitClicked(object sender, EventArgs e)
         {
-            if (nameEntry.Text == null) return ;
+            if (nameEntry.Text == null) return;
             if (Directory.CreateDirectory(nameEntry.Text.Substring(0, Math.Min(255, nameEntry.Text.Length)), user))
-            {   
-                var page = new RootPage(user,Directory.GetLastestDirectorybyUser(user)); 
+            {
+                var page = new RootPage(user, Directory.GetLastestDirectorybyUser(user));
                 NavigationPage.SetHasNavigationBar(page, false);
             }
             else

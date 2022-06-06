@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Xamarin.Forms;
 
@@ -13,7 +10,7 @@ namespace ClarityNotes
         Picker picker;
         User user;
         int idDirectory;
-        public ShareSettingsPage(User user, User target,int idDirectory)
+        public ShareSettingsPage(User user, User target, int idDirectory)
         {
             this.target = target;
             this.idDirectory = idDirectory;
@@ -31,12 +28,11 @@ namespace ClarityNotes
             Label questionLabel = new Label()
             {
                 FontSize = 16,
-                Text = $"Options de partage avec l'utilisateur {target.Username.ToUpper()} \n" +
+                Text = $"Options de partage avec l'utilisateur \"{target.Username.ToUpper()}\" \n" +
                 $"L'adresse mail de l'utilisateur est {target.Email}.\n",
                 TextColor = Color.Black,
                 HorizontalTextAlignment = TextAlignment.Center
             };
-
             picker = new Picker
             {
                 Title = "Sélection de l'action",
@@ -44,9 +40,9 @@ namespace ClarityNotes
                 VerticalOptions = LayoutOptions.CenterAndExpand
             };
 
-            foreach (string colorName in new string[] 
-            { 
-                "Retirer le partage de l'utilisateur", 
+            foreach (string colorName in new string[]
+            {
+                "Retirer le partage de l'utilisateur",
                 "Donner la propriété",
                 (Directory.GetReadOnlyByDirectoryAndIdOwner(idDirectory,target) ? "Accorder l'écriture" : "Accorder seulement la lecture")
             })
@@ -78,8 +74,8 @@ namespace ClarityNotes
                 case "Donner la propriété":
                     Directory.ChangeRootOwner(user.Id, target.Id, idDirectory);
                     break;
-                case "Accorder l'écriture": 
-                case "Accorder seulement la lecture" :
+                case "Accorder l'écriture":
+                case "Accorder seulement la lecture":
                     Directory.ChangeReadOnly(idDirectory, target);
                     break;
                 default:

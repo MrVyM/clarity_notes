@@ -1,7 +1,6 @@
-﻿using System;
-using Xamarin.Forms;
-using QRCoder;
+﻿using QRCoder;
 using System.IO;
+using Xamarin.Forms;
 
 namespace ClarityNotes
 {
@@ -10,7 +9,7 @@ namespace ClarityNotes
         User user;
         int idDirectory;
 
-        public QRCodeGeneratorPage(User user,int idDirectory)
+        public QRCodeGeneratorPage(User user, int idDirectory)
         {
             this.user = user;
             this.idDirectory = idDirectory;
@@ -22,9 +21,9 @@ namespace ClarityNotes
             PngByteQRCode qRCode = new PngByteQRCode(qrCodeData);
             byte[] qrCodeBytes = qRCode.GetGraphic(100);
             ImageSource QrCodeImage = ImageSource.FromStream(() => new MemoryStream(qrCodeBytes));
-            
+
             StackLayout stack = new StackLayout();
-   
+
             BackgroundImageSource = QrCodeImage;
         }
     }
