@@ -160,6 +160,15 @@ public class Directory
         return true;
     }
 
+
+    public static int GetLastestDirectorybyUser(User user)
+    {
+        Directory[] list = Directory.GetUserDirectories(user);
+        if (list.Count() == 0)
+            return -1;
+        return list.Last().Id;
+    }
+
     public static bool DeleteDirectory(int id, User user)
     {
         MySqlConnection mySqlConnection = Database.GetConnection();
