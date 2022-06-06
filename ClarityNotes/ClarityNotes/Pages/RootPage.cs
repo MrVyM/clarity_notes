@@ -180,7 +180,7 @@ namespace ClarityNotes
                 QRbutton.Clicked += OnQRCodeClicked;
                 QRbutton.FontSize = fontsize;
 
-                //allButtonList.Children.Add(QRbutton);
+                allButtonList.Children.Add(QRbutton);
 
                 if (Device.RuntimePlatform == Device.UWP)
                 {
@@ -246,6 +246,7 @@ namespace ClarityNotes
                 int directoryID = Int32.Parse(split[1]);
 
                 string ownername = split[0];
+
                 var owner = User.GetUserByUsername(ownername);
 
                 Directory.ShareDirectory(directoryID, owner, user.Username);

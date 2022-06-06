@@ -32,14 +32,9 @@ namespace ClarityNotes
                 traduce.Clicked += OnTraduceClicked;
 
                 editorWindows = new SfRichTextEditor();
-                editorWindows.IsVisible = true;
-                editorWindows.IsEnabled = true;
-                //editorWindows.AutoSize = AutoSizeOption.TextChanges;
-                editorWindows.VerticalOptions = LayoutOptions.CenterAndExpand;
-                editorWindows.HorizontalOptions = LayoutOptions.CenterAndExpand;
+                editorWindows.AutoSize = AutoSizeOption.TextChanges;
+                editorWindows.VerticalOptions = LayoutOptions.Start;
                 editorWindows.HtmlText = note.Content;
-                editorWindows.HeightRequest = 200;
-                editorWindows.WidthRequest = 200;
                 editorWindows.ReadOnly = Directory.GetReadOnlyByNoteAndIdOwner(note, user);
                 editorWindows.PlaceHolder = $"Bienvenue sur la note [{note.Title}], vous pouvez insérer votre propre texte.";
 
@@ -58,9 +53,6 @@ namespace ClarityNotes
                 editorWindows.TextChanged += OnTextChangedWindows;
 
                 StackLayout stack = new StackLayout();
-                stack.VerticalOptions = LayoutOptions.Fill;
-                stack.HorizontalOptions = LayoutOptions.Fill;
-                stack.BackgroundColor = Color.Red;
                 stack.Children.Add(editorWindows);
                 this.Content = stack;
             }
@@ -85,8 +77,6 @@ namespace ClarityNotes
         public void OnTextChangedWindows(object sender, Syncfusion.XForms.RichTextEditor.TextChangedEventArgs e)
         {
             note.Update(editorWindows.HtmlText, user);
-            string text = editorWindows.Text;
-            note.Update(text, user);
         }
 
         public void OnTextChangedAndroid(object sender,EventArgs e)
