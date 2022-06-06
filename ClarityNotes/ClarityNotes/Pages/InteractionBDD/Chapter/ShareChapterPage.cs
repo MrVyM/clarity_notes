@@ -127,6 +127,7 @@ namespace ClarityNotes
 
         private void OnSubmitClicked(object sender, EventArgs e)
         {
+            if (peopleToShare.Text == user.Username || peopleToShare.Text == user.Email) return;
             if (!Directory.ShareDirectory(idDirectory,user, peopleToShare.Text))
                 DisplayAlert("Erreur", "L'utilisateur est introuvable.", "OK");
             else
