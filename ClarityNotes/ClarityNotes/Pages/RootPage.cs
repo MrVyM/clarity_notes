@@ -14,7 +14,7 @@ namespace ClarityNotes
 
         public double FontSize { get; }
 
-        public RootPage(User user)
+        public RootPage(User user, int idDirectory = -1)
         {
             this.user = user;
             Application.Current.MainPage = new NavigationPage(this);
@@ -107,8 +107,8 @@ namespace ClarityNotes
                 stackListNotes.VerticalOptions = LayoutOptions.CenterAndExpand;
                 stackListNotes.HorizontalOptions = LayoutOptions.FillAndExpand;
                 stackListNotes.Children.Clear();
-                currentDirectory = directories[0].Id;
-                Note[] notes = Note.GetNotesByIdDirectory(directories[0].Id);
+                currentDirectory = idDirectory == -1 ? directories[0].Id : idDirectory;
+                Note[] notes = Note.GetNotesByIdDirectory(currentDirectory);
                 if (notes.Length == 0)
                 {
                     Label pleaseAddChapter = new Label();

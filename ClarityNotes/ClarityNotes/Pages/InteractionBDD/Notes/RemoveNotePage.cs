@@ -75,7 +75,7 @@ namespace ClarityNotes
             if (picker.SelectedItem == null) return;
             if (Note.DeleteNote(Note.GetNoteByTitleAndIdDirectory(picker.SelectedItem.ToString(), idDirectory).Id))
             {
-                var page = new RootPage(user);
+                var page = new RootPage(user,idDirectory);
                 NavigationPage.SetHasNavigationBar(page, false);
             }
         }

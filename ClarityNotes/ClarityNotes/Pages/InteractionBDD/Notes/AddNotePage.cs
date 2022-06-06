@@ -57,7 +57,7 @@ namespace ClarityNotes
             if (nameEntry.Text == null) return;
             else if (Note.CreateNote(nameEntry.Text.Substring(0, Math.Min(255, nameEntry.Text.Length)), directory.Id, user))
             {
-                var page = new RootPage(user);
+                var page = new RootPage(user, directory.Id);
                 NavigationPage.SetHasNavigationBar(page, false);
             }
             else
